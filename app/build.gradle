@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
+apply plugin: 'android-apt'
+apply plugin: 'realm-android'
+apply plugin: 'me.tatarka.retrolambda'
 
 android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
     defaultConfig {
@@ -18,7 +26,7 @@ android {
         }
     }
     buildTypes.each {
-        it.buildConfigField 'int', 'DEFAULT_SPLASH_DELAY_MILLIS', "3000"
+        it.buildConfigField 'int', 'DEFAULT_SPLASH_DELAY_MILLIS', "0"
     }
     buildTypes {
         debug {
@@ -28,16 +36,50 @@ android {
 //            buildConfigField "String", "SERVER_URL", SERVER_URL_RELEASE
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+repositories {
+    maven { url "https://clojars.org/repo/" }
+    maven { url 'https://maven.fabric.io/public' }
+    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+ext {
+    supportLibraryVersion = '25.1.0';
+    playServicesVersion = '10.0.1';
+    jacksonVersion = '2.8.6';
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //testing
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:recyclerview-v7:25.1.0'
-    compile 'com.android.support:design:25.1.0'
     testCompile 'junit:junit:4.12'
+    //ui
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support:support-v4:${supportLibraryVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    compile "com.android.support:design:${supportLibraryVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    //net
+    compile 'com.squareup.okhttp3:okhttp:3.4.2'
+    compile 'com.squareup.retrofit2:retrofit:2.1.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
+    compile 'com.squareup.picasso:picasso:2.5.3-SNAPSHOT'
+    //db
+
+    //di
+    compile 'com.google.dagger:dagger:2.5'
+    apt 'com.google.dagger:dagger-compiler:2.5'
+    //rx
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
 }
