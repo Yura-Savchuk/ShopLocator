@@ -32,7 +32,7 @@ android {
         debug {
 //            buildConfigField "String", "SERVER_URL", SERVER_URL_DEBUG
         }
-        release{
+        release {
 //            buildConfigField "String", "SERVER_URL", SERVER_URL_RELEASE
         }
     }
@@ -52,6 +52,7 @@ ext {
     supportLibraryVersion = '25.1.0';
     playServicesVersion = '10.0.1';
     jacksonVersion = '2.8.6';
+    butteryKnifeVersion = '8.2.1';
 }
 
 dependencies {
@@ -60,26 +61,33 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    testCompile 'junit:junit:4.12'
     //ui
     compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
     compile "com.android.support:support-v4:${supportLibraryVersion}"
     compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     compile "com.android.support:design:${supportLibraryVersion}"
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    //tools
+
+    compile "com.jakewharton:butterknife:${butteryKnifeVersion}"
+    apt "com.jakewharton:butterknife-compiler:${butteryKnifeVersion}"
     //net
+    //db
+
+    //di
+    //rx
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     compile 'com.squareup.okhttp3:okhttp:3.4.2'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
     compile 'com.squareup.picasso:picasso:2.5.3-SNAPSHOT'
-    //db
-
-    //di
     compile 'com.google.dagger:dagger:2.5'
-    apt 'com.google.dagger:dagger-compiler:2.5'
-    //rx
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
+    compile 'com.google.firebase:firebase-database:10.0.1'
+    testCompile 'junit:junit:4.12'
+    apt 'com.google.dagger:dagger-compiler:2.5'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,15 +1,12 @@
 package com.example.shoplocator.ui.splash.view;
 
 import android.content.Intent;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.example.shoplocator.App;
-import com.example.shoplocator.data.repsitory.ISettingsRepository;
-import com.example.shoplocator.ui.shops.ItemListActivity;
-import com.example.shoplocator.util.rx.RxSchedulers;
+import com.example.shoplocator.data.repsitory.settings.ISettingsRepository;
+import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.util.rx.RxSchedulersAbs;
 
 import java.util.concurrent.TimeUnit;
@@ -18,7 +15,6 @@ import javax.inject.Inject;
 
 import rx.Observable;
 import rx.Subscription;
-import rx.functions.Action1;
 
 public class SplashActivity extends AppCompatActivity implements ISplashView {
 
@@ -47,7 +43,7 @@ public class SplashActivity extends AppCompatActivity implements ISplashView {
     }
 
     private void startMainActivity() {
-        Intent intent = new Intent(SplashActivity.this, ItemListActivity.class);
+        Intent intent = new Intent(SplashActivity.this, ShopsListActivity.class);
         startActivity(intent);
     }
 

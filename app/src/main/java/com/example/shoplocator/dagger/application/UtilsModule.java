@@ -2,6 +2,8 @@ package com.example.shoplocator.dagger.application;
 
 import android.content.Context;
 
+import com.example.shoplocator.util.fragment.FragmentRoute;
+import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 import com.example.shoplocator.util.rx.RxSchedulers;
 import com.example.shoplocator.util.rx.RxSchedulersAbs;
 
@@ -21,6 +23,12 @@ public class UtilsModule {
 //    RateUtilAbs provideRateUtilAbs() {
 //        return new RateUtil();
 //    }
+
+    @Provides
+    @Singleton
+    FragmentRouteAbs fragmentRoute() {
+        return new FragmentRoute();
+    }
 
     @Provides
     @Singleton

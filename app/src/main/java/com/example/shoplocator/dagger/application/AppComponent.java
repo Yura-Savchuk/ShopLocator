@@ -1,5 +1,11 @@
 package com.example.shoplocator.dagger.application;
 
+import com.example.shoplocator.dagger.shopDetail.ShopDetailComponent;
+import com.example.shoplocator.dagger.shopDetail.ShopDetailModule;
+import com.example.shoplocator.dagger.shopsList.ShopsComponent;
+import com.example.shoplocator.dagger.shopsList.ShopsModule;
+import com.example.shoplocator.ui.shops.ShopsListActivity;
+import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.splash.view.SplashActivity;
 
 import javax.inject.Singleton;
@@ -15,5 +21,9 @@ import dagger.Component;
 public interface AppComponent {
 
     void inject(SplashActivity activity);
+    void inject(ShopsListActivity activity);
+    void inject(ShopDetailActivity activity);
 
+    ShopsComponent plus(ShopsModule module);
+    ShopDetailComponent plus(ShopDetailModule module);
 }

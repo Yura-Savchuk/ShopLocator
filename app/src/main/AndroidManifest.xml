@@ -22,17 +22,15 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.shops.ItemListActivity"
-            android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".ui.shops.ShopsListActivity"
+            android:label="@string/title_shops_list"/>
         <activity
-            android:name=".ui.shops.ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".ui.shops.ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.shops.detail.ShopDetailActivity"
+            android:label="@string/title_shop_detail"
+            android:parentActivityName=".ui.shops.ShopsListActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.shoplocator.ui.shops.ItemListActivity" />
+                android:value="com.example.shoplocator.ui.shops.ShopsListActivity" />
         </activity>
     </application>
 

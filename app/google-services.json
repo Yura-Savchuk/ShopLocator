@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "975359920999",
+    "firebase_url": "https://shoplocator-6ae4a.firebaseio.com",
+    "project_id": "shoplocator-6ae4a",
+    "storage_bucket": "shoplocator-6ae4a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:975359920999:android:35dd68675b5fe0e9",
+        "android_client_info": {
+          "package_name": "com.example.shoplocator"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "975359920999-2humcjrs1a9g4pv1cja7tcekqsigcde9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shoplocator",
+            "certificate_hash": "01EF09721873D540FD4758012B2A9696DD00BCCB"
+          }
+        },
+        {
+          "client_id": "975359920999-3c7agekbvupkeiioos8864i6315446hj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0BiD2JMssv0kjvbPUTdcR9FAVyTOrBes"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "975359920999-3c7agekbvupkeiioos8864i6315446hj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

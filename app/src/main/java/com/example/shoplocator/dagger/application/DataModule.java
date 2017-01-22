@@ -2,6 +2,8 @@ package com.example.shoplocator.dagger.application;
 
 import android.content.Context;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -18,5 +20,11 @@ public class DataModule {
 //    INetworkManager provideApiConnection(Context context, NetworkUtil networkUtil) {
 //        return new NetworkManager(context, Credential.DOMAIN, networkUtil);
 //    }
+
+    @Provides
+    @Singleton
+    FirebaseDatabase provideFirebaseDatabase() {
+        return FirebaseDatabase.getInstance();
+    }
 
 }

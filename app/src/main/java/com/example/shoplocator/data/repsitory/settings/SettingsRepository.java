@@ -1,4 +1,4 @@
-package com.example.shoplocator.data.repsitory;
+package com.example.shoplocator.data.repsitory.settings;
 
 import android.support.annotation.NonNull;
 
