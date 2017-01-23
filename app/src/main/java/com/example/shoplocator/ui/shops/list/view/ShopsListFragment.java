@@ -17,6 +17,7 @@ import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.ShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
 
@@ -75,6 +76,15 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
         Activity activity = getActivity();
         if (activity instanceof ShopListDelegate) {
             ((ShopListDelegate) activity).showShopDetail(shopId);
+        }
+    }
+
+    @Override
+    public void showProgress(boolean show) {
+        if (show) {
+            ProgressDialog.showIfHidden(getActivity());
+        } else {
+            ProgressDialog.hideIfShown();
         }
     }
 }

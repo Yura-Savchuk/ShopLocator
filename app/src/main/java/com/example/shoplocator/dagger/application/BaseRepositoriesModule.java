@@ -2,6 +2,11 @@ package com.example.shoplocator.dagger.application;
 
 import android.content.Context;
 
+import com.example.shoplocator.data.db.client.IDatabaseClient;
+import com.example.shoplocator.data.db.shops.IShopsDBService;
+import com.example.shoplocator.data.db.shops.ShopsDBService;
+import com.example.shoplocator.data.db.users.IUsersDBService;
+import com.example.shoplocator.data.db.users.UserDBService;
 import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.firebaseDb.shops.ShopsFDBService;
 import com.example.shoplocator.data.firebaseDb.users.IUsersFDBService;
@@ -37,16 +42,18 @@ public class BaseRepositoriesModule {
 
     @Provides
     @Singleton
-    IUsersRepository usersRepository(FirebaseDatabase firebaseDatabase) {
+    IUsersRepository usersRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
         IUsersFDBService usersFDBService = new UsersFDBService(firebaseDatabase);
-        return new UsersRepository(usersFDBService);
+        IUsersDBService usersDBService = new UserDBService(databaseClient);
+        return new UsersRepository(usersFDBService, usersDBService);
     }
 
     @Provides
     @Singleton
-    IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase) {
+    IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
         IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase);
-        return new ShopsRepository(shopsFDBService);
+        IShopsDBService shopsDBService = new ShopsDBService(databaseClient);
+        return new ShopsRepository(shopsFDBService, shopsDBService);
     }
 
 }

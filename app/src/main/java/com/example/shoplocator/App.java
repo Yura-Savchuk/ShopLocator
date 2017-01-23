@@ -7,6 +7,8 @@ import com.example.shoplocator.dagger.application.AppComponent;
 import com.example.shoplocator.dagger.application.AppModule;
 import com.example.shoplocator.dagger.application.DaggerAppComponent;
 
+import io.realm.Realm;
+
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.
  */
@@ -35,6 +37,7 @@ public class App extends Application {
         super.onCreate();
         instance = this;
         appComponent = prepareAppComponent().build();
+        Realm.init(this);
     }
 
     @NonNull

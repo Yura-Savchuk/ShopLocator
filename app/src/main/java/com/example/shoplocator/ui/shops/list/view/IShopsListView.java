@@ -14,4 +14,6 @@ public interface IShopsListView {
     void setupShopsList(@NonNull List<ShopModel> shops);
 
     void showShopDetail(long shopId);
+
+    void showProgress(boolean show);
 }

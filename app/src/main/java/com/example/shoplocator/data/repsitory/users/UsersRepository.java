@@ -1,5 +1,8 @@
 package com.example.shoplocator.data.repsitory.users;
 
+import android.support.annotation.NonNull;
+
+import com.example.shoplocator.data.db.users.IUsersDBService;
 import com.example.shoplocator.data.firebaseDb.users.IUsersFDBService;
 import com.example.shoplocator.data.model.UserDbModel;
 
@@ -15,28 +18,45 @@ import rx.functions.Func1;
 public class UsersRepository implements IUsersRepository {
 
     private final IUsersFDBService usersFDBService;
+    private final IUsersDBService usersDBService;
 
-    public UsersRepository(IUsersFDBService usersFDBService) {
+    public UsersRepository(@NonNull IUsersFDBService usersFDBService, @NonNull IUsersDBService usersDBService) {
         this.usersFDBService = usersFDBService;
+        this.usersDBService = usersDBService;
     }
 
     @Override
     public Single<List<UserDbModel>> getUsers() {
-        return usersFDBService.getUsers();
+        return usersDBService.getUsers()
+                .flatMap(userDbModels -> {
+                    if (userDbModels == null || userDbModels.isEmpty()) {
+                        return usersFDBService.getUsers()
+                                .doOnSuccess(usersDBService::setUsers);
+                    }
+                    return Single.just(userDbModels);
+                });
     }
 
     @Override
     public Single<UserDbModel> getUserById(long userId) {
-        return getUsers()
-                .map(userDbModels -> {
-                    for (UserDbModel user : userDbModels) {
-                        if (user.getId() == userId) {
-                            return user;
-                        }
+        return usersDBService.getUserById(userId)
+                .onErrorResumeNext(new Func1<Throwable, Single<UserDbModel>>() {
+                    @Override
+                    public Single<UserDbModel> call(Throwable throwable) {
+                        return getUserByIdFromFDBService(userId);
                     }
-                    return null;
-                })
-                .onErrorResumeNext(Single.just(null));
+                });
+    }
+
+    private Single<UserDbModel> getUserByIdFromFDBService(long userId) {
+        return getUsers().map(userDbModels -> {
+            for (UserDbModel user : userDbModels) {
+                if (user.getId() == userId) {
+                    return user;
+                }
+            }
+            return null;
+        });
     }
 
 }

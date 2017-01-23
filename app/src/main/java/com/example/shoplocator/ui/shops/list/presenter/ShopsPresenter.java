@@ -53,6 +53,7 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     private void setupShopsFromInteractor() {
+        view.showProgress(true);
         shopsInteractor.getShops()
                 .compose(schedulers.getIOToMainTransformerSingle())
                 .subscribe(this::handleGetShopsSuccess, this::handleGetShopsError);
@@ -61,10 +62,12 @@ public class ShopsPresenter implements IShopsListPresenter {
     private void handleGetShopsSuccess(@NonNull List<ShopModel> shopModels) {
         cash.setShops(shopModels);
         setupShopsFromCash();
+        view.showProgress(false);
     }
 
     private void handleGetShopsError(Throwable throwable) {
         //TODO
+        view.showProgress(false);
     }
 
     @Override
