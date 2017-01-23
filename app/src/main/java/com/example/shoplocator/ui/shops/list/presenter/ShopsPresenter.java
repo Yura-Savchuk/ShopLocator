@@ -6,6 +6,7 @@ import android.view.View;
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 import com.example.shoplocator.util.rx.RxSchedulersAbs;
 
 import java.util.List;
@@ -55,12 +56,12 @@ public class ShopsPresenter implements IShopsListPresenter {
 
     private void setupShopsFromInteractor() {
         view.showProgress(true);
-        shopsInteractor.getShops()
+        shopsInteractor.getCheckableShops()
                 .compose(schedulers.getIOToMainTransformerSingle())
                 .subscribe(this::handleGetShopsSuccess, this::handleGetShopsError);
     }
 
-    private void handleGetShopsSuccess(@NonNull List<ShopModel> shopModels) {
+    private void handleGetShopsSuccess(@NonNull List<CheckableShopModel> shopModels) {
         cash.setShops(shopModels);
         setupShopsFromCash();
         view.showProgress(false);

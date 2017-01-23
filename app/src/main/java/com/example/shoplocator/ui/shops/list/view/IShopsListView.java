@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 
 import java.util.List;
 
@@ -12,9 +13,10 @@ import java.util.List;
  */
 public interface IShopsListView {
 
-    void setupShopsList(@NonNull List<ShopModel> shops);
-
+    void setupShopsList(@NonNull List<CheckableShopModel> shops);
     void showShopDetail(long shopId, View itemView);
-
     void showProgress(boolean show);
+
+    void onRemoveActionSelected();
+
 }

@@ -17,6 +17,7 @@ import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.ShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
@@ -65,7 +66,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
-    public void setupShopsList(@NonNull List<ShopModel> shops) {
+    public void setupShopsList(@NonNull List<CheckableShopModel> shops) {
         recyclerViewAdapter = new ShopsRecyclerViewAdapter(shops, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setDelegate(presenter::onItemClick);
@@ -86,5 +87,10 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
         } else {
             ProgressDialog.hideIfShown();
         }
+    }
+
+    @Override
+    public void onRemoveActionSelected() {
+
     }
 }

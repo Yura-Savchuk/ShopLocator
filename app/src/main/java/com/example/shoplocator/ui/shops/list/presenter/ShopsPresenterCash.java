@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shops.list.presenter;
 
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 
 import java.util.List;
 
@@ -10,9 +11,9 @@ import java.util.List;
 
 public class ShopsPresenterCash {
 
-    private List<ShopModel> shops;
+    private List<CheckableShopModel> shops;
 
-    public List<ShopModel> getShops() {
+    public List<CheckableShopModel> getShops() {
         return shops;
     }
 
@@ -20,7 +21,7 @@ public class ShopsPresenterCash {
         return shops != null;
     }
 
-    public void setShops(List<ShopModel> shops) {
+    public void setShops(List<CheckableShopModel> shops) {
         this.shops = shops;
     }
 }

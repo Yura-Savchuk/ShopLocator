@@ -10,6 +10,7 @@ import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModel;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModelsPool;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 import com.example.shoplocator.util.picasso.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -21,12 +22,12 @@ import java.util.List;
 
 public class ShopsRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    private final List<ShopModel> shops;
+    private final List<CheckableShopModel> shops;
     private final LayoutInflater inflater;
     private final ShopSpannableModelsPool spannableModelsPool;
     private final ShopsRecyclerViewDelegateProxy delegateProxy;
 
-    public ShopsRecyclerViewAdapter(@NonNull List<ShopModel> shops, Context context) {
+    public ShopsRecyclerViewAdapter(@NonNull List<CheckableShopModel> shops, Context context) {
         this.shops = shops;
         inflater = LayoutInflater.from(context);
         spannableModelsPool = new ShopSpannableModelsPool(context);

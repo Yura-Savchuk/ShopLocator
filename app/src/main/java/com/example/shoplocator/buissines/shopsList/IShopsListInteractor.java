@@ -1,6 +1,7 @@
 package com.example.shoplocator.buissines.shopsList;
 
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.model.CheckableShopModel;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import rx.Single;
 
 public interface IShopsListInteractor {
 
-    Single<List<ShopModel>> getShops();
+    Single<List<CheckableShopModel>> getCheckableShops();
 
 }

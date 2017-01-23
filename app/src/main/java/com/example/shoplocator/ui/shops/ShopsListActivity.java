@@ -3,8 +3,11 @@ package com.example.shoplocator.ui.shops;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.shoplocator.App;
@@ -12,6 +15,7 @@ import com.example.shoplocator.R;
 
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
+import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.list.view.ShopsListFragment;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
@@ -31,6 +35,9 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     private boolean twoPane;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
+
+    private MenuItem actionDone;
+    private MenuItem actionCancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +65,32 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
 
     private void deleteReduantDetailFragment() {
         fragmentRoute.deleteFragmentIfExist(this, ShopDetailFragment.class);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_shop_list, menu);
+        actionDone = menu.findItem(R.id.actionDone);
+        actionCancel = menu.findItem(R.id.actionCancel);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionRemove: {
+                onActionRemoveSelected();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onActionRemoveSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onRemoveActionSelected();
+        }
     }
 
     @Override

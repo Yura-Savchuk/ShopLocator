@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/actionRemove"
+        android:title="@string/action_remove"
+        app:showAsAction="never"
+        />
+
+    <item android:id="@+id/actionCancel"
+        android:title="@string/action_cancel"
+        android:icon="@drawable/vector_cancel"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        />
+
+    <item android:id="@+id/actionDone"
+        android:title="@string/action_confirm"
+        android:icon="@drawable/vector_done"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>
