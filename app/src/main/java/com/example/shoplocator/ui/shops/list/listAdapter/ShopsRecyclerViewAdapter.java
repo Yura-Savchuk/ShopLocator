@@ -51,6 +51,7 @@ public class ShopsRecyclerViewAdapter extends RecyclerView.Adapter {
         ShopSpannableModel spannableModel = spannableModelsPool.getSpannableModel(shopModel);
         vh.textViewShopOwner.setText(spannableModel.getOwner());
         vh.textViewShopCoords.setText(spannableModel.getCoordinate());
+        vh.updateTransitionName();
     }
 
     private void setupImageView(ShopViewHolder vh, ShopModel shopModel) {

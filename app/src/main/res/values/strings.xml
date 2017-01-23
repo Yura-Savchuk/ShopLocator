@@ -9,4 +9,5 @@
     <string name="item_shop_coordinate_x_prefix">"Coordinates X: "</string>
     <string name="item_shop_coordinate_y_prefix">" Y: "</string>
     <string name="content_shop_image">Shop image</string>
+    <string name="transition_shop_image">transition_name_shop_image</string>
 </resources>

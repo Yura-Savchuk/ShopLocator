@@ -2,8 +2,10 @@ package com.example.shoplocator.ui.shops;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
@@ -40,6 +42,8 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         twoPane = findViewById(R.id.shopDetailContainer) != null;
         if (savedInstanceState == null) {
             setupFragment();
+        } else {
+            deleteReduantDetailFragment();
         }
     }
 
@@ -52,8 +56,12 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         toolbar.setTitle(getTitle());
     }
 
+    private void deleteReduantDetailFragment() {
+        fragmentRoute.deleteFragmentIfExist(this, ShopDetailFragment.class);
+    }
+
     @Override
-    public void showShopDetail(long shopId) {
+    public void showShopDetail(long shopId, View itemView) {
         Bundle arguments = new Bundle();
         arguments.putLong(ShopDetailFragment.PARAM_SHOP_ID, shopId);
         if (twoPane) {
@@ -61,8 +69,21 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
             fragment.setArguments(arguments);
             fragmentRoute.replaceFragment(this, fragment, R.id.shopDetailContainer);
         } else {
-            Intent intent = new Intent(this, ShopDetailActivity.class);
-            intent.putExtras(arguments);
+            shopShopDetailActivity(itemView, arguments);
+        }
+    }
+
+    private void shopShopDetailActivity(View itemView, Bundle arguments) {
+        Intent intent = new Intent(this, ShopDetailActivity.class);
+        intent.putExtras(arguments);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            View imageView = itemView.findViewById(R.id.imageView);
+            String transitionName = imageView.getTransitionName();
+            intent.putExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME, transitionName);
+            ActivityOptionsCompat options = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation(this, imageView, transitionName);
+            startActivity(intent, options.toBundle());
+        } else {
             startActivity(intent);
         }
     }

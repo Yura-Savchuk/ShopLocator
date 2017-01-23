@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shops.list.presenter;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
@@ -71,7 +72,7 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     @Override
-    public void onItemClick(int position) {
-        view.showShopDetail(cash.getShops().get(position).getId());
+    public void onItemClick(int position, View itemView) {
+        view.showShopDetail(cash.getShops().get(position).getId(), itemView);
     }
 }

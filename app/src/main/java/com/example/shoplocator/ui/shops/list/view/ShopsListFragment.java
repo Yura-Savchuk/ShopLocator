@@ -72,10 +72,10 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
-    public void showShopDetail(long shopId) {
+    public void showShopDetail(long shopId, View itemView) {
         Activity activity = getActivity();
         if (activity instanceof ShopListDelegate) {
-            ((ShopListDelegate) activity).showShopDetail(shopId);
+            ((ShopListDelegate) activity).showShopDetail(shopId, itemView);
         }
     }
 

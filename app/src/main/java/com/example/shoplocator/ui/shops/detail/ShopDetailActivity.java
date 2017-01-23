@@ -39,37 +39,24 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
 
     private void setupActionBar() {
-//        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
     }
 
     private void setupFragment() {
         Bundle arguments = new Bundle();
+        Intent intent = getIntent();
         arguments.putLong(ShopDetailFragment.PARAM_SHOP_ID,
-                getIntent().getLongExtra(ShopDetailFragment.PARAM_SHOP_ID, 0));
+                intent.getLongExtra(ShopDetailFragment.PARAM_SHOP_ID, 0));
+        arguments.putString(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME,
+                intent.getStringExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME));
         ShopDetailFragment fragment = new ShopDetailFragment();
         fragment.setArguments(arguments);
         fragmentRoute.setFragment(this, fragment, R.id.shopDetailContainer);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == android.R.id.home) {
-            // This ID represents the Home or Up button. In the case of this
-            // activity, the Up button is shown. Use NavUtils to allow users
-            // to navigate up one level in the application structure. For
-            // more details, see the Navigation pattern on Android Design:
-            //
-            // http://developer.android.com/design/patterns/navigation.html#up-vs-back
-            //
-            NavUtils.navigateUpTo(this, new Intent(this, ShopsListActivity.class));
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

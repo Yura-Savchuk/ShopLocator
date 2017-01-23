@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shops.list.view;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.example.shoplocator.ui.model.ShopModel;
 
@@ -13,7 +14,7 @@ public interface IShopsListView {
 
     void setupShopsList(@NonNull List<ShopModel> shops);
 
-    void showShopDetail(long shopId);
+    void showShopDetail(long shopId, View itemView);
 
     void showProgress(boolean show);
 }

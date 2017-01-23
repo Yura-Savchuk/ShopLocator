@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.shops.list.presenter;
 
+import android.view.View;
+
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 
 /**
@@ -13,5 +15,5 @@ public interface IShopsListPresenter {
 
     void setupShopsList();
 
-    void onItemClick(int position);
+    void onItemClick(int position, View itemView);
 }

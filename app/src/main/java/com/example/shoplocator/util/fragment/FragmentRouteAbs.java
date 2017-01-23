@@ -1,10 +1,15 @@
 package com.example.shoplocator.util.fragment;
 
+import android.app.Activity;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+
+import com.example.shoplocator.ui.shops.ShopsListActivity;
+import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 
 /**
  * Created by macbookpro on 13.11.16.
@@ -34,7 +39,7 @@ public abstract class FragmentRouteAbs {
     }
 
     @Nullable
-    private static <T> String getFragmentTag(@NonNull Class<T> tClass) {
+    public static <T> String getFragmentTag(@NonNull Class<T> tClass) {
         if (tClass.isAnnotationPresent(FragmentTag.class)) {
             return tClass.getAnnotation(FragmentTag.class).tag();
         }
@@ -61,4 +66,15 @@ public abstract class FragmentRouteAbs {
                 .commit();
     }
 
+    public<T> void deleteFragmentIfExist(@NonNull FragmentActivity activity, @NonNull Class<T> fragmentClass) {
+        String fragmentTag = getFragmentTag(fragmentClass);
+        if (fragmentTag == null) throw new RuntimeException("Fragment must be annotated with FragmentTag");
+        FragmentManager fragmentManager = activity.getSupportFragmentManager();
+        Fragment fragment = fragmentManager.findFragmentByTag(fragmentTag);
+        if (fragment != null) {
+            fragmentManager.beginTransaction()
+                    .remove(fragment)
+                    .commit();
+        }
+    }
 }
