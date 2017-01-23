@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
@@ -17,6 +18,7 @@ import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ShopDetailActivity extends AppCompatActivity {
 
@@ -28,6 +30,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shop_detail);
+        ButterKnife.bind(this);
         setupActionBar();
         App.instance().applicationComponent().inject(this);
         if (savedInstanceState == null) {
@@ -36,6 +39,7 @@ public class ShopDetailActivity extends AppCompatActivity {
     }
 
     private void setupActionBar() {
+//        toolbar.setNavigationOnClickListener(v -> onBackPressed());
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
