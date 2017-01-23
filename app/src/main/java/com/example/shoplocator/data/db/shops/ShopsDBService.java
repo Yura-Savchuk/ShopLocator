@@ -45,17 +45,14 @@ public class ShopsDBService implements IShopsDBService {
     }
 
     @Override
-    public Single<Object> setShops(@NonNull List<ShopDbModel> shops) {
-        return Single.fromCallable(() -> {
-            List<ShopRealmObject> realmShops = ShopRealmObjectMapper.mapDbToRealm(shops);
-            Realm realm = client.getRealm();
-            realm.beginTransaction();
-            realm.where(ShopRealmObject.class).findAll().deleteAllFromRealm();
-            for (ShopRealmObject shop : realmShops) {
-                realm.copyToRealm(shop);
-            }
-            realm.commitTransaction();
-            return null;
-        });
+    public void setShops(@NonNull List<ShopDbModel> shops) {
+        List<ShopRealmObject> realmShops = ShopRealmObjectMapper.mapDbToRealm(shops);
+        Realm realm = client.getRealm();
+        realm.beginTransaction();
+        realm.where(ShopRealmObject.class).findAll().deleteAllFromRealm();
+        for (ShopRealmObject shop : realmShops) {
+            realm.copyToRealm(shop);
+        }
+        realm.commitTransaction();
     }
 }

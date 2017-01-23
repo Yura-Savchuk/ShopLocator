@@ -16,6 +16,6 @@ public interface IShopsDBService {
 
     Single<List<ShopDbModel>> getShops();
     Single<ShopDbModel> getShopById(long shopId);
-    Single<Object> setShops(@NonNull List<ShopDbModel> shops);
+    void setShops(@NonNull List<ShopDbModel> shops);
 
 }

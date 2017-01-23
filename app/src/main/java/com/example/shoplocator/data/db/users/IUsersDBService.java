@@ -14,6 +14,6 @@ public interface IUsersDBService {
 
     Single<List<UserDbModel>> getUsers();
     Single<UserDbModel> getUserById(long userId);
-    Single<Object> setUsers(List<UserDbModel> users);
+    void setUsers(List<UserDbModel> users);
 
 }

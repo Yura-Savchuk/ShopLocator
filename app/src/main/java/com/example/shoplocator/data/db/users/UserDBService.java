@@ -42,17 +42,14 @@ public class UserDBService implements IUsersDBService {
     }
 
     @Override
-    public Single<Object> setUsers(List<UserDbModel> users) {
-        return Single.fromCallable(() -> {
-            List<UserRealmObject> realmShops = UserRealmObjectMapper.mapDbToRealm(users);
-            Realm realm = client.getRealm();
-            realm.beginTransaction();
-            realm.where(UserRealmObject.class).findAll().deleteAllFromRealm();
-            for (UserRealmObject user : realmShops) {
-                realm.copyToRealm(user);
-            }
-            realm.commitTransaction();
-            return null;
-        });
+    public void setUsers(List<UserDbModel> users) {
+        List<UserRealmObject> realmShops = UserRealmObjectMapper.mapDbToRealm(users);
+        Realm realm = client.getRealm();
+        realm.beginTransaction();
+        realm.where(UserRealmObject.class).findAll().deleteAllFromRealm();
+        for (UserRealmObject user : realmShops) {
+            realm.copyToRealm(user);
+        }
+        realm.commitTransaction();
     }
 }
