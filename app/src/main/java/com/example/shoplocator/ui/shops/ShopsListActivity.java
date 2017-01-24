@@ -2,8 +2,12 @@ package com.example.shoplocator.ui.shops;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -35,6 +39,8 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     private boolean twoPane;
 
     @BindView(R.id.toolbar) Toolbar toolbar;
+    @BindView(R.id.drawerLayout) DrawerLayout drawerLayout;
+    @BindView(R.id.navigationView) NavigationView navigationView;
 
     private MenuItem actionDone;
     private MenuItem actionCancel;
@@ -43,10 +49,11 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_item_list);
+        setContentView(R.layout.activity_shops_list_drawer);
         ButterKnife.bind(this);
         App.instance().applicationComponent().inject(this);
         setupActionBar();
+        setupNavigation();
         twoPane = findViewById(R.id.shopDetailContainer) != null;
         if (savedInstanceState == null) {
             setupFragment();
@@ -64,8 +71,57 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         toolbar.setTitle(getTitle());
     }
 
+    private void setupNavigation() {
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+        navigationView.setNavigationItemSelectedListener(navigationItemSelectedListener);
+    }
+
+    private final NavigationView.OnNavigationItemSelectedListener navigationItemSelectedListener =
+            item -> {
+                switch (item.getItemId()) {
+                    case R.id.nav_shops_list:{
+                        onNavToShopsListSelected();
+                        break;
+                    }
+                    case R.id.nav_shops_map: {
+                        onNavToShopsMapSelected();
+                        break;
+                    }
+                    case R.id.nav_users_list: {
+                        onNavToUsersListSelected();
+                        break;
+                    }
+                }
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return false;
+            };
+
+    private void onNavToShopsListSelected() {
+
+    }
+
+    private void onNavToShopsMapSelected() {
+
+    }
+
+    private void onNavToUsersListSelected() {
+
+    }
+
     private void deleteReduantDetailFragment() {
         fragmentRoute.deleteFragmentIfExist(this, ShopDetailFragment.class);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override
