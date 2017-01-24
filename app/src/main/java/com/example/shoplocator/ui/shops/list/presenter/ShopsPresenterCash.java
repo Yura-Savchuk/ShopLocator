@@ -1,7 +1,6 @@
 package com.example.shoplocator.ui.shops.list.presenter;
 
-import com.example.shoplocator.ui.model.ShopModel;
-import com.example.shoplocator.ui.shops.model.CheckableShopModel;
+import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 
 import java.util.List;
 
@@ -11,9 +10,10 @@ import java.util.List;
 
 public class ShopsPresenterCash {
 
-    private List<CheckableShopModel> shops;
+    private List<SelectableShopModel> shops;
+    private boolean toolbarInEditState;
 
-    public List<CheckableShopModel> getShops() {
+    public List<SelectableShopModel> getShops() {
         return shops;
     }
 
@@ -21,7 +21,15 @@ public class ShopsPresenterCash {
         return shops != null;
     }
 
-    public void setShops(List<CheckableShopModel> shops) {
+    public void setShops(List<SelectableShopModel> shops) {
         this.shops = shops;
+    }
+
+    public void setToolbarInEditState(boolean toolbarInEditState) {
+        this.toolbarInEditState = toolbarInEditState;
+    }
+
+    public boolean isToolbarInEditState() {
+        return toolbarInEditState;
     }
 }

@@ -1,7 +1,9 @@
 package com.example.shoplocator.buissines.shopsList;
 
-import com.example.shoplocator.ui.model.ShopModel;
-import com.example.shoplocator.ui.shops.model.CheckableShopModel;
+import android.support.annotation.NonNull;
+
+import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
+import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import rx.Single;
 
 public interface IShopsListInteractor {
 
-    Single<List<CheckableShopModel>> getCheckableShops();
+    Single<List<SelectableShopModel>> getCheckableShops();
 
+    Single<ChangeItemsCommand> removeSelectedShops(@NonNull List<SelectableShopModel> shops);
+    ChangeItemsCommand deselectSelectedShops(@NonNull List<SelectableShopModel> shops);
 }

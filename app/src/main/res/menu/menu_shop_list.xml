@@ -4,7 +4,8 @@
 
     <item android:id="@+id/actionRemove"
         android:title="@string/action_remove"
-        app:showAsAction="never"
+        android:icon="@drawable/vector_remove"
+        app:showAsAction="ifRoom"
         />
 
     <item android:id="@+id/actionCancel"

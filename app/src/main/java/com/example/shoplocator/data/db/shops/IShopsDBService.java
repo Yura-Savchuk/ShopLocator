@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.example.shoplocator.data.model.ShopDbModel;
 
+import java.util.Collection;
 import java.util.List;
 
 import rx.Single;
@@ -18,4 +19,5 @@ public interface IShopsDBService {
     Single<ShopDbModel> getShopById(long shopId);
     void setShops(@NonNull List<ShopDbModel> shops);
 
+    Single<Object> deleteShopsByIds(@NonNull Collection<Long> ids);
 }

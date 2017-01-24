@@ -16,4 +16,10 @@ public interface IShopsListPresenter {
     void setupShopsList();
 
     void onItemClick(int position, View itemView);
+
+    void setupToolbarState();
+    void setToolbarInRemoveState();
+
+    void removeSelectedShops();
+    void cancelRemoveShops();
 }

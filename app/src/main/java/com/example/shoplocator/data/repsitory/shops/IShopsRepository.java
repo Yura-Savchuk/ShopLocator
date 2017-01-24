@@ -1,8 +1,11 @@
 package com.example.shoplocator.data.repsitory.shops;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.ui.model.ShopModel;
 
+import java.util.Collection;
 import java.util.List;
 
 import rx.Single;
@@ -15,5 +18,6 @@ public interface IShopsRepository {
 
     Single<List<ShopDbModel>> getShops();
     Single<ShopDbModel> getShopById(long shopId);
+    Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<Long> ids);
 
 }

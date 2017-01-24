@@ -10,4 +10,6 @@ public interface ShopListDelegate {
 
     void showShopDetail(long shopId, View itemView);
 
+    void setEditState(boolean editState);
+
 }

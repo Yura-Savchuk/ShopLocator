@@ -10,19 +10,19 @@ import com.example.shoplocator.ui.model.UserModel;
  * Created by {@author yura.savchuk22@gmail.com} on 23.01.17.
  */
 
-public class CheckableShopModel extends ShopModel {
+public class SelectableShopModel extends ShopModel {
 
-    private boolean checked;
+    private boolean selected;
 
-    public CheckableShopModel(long id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
+    public SelectableShopModel(long id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
         super(id, name, imageUrl, coordinate, owner);
     }
 
-    public boolean isChecked() {
-        return checked;
+    public boolean isSelected() {
+        return selected;
     }
 
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 }

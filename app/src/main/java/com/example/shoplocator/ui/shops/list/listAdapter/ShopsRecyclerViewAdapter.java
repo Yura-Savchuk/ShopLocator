@@ -10,7 +10,7 @@ import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModel;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModelsPool;
-import com.example.shoplocator.ui.shops.model.CheckableShopModel;
+import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 import com.example.shoplocator.util.picasso.CircleTransform;
 import com.squareup.picasso.Picasso;
 
@@ -22,12 +22,12 @@ import java.util.List;
 
 public class ShopsRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    private final List<CheckableShopModel> shops;
+    private final List<SelectableShopModel> shops;
     private final LayoutInflater inflater;
     private final ShopSpannableModelsPool spannableModelsPool;
     private final ShopsRecyclerViewDelegateProxy delegateProxy;
 
-    public ShopsRecyclerViewAdapter(@NonNull List<CheckableShopModel> shops, Context context) {
+    public ShopsRecyclerViewAdapter(@NonNull List<SelectableShopModel> shops, Context context) {
         this.shops = shops;
         inflater = LayoutInflater.from(context);
         spannableModelsPool = new ShopSpannableModelsPool(context);
@@ -46,13 +46,14 @@ public class ShopsRecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ShopViewHolder vh = (ShopViewHolder) holder;
-        ShopModel shopModel = shops.get(position);
+        SelectableShopModel shopModel = shops.get(position);
         setupImageView(vh, shopModel);
         vh.textViewShopName.setText(shopModel.getName());
         ShopSpannableModel spannableModel = spannableModelsPool.getSpannableModel(shopModel);
         vh.textViewShopOwner.setText(spannableModel.getOwner());
         vh.textViewShopCoords.setText(spannableModel.getCoordinate());
         vh.updateTransitionName();
+        vh.setSelection(shopModel.isSelected());
     }
 
     private void setupImageView(ShopViewHolder vh, ShopModel shopModel) {

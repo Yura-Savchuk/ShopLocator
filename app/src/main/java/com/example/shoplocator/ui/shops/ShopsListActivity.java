@@ -38,6 +38,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
 
     private MenuItem actionDone;
     private MenuItem actionCancel;
+    private MenuItem actionRemove;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         getMenuInflater().inflate(R.menu.menu_shop_list, menu);
         actionDone = menu.findItem(R.id.actionDone);
         actionCancel = menu.findItem(R.id.actionCancel);
+        actionRemove = menu.findItem(R.id.actionRemove);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -82,14 +84,34 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
                 onActionRemoveSelected();
                 break;
             }
+            case R.id.actionCancel: {
+                onActionCancelSelected();
+                break;
+            }
+            case R.id.actionDone: {
+                onActionDoneSelected();
+            }
         }
         return super.onOptionsItemSelected(item);
     }
-
     private void onActionRemoveSelected() {
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
             ((IShopsListView) fragment).onRemoveActionSelected();
+        }
+    }
+
+    private void onActionCancelSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onCancelActionSelection();
+        }
+    }
+
+    private void onActionDoneSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onDoneActionSelection();
         }
     }
 
@@ -119,6 +141,13 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         } else {
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void setEditState(boolean editState) {
+        actionCancel.setVisible(editState);
+        actionDone.setVisible(editState);
+        actionRemove.setVisible(!editState);
     }
 
 }

@@ -6,6 +6,7 @@ import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.model.ShopDbModel;
 
+import java.util.Collection;
 import java.util.List;
 
 import rx.Single;
@@ -58,5 +59,10 @@ public class ShopsRepository implements IShopsRepository {
             }
             return null;
         });
+    }
+
+    @Override
+    public Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<Long> ids) {
+        return shopsDBService.deleteShopsByIds(ids);
     }
 }
