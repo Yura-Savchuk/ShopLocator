@@ -1,4 +1,4 @@
-package com.example.shoplocator.util.rx;
+package com.example.shoplocator.util.rx.schedulers;
 
 import rx.Observable;
 import rx.Scheduler;

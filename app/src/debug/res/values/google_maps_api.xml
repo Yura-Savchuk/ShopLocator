@@ -1,0 +1,19 @@
+<resources>
+    <!--
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=01:EF:09:72:18:73:D5:40:FD:47:58:01:2B:2A:96:96:DD:00:BC:CB%3Bcom.example.shoplocator.ui.shopsMap
+
+    You can also add your credentials to an existing key, using this line:
+    01:EF:09:72:18:73:D5:40:FD:47:58:01:2B:2A:96:96:DD:00:BC:CB;com.example.shoplocator.ui.shopsMap
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyB0BiD2JMssv0kjvbPUTdcR9FAVyTOrBes
+    </string>
+</resources>

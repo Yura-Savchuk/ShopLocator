@@ -1,26 +1,25 @@
-package com.example.shoplocator.util.rx;
+package com.example.shoplocator.util.rx.schedulers;
 
 import rx.Scheduler;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 /**
  * Created by macbookpro on 13.11.16.
  */
 
-public final class RxSchedulers extends RxSchedulersAbs {
+public final class RxSchedulersTest extends RxSchedulersAbs {
     @Override
     public Scheduler getMainThreadScheduler() {
-        return AndroidSchedulers.mainThread();
+        return Schedulers.immediate();
     }
 
     @Override
     public Scheduler getIOScheduler() {
-        return Schedulers.io();
+        return Schedulers.immediate();
     }
 
     @Override
     public Scheduler getComputationScheduler() {
-        return Schedulers.computation();
+        return Schedulers.immediate();
     }
 }

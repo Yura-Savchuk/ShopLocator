@@ -32,8 +32,8 @@ public class ShopsListInteractor implements IShopsListInteractor {
         this.usersRepository = usersRepository;
     }
 
-
-    private Single<List<ShopModel>> getShops() {
+    @Override
+    public Single<List<ShopModel>> getShops() {
         return Single.zip(shopsRepository.getShops(), usersRepository.getUsers(), ShopsDbMapper::new)
                 .map(ShopsDbMapper::getUiShops);
     }

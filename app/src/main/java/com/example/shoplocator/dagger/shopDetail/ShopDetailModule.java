@@ -6,7 +6,7 @@ import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.shops.detail.presenter.IShopDetailPresenter;
 import com.example.shoplocator.ui.shops.detail.presenter.ShopDetailPresenter;
-import com.example.shoplocator.util.rx.RxSchedulersAbs;
+import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import dagger.Module;
 import dagger.Provides;

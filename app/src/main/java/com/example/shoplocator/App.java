@@ -1,7 +1,9 @@
 package com.example.shoplocator;
 
 import android.app.Application;
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.multidex.MultiDex;
 
 import com.example.shoplocator.dagger.application.AppComponent;
 import com.example.shoplocator.dagger.application.AppModule;
@@ -30,6 +32,12 @@ public class App extends Application {
     @NonNull
     public AppComponent applicationComponent() {
         return appComponent;
+    }
+
+    @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     @Override

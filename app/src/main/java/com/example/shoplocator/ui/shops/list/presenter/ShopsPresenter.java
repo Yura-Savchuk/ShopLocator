@@ -5,10 +5,9 @@ import android.view.View;
 
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
 import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
-import com.example.shoplocator.buissines.shopsList.commands.CommandExecutedListener;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
-import com.example.shoplocator.util.rx.RxSchedulersAbs;
+import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import java.util.List;
 
