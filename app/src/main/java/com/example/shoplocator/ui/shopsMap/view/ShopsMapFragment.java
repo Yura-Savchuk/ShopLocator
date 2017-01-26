@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shopsMap.view;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -43,6 +44,7 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
     @Inject IShopMapPresenter presenter;
 
     private GoogleMap mMap;
+    private TextViewPagerAdapter pagerAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -94,8 +96,8 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
 
     @Override
     public void setupShopsList(List<ShopModel> shops) {
-        TextViewPagerAdapter adapter = new TextViewPagerAdapter(shops);
-        viewPager.setAdapter(adapter);
+        pagerAdapter = new TextViewPagerAdapter(shops);
+        viewPager.setAdapter(pagerAdapter);
         viewPager.addOnPageChangeListener(pagerChangeListener);
     }
 
@@ -127,6 +129,16 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
         viewPager.removeOnPageChangeListener(pagerChangeListener);
         viewPager.setCurrentItem(position);
         viewPager.addOnPageChangeListener(pagerChangeListener);
+    }
+
+    @Override
+    public void onQueryChanged(@NonNull String query) {
+        presenter.onQueryChanged(query);
+    }
+
+    @Override
+    public void notifyShopsDataChanged() {
+        if (pagerAdapter != null) pagerAdapter.notifyDataSetChanged();
     }
 
 }

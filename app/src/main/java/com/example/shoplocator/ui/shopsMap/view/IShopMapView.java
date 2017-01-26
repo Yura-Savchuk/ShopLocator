@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.shopsMap.view;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 
@@ -19,4 +21,8 @@ public interface IShopMapView {
     void setMapCursorToCoordinate(ShopCoordinate coordinate);
 
     void setShopByPositionOnPager(int position);
+
+    void onQueryChanged(@NonNull String query);
+
+    void notifyShopsDataChanged();
 }

@@ -1,12 +1,11 @@
 package com.example.shoplocator.ui.shopsMap.presenter;
 
-import android.os.Bundle;
+import android.support.annotation.NonNull;
 
-import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
+import com.example.shoplocator.buissines.shopsMap.IShopsMapInteractor;
+import com.example.shoplocator.buissines.shopsMap.filtration.ShopListFilterModel;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
-
-import java.util.List;
 
 import rx.Single;
 import rx.Subscription;
@@ -19,13 +18,13 @@ import rx.subscriptions.CompositeSubscription;
 public class ShopMapPresenter implements IShopMapPresenter {
 
     private final ShopsMapPresenterCash cash;
-    private final IShopsListInteractor shopsListInteractor;
+    private final IShopsMapInteractor shopsMapInteractor;
 
     private IShopMapView view;
     private CompositeSubscription compositeSubscription;
 
-    public ShopMapPresenter(IShopsListInteractor shopsListInteractor) {
-        this.shopsListInteractor = shopsListInteractor;
+    public ShopMapPresenter(IShopsMapInteractor shopsMapInteractor) {
+        this.shopsMapInteractor = shopsMapInteractor;
         cash = new ShopsMapPresenterCash();
     }
 
@@ -49,28 +48,29 @@ public class ShopMapPresenter implements IShopMapPresenter {
         compositeSubscription.add(subscription);
     }
 
-    private Single<List<ShopModel>> getShops() {
-        if (cash.isShopsExist()) {
-            return Single.just(cash.getShops());
+    private Single<ShopListFilterModel> getShops() {
+        if (cash.isShopListFilterModelExist()) {
+            return Single.just(cash.getShopListFilterModel());
         }
-        return shopsListInteractor.getShops();
+        return shopsMapInteractor.getShopListFilterModel();
     }
 
     private void handleLoadShopsError(Throwable throwable) {
         view.shopProgress(false);
     }
 
-    private void handleLoadShopsSuccess(List<ShopModel> shops) {
-        cash.setShops(shops);
+    private void handleLoadShopsSuccess(ShopListFilterModel filterModel) {
+        cash.setShopListFilterModel(filterModel);
         view.shopProgress(false);
-        view.setupShopsList(shops);
-        view.setupShopMapkers(shops);
+        view.setupShopsList(filterModel.getUpdatableShops());
+        view.setupShopMapkers(filterModel.getUpdatableShops());
         setMapCursorToSelectedPosition();
         view.setShopByPositionOnPager(cash.getSelectedShopPosition());
+        if (cash.isQueryExist()) filterShopsWithQuery();
     }
 
     private void setMapCursorToSelectedPosition() {
-        ShopModel shopModel = cash.getShops().get(cash.getSelectedShopPosition());
+        ShopModel shopModel = cash.getShopListFilterModel().getUpdatableShops().get(cash.getSelectedShopPosition());
         view.setMapCursorToCoordinate(shopModel.getCoordinate());
     }
 
@@ -78,5 +78,18 @@ public class ShopMapPresenter implements IShopMapPresenter {
     public void onShopPositionChanged(int position) {
         cash.setSelectedShopPosition(position);
         setMapCursorToSelectedPosition();
+    }
+
+    @Override
+    public void onQueryChanged(@NonNull String query) {
+        cash.setQuery(query);
+        if (cash.isShopListFilterModelExist()) {
+            filterShopsWithQuery();
+        }
+    }
+
+    private void filterShopsWithQuery() {
+        shopsMapInteractor.filterShopList(cash.getShopListFilterModel(), cash.getQuery());
+        view.notifyShopsDataChanged();
     }
 }

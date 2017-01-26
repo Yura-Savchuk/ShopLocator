@@ -8,6 +8,7 @@ import com.example.shoplocator.dagger.shopsMap.ShopsMapComponent;
 import com.example.shoplocator.dagger.shopsMap.ShopsMapModule;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
+import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
 import com.example.shoplocator.ui.splash.view.SplashActivity;
 
 import javax.inject.Singleton;

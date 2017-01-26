@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shopsMap.presenter;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
 import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
@@ -20,4 +21,6 @@ public interface IShopMapPresenter {
     void loadShopsAndControlAccessablity(Single<Object> single);
 
     void onShopPositionChanged(int position);
+
+    void onQueryChanged(@NonNull String query);
 }

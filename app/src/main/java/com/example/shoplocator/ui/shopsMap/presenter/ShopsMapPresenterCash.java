@@ -2,6 +2,8 @@ package com.example.shoplocator.ui.shopsMap.presenter;
 
 import android.os.Bundle;
 
+import com.example.shoplocator.buissines.shopsMap.filtration.IShopListFiler;
+import com.example.shoplocator.buissines.shopsMap.filtration.ShopListFilterModel;
 import com.example.shoplocator.ui.model.ShopModel;
 
 import java.util.List;
@@ -13,22 +15,9 @@ public class ShopsMapPresenterCash {
 
     private static final int DEFAULT_SELECTED_SHOP_POSITION = 0;
 
-    private static final String STATE_PARAM_SHOP_ITEM_POSITION = "shop_item_position";
-
-    private List<ShopModel> shops;
     private int selectedShopPosition = DEFAULT_SELECTED_SHOP_POSITION;
-
-    public boolean isShopsExist() {
-        return shops != null;
-    }
-
-    public List<ShopModel> getShops() {
-        return shops;
-    }
-
-    public void setShops(List<ShopModel> shops) {
-        this.shops = shops;
-    }
+    private ShopListFilterModel shopListFilterModel;
+    private String query;
 
     public int getSelectedShopPosition() {
         return selectedShopPosition;
@@ -38,11 +27,27 @@ public class ShopsMapPresenterCash {
         this.selectedShopPosition = selectedShopPosition;
     }
 
-    public void saveInstanceState(Bundle outState) {
-        outState.putInt(STATE_PARAM_SHOP_ITEM_POSITION, selectedShopPosition);
+    public boolean isShopListFilterModelExist() {
+        return shopListFilterModel != null;
     }
 
-    public void restoreInstanceState(Bundle savedInstanceState) {
-        selectedShopPosition = savedInstanceState.getInt(STATE_PARAM_SHOP_ITEM_POSITION, DEFAULT_SELECTED_SHOP_POSITION);
+    public ShopListFilterModel getShopListFilterModel() {
+        return shopListFilterModel;
+    }
+
+    public void setShopListFilterModel(ShopListFilterModel shopListFilterModel) {
+        this.shopListFilterModel = shopListFilterModel;
+    }
+
+    public boolean isQueryExist() {
+        return query != null;
+    }
+
+    public String getQuery() {
+        return query;
+    }
+
+    public void setQuery(String query) {
+        this.query = query;
     }
 }

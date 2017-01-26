@@ -2,6 +2,8 @@ package com.example.shoplocator.dagger.shopsMap;
 
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
 import com.example.shoplocator.buissines.shopsList.ShopsListInteractor;
+import com.example.shoplocator.buissines.shopsMap.IShopsMapInteractor;
+import com.example.shoplocator.buissines.shopsMap.ShopsMapInteractor;
 import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.data.repsitory.users.UsersRepository;
@@ -21,7 +23,7 @@ public class ShopsMapModule {
     @Provides
     @ShopsMapScope
     IShopMapPresenter shopMapPresenter(IShopsRepository shopRepository, IUsersRepository usersRepository) {
-        IShopsListInteractor interactor = new ShopsListInteractor(shopRepository, usersRepository);
+        IShopsMapInteractor interactor = new ShopsMapInteractor(shopRepository, usersRepository);
         return new ShopMapPresenter(interactor);
     }
 
