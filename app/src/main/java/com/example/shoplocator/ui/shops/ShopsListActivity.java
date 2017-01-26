@@ -21,6 +21,7 @@ import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.list.view.ShopsListFragment;
+import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
 import javax.inject.Inject;
@@ -104,7 +105,8 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     }
 
     private void onNavToShopsMapSelected() {
-
+        Intent intent = new Intent(this, ShopsMapActivity.class);
+        startActivity(intent);
     }
 
     private void onNavToUsersListSelected() {

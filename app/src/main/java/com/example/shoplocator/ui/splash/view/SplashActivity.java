@@ -7,7 +7,7 @@ import android.os.Bundle;
 import com.example.shoplocator.App;
 import com.example.shoplocator.data.repsitory.settings.ISettingsRepository;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
-import com.example.shoplocator.util.rx.RxSchedulersAbs;
+import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import java.util.concurrent.TimeUnit;
 

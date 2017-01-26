@@ -6,7 +6,7 @@ import android.util.Log;
 import com.example.shoplocator.buissines.shopDetail.IShopDetailInteractor;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
-import com.example.shoplocator.util.rx.RxSchedulersAbs;
+import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import rx.subscriptions.CompositeSubscription;
 

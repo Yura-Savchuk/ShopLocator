@@ -20,4 +20,6 @@
     <string name="author_email">coulcod@gmail.com</string>
     <string name="navigation_drawer_open">drawer_opwn</string>
     <string name="navigation_drawer_close">drawer_close</string>
+    <string name="title_activity_shops_map">Shops Map</string>
+    <string name="shop_name">Shop Name</string>
 </resources>
