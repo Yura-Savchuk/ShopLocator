@@ -1,6 +1,6 @@
 package com.example.shoplocator.dagger.shopsMap;
 
-import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
+import com.example.shoplocator.ui.shopsMap.view.ShopsMapFragment;
 
 import dagger.Subcomponent;
 
@@ -12,6 +12,6 @@ import dagger.Subcomponent;
 @ShopsMapScope
 public interface ShopsMapComponent {
 
-    void inject(ShopsMapActivity activity);
+    void inject(ShopsMapFragment fragment);
 
 }

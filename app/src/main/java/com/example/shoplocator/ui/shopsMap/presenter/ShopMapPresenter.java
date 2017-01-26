@@ -42,16 +42,6 @@ public class ShopMapPresenter implements IShopMapPresenter {
     }
 
     @Override
-    public void saveInstanceState(Bundle outState) {
-        cash.saveInstanceState(outState);
-    }
-
-    @Override
-    public void restoreInstanceState(Bundle savedInstanceState) {
-        cash.restoreInstanceState(savedInstanceState);
-    }
-
-    @Override
     public void loadShopsAndControlAccessablity(Single<Object> single) {
         view.shopProgress(true);
         Subscription subscription = Single.zip(getShops(), single, (shops, o) -> shops)

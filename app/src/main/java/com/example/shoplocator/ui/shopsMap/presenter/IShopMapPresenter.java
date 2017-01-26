@@ -17,9 +17,6 @@ public interface IShopMapPresenter {
     void bindView(IShopMapView view);
     void unbindView();
 
-    void saveInstanceState(Bundle outState);
-    void restoreInstanceState(Bundle savedInstanceState);
-
     void loadShopsAndControlAccessablity(Single<Object> single);
 
     void onShopPositionChanged(int position);
