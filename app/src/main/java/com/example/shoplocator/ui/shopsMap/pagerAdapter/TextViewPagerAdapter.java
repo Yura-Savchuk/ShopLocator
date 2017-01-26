@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
 
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -33,14 +34,10 @@ public class TextViewPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
-        View view = getViewAtPosition(position, collection);
+        View view = onCreateView(position, collection);
         collection.addView(view, 0);
-        onBindView(view, position);
+        onBindView(new TextViewHolder(view), position);
         return view;
-    }
-
-    private View getViewAtPosition(int position, @NonNull ViewGroup container) {
-        return onCreateView(position, container);
     }
 
     private View onCreateView(int position, @NonNull ViewGroup container) {
@@ -48,9 +45,8 @@ public class TextViewPagerAdapter extends PagerAdapter {
                 .inflate(R.layout.item_shop_map_name, container, false);
     }
 
-    private void onBindView(View view, int position) {
-        TextView textView = (TextView) view;
-        textView.setText(shopList.get(position).getName());
+    private void onBindView(TextViewHolder viewHolder, int position) {
+        viewHolder.textViewShopName.setText(shopList.get(position).getName());
     }
 
     @Override
@@ -62,4 +58,5 @@ public class TextViewPagerAdapter extends PagerAdapter {
     public boolean isViewFromObject(View view, Object object) {
         return view == object;
     }
+
 }

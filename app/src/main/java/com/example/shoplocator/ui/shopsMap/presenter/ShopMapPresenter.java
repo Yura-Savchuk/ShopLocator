@@ -7,6 +7,8 @@ import com.example.shoplocator.buissines.shopsMap.filtration.ShopListFilterModel
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
 
+import java.util.List;
+
 import rx.Single;
 import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
@@ -16,6 +18,8 @@ import rx.subscriptions.CompositeSubscription;
  */
 
 public class ShopMapPresenter implements IShopMapPresenter {
+
+    private static final int EMPTY_POSITION = -1;
 
     private final ShopsMapPresenterCash cash;
     private final IShopsMapInteractor shopsMapInteractor;
@@ -89,7 +93,31 @@ public class ShopMapPresenter implements IShopMapPresenter {
     }
 
     private void filterShopsWithQuery() {
+        List<ShopModel> shops = cash.getShopListFilterModel().getUpdatableShops();
+        long shopId = getSelectedShopId(shops);
         shopsMapInteractor.filterShopList(cash.getShopListFilterModel(), cash.getQuery());
-        view.notifyShopsDataChanged();
+        view.setupShopsList(shops);
+        restoreSelectedShopPosition(shops, shopId);
+    }
+
+    private long getSelectedShopId(List<ShopModel> shops) {
+        if (shops.size() > cash.getSelectedShopPosition()
+                && cash.getSelectedShopPosition() > 0) {
+            return shops.get(cash.getSelectedShopPosition()).getId();
+        }
+        return EMPTY_POSITION;
+    }
+
+    private void restoreSelectedShopPosition(List<ShopModel> shops, long shopIdBeforeFilter) {
+        if (!shops.isEmpty() && shopIdBeforeFilter != EMPTY_POSITION) {
+            for (int i = 0; i < shops.size(); i++) {
+                ShopModel shopModel = shops.get(i);
+                if (shopModel.getId() == shopIdBeforeFilter) {
+                    cash.setSelectedShopPosition(i);
+                    view.setShopByPositionOnPager(i);
+                    break;
+                }
+            }
+        }
     }
 }
