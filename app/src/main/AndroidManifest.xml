@@ -48,12 +48,13 @@
         <activity
             android:name=".ui.shopsMap.view.ShopsMapActivity"
             android:label="@string/title_activity_shops_map"
-            android:windowSoftInputMode="adjustResize|stateHidden"
-            >
+            android:windowSoftInputMode="adjustResize|stateHidden">
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
+        <activity android:name=".ui.createAndEditShop.CreatAndEditShopActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize"/>
     </application>
 
 </manifest>
