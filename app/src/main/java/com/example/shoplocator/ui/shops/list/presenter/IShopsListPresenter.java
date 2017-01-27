@@ -22,4 +22,8 @@ public interface IShopsListPresenter {
 
     void removeSelectedShops();
     void cancelRemoveShops();
+
+    void onCreateActionSelection();
+
+    void addShopById(long shopId);
 }

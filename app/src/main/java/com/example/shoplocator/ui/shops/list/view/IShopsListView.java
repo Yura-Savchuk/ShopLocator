@@ -19,9 +19,12 @@ public interface IShopsListView {
     void onRemoveActionSelected();
     void onDoneActionSelection();
     void onCancelActionSelection();
+    void onCreateActionSelection();
 
     void setToolbarInEditState(boolean editState);
 
     void notifyItemRemoved(int position);
     void notifyItemChanged(int position);
+
+    void showCreateShopView();
 }

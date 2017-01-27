@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.shops.list.view;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsList.ShopsModule;
+import com.example.shoplocator.ui.createAndEditShop.CreatAndEditShopActivity;
 import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.ShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
@@ -31,6 +33,10 @@ import butterknife.ButterKnife;
  */
 
 public class ShopsListFragment extends Fragment implements IShopsListView {
+
+    private static final int CREATE_SHOP_REQUEST_CODE = 1;
+
+    private static final long INVALID_SHOP_ID = -1;
 
     @Inject IShopsListPresenter presenter;
 
@@ -62,6 +68,28 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     public void onDestroyView() {
         presenter.unbindView();
         super.onDestroyView();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case CREATE_SHOP_REQUEST_CODE: {
+                    onCreateShopResult(data);
+                    break;
+                }
+                default:{
+                    throw new RuntimeException("Unexpected request code.");
+                }
+            }
+        }
+    }
+
+    private void onCreateShopResult(@NonNull Intent intent) {
+        long shopId = intent.getLongExtra(CreatAndEditShopActivity.PARAM_SHOP_ID, INVALID_SHOP_ID);
+        if (shopId == INVALID_SHOP_ID) throw new RuntimeException("Shop id is invalid.");
+        presenter.addShopById(shopId);
     }
 
     @Override
@@ -104,6 +132,11 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
+    public void onCreateActionSelection() {
+        presenter.onCreateActionSelection();
+    }
+
+    @Override
     public void setToolbarInEditState(boolean editState) {
         Activity activity = getActivity();
         if (activity instanceof ShopListDelegate) {
@@ -119,5 +152,11 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     @Override
     public void notifyItemChanged(int position) {
         recyclerViewAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void showCreateShopView() {
+        Intent intent = new Intent(getActivity(), CreatAndEditShopActivity.class);
+        startActivityForResult(intent, CREATE_SHOP_REQUEST_CODE);
     }
 }

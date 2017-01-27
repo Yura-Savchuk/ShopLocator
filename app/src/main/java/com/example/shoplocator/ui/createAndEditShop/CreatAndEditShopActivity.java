@@ -46,6 +46,7 @@ public class CreatAndEditShopActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
+        toolbar.setNavigationOnClickListener(v -> finish());
     }
 
     private void setupFragment(Bundle savedInstanceState) {

@@ -24,4 +24,5 @@
     <string name="shop_name">Shop Name</string>
     <string name="save">Save</string>
     <string name="empty_view_for_focus">empty_view_for_focus</string>
+    <string name="action_create">Создать</string>
 </resources>

@@ -128,4 +128,14 @@ public class ShopsPresenter implements IShopsListPresenter {
         ChangeItemsCommand command = shopsInteractor.deselectSelectedShops(cash.getShops());
         command.executeWithListener(position -> view.notifyItemChanged(position));
     }
+
+    @Override
+    public void onCreateActionSelection() {
+        view.showCreateShopView();
+    }
+
+    @Override
+    public void addShopById(long shopId) {
+
+    }
 }

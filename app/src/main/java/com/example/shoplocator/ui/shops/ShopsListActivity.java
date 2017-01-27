@@ -46,6 +46,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     private MenuItem actionDone;
     private MenuItem actionCancel;
     private MenuItem actionRemove;
+    private MenuItem actionCreate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +133,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         actionDone = menu.findItem(R.id.actionDone);
         actionCancel = menu.findItem(R.id.actionCancel);
         actionRemove = menu.findItem(R.id.actionRemove);
+        actionCreate = menu.findItem(R.id.actionRemove);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -148,10 +150,16 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
             }
             case R.id.actionDone: {
                 onActionDoneSelected();
+                break;
+            }
+            case R.id.actionCreate: {
+                onActionCreateSelected();
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void onActionRemoveSelected() {
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
@@ -170,6 +178,13 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
             ((IShopsListView) fragment).onDoneActionSelection();
+        }
+    }
+
+    private void onActionCreateSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onCreateActionSelection();
         }
     }
 
@@ -206,6 +221,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         actionCancel.setVisible(editState);
         actionDone.setVisible(editState);
         actionRemove.setVisible(!editState);
+        actionCreate.setVisible(!editState);
     }
 
 }
