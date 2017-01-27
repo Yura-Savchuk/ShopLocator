@@ -25,4 +25,7 @@
     <string name="save">Save</string>
     <string name="empty_view_for_focus">empty_view_for_focus</string>
     <string name="action_create">Создать</string>
+    <string name="iamge_url">Image Url</string>
+    <string name="pos_x">Position X</string>
+    <string name="pos_y">Position Y</string>
 </resources>

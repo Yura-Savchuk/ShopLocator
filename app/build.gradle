@@ -73,6 +73,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
     compile "com.android.support:design:${supportLibraryVersion}"
     compile "com.android.support:cardview-v7:${supportLibraryVersion}"
+    compile 'com.coulcod.selectorview:selectorview:1.0.2'
     //tools
 
     compile "com.jakewharton:butterknife:${butteryKnifeVersion}"

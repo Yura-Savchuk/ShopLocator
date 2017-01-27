@@ -1,5 +1,7 @@
 package com.example.shoplocator.dagger.application;
 
+import com.example.shoplocator.dagger.createAndEditShop.CreateAndEditShopComponent;
+import com.example.shoplocator.dagger.createAndEditShop.CreateAndEditShopModule;
 import com.example.shoplocator.dagger.shopDetail.ShopDetailComponent;
 import com.example.shoplocator.dagger.shopDetail.ShopDetailModule;
 import com.example.shoplocator.dagger.shopsList.ShopsComponent;
@@ -32,4 +34,5 @@ public interface AppComponent {
     ShopsComponent plus(ShopsModule module);
     ShopDetailComponent plus(ShopDetailModule module);
     ShopsMapComponent plus(ShopsMapModule module);
+    CreateAndEditShopComponent plus(CreateAndEditShopModule module);
 }
