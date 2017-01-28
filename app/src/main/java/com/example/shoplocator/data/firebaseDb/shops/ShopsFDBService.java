@@ -87,25 +87,31 @@ public class ShopsFDBService implements IShopsFDBService {
 
     @Override
     public Single<ShopDbModel> addShop(@NonNull ShopFormDbModel formModel) {
-        return Single.create(new Single.OnSubscribe<ShopDbModel>() {
-            @Override
-            public void call(SingleSubscriber<? super ShopDbModel> subscriber) {
-                String key = shopsDataRefrence.push().getKey();
-                ShopFdbModel shopModel = ShopMapper.createFrom(key, formModel);
-                shopsDataRefrence.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        subscriber.onSuccess(getShopFromData(dataSnapshot));
-                    }
+        return Single.create(subscriber -> {
+            String key = shopsDataRefrence.push().getKey();
+            setShopFormTo(formModel, subscriber, key);
+        });
+    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        subscriber.onError(databaseError.toException());
-                    }
-                });
-                shopsDataRefrence.child(key).setValue(shopModel);
+    private void setShopFormTo(@NonNull ShopFormDbModel formModel, final SingleSubscriber<? super ShopDbModel> subscriber, String key) {
+        ShopFdbModel shopModel = ShopMapper.createFrom(key, formModel);
+        shopsDataRefrence.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                subscriber.onSuccess(getShopFromData(dataSnapshot));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                subscriber.onError(databaseError.toException());
             }
         });
+        shopsDataRefrence.child(key).setValue(shopModel);
+    }
+
+    @Override
+    public Single<ShopDbModel> updateShop(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel) {
+        return Single.create(subscriber -> setShopFormTo(formDbModel, subscriber, shopId));
     }
 
 }

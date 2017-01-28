@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.shops.detail.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.os.Bundle;
@@ -18,7 +20,9 @@ import android.widget.TextView;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopDetail.ShopDetailModule;
+import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.model.ShopCoordinate;
+import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.presenter.IShopDetailPresenter;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModelFactory;
 import com.example.shoplocator.util.fragment.FragmentTag;
@@ -35,6 +39,8 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
     public static final String PARAM_SHOP_ID = "shop_id";
     public static final String PARAM_IMAGE_VIEW_TRANSITION_NAME = "image_view_transition_name";
 
+    public static final int REQUEST_CODE_EDIT_SHOP = 2;
+
     @Inject IShopDetailPresenter presenter;
 
     @BindView(R.id.imageView) ImageView imageView;
@@ -50,6 +56,7 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
         App.instance().applicationComponent().plus(new ShopDetailModule()).inject(this);
         fetchArguments();
         postponeEnterTransitionIfExist();
+        setEditButtonVisible();
     }
 
     private void postponeEnterTransitionIfExist() {
@@ -65,6 +72,13 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
         }
         imageViewTransitionName = arguments.getString(PARAM_IMAGE_VIEW_TRANSITION_NAME);
         presenter.setShopId(arguments.getString(PARAM_SHOP_ID));
+    }
+
+    private void setEditButtonVisible() {
+        Activity activity = getActivity();
+        if (activity instanceof ShopsListActivity) {
+            ((ShopsListActivity) activity).setEditButtonVisible(true);
+        }
     }
 
     @Override
@@ -131,5 +145,27 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
     public void setCoordinate(@NonNull ShopCoordinate coordinate) {
         Spannable spannableCoordinate = new ShopSpannableModelFactory(getContext()).createCoordsSpannable(coordinate);
         textViewCoordinate.setText(spannableCoordinate);
+    }
+
+    @Override
+    public void onEditActionSelected() {
+        presenter.onEditActionSelected();
+    }
+
+    @Override
+    public void onRemoveActionSelected() {
+        presenter.onRemoveActionSelected();
+    }
+
+    @Override
+    public void showEditView(String shopId) {
+        Intent intent = new Intent(getActivity(), CreateAndEditShopActivity.class);
+        intent.putExtra(CreateAndEditShopActivity.PARAM_SHOP_ID, shopId);
+        getActivity().startActivityForResult(intent, REQUEST_CODE_EDIT_SHOP);
+    }
+
+    @Override
+    public void onEditShopResult(String shopId) {
+        presenter.onEditShopResult(shopId);
     }
 }

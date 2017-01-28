@@ -78,4 +78,19 @@ public class ShopDetailPresenter implements IShopDetailPresenter {
         //TODO
         Log.d("TAG", "handleShopByIdError: " + throwable);
     }
+
+    @Override
+    public void onEditActionSelected() {
+        view.showEditView(cash.getShopId());
+    }
+
+    @Override
+    public void onRemoveActionSelected() {
+
+    }
+
+    @Override
+    public void onEditShopResult(String shopId) {
+
+    }
 }

@@ -1,5 +1,6 @@
 package com.example.shoplocator.ui.shops;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,7 +19,9 @@ import android.view.View;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 
+import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
+import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.list.view.ShopsListFragment;
@@ -48,6 +51,7 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     private MenuItem actionCancel;
     private MenuItem actionRemove;
     private MenuItem actionCreate;
+    private MenuItem actionEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,7 +138,8 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         actionDone = menu.findItem(R.id.actionDone);
         actionCancel = menu.findItem(R.id.actionCancel);
         actionRemove = menu.findItem(R.id.actionRemove);
-        actionCreate = menu.findItem(R.id.actionRemove);
+        actionCreate = menu.findItem(R.id.actionCreate);
+        actionEdit = menu.findItem(R.id.actionEdit);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -157,6 +162,10 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
                 onActionCreateSelected();
                 break;
             }
+            case R.id.actionEdit: {
+                onActionEditSelected();
+                break;
+            }
         }
         return super.onOptionsItemSelected(item);
     }
@@ -171,21 +180,64 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     private void onActionCancelSelected() {
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
-            ((IShopsListView) fragment).onCancelActionSelection();
+            ((IShopsListView) fragment).onCancelActionSelected();
         }
     }
 
     private void onActionDoneSelected() {
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
-            ((IShopsListView) fragment).onDoneActionSelection();
+            ((IShopsListView) fragment).onDoneActionSelected();
         }
     }
 
     private void onActionCreateSelected() {
         Fragment fragment = fragmentRoute.getCurrentFragment(this);
         if (fragment instanceof IShopsListView) {
-            ((IShopsListView) fragment).onCreateActionSelection();
+            ((IShopsListView) fragment).onCreateActionSelected();
+        }
+    }
+
+    private void onActionEditSelected() {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.shopDetailContainer);
+        if (fragment instanceof IShopDetailView) {
+            ((IShopDetailView) fragment).onEditActionSelected();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case ShopDetailFragment.REQUEST_CODE_EDIT_SHOP: {
+                    onEditShopResult(data);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void onEditShopResult(@NonNull Intent data) {
+        String shopId = data.getStringExtra(CreateAndEditShopActivity.PARAM_SHOP_ID);
+        if (shopId == null) throw new RuntimeException("Shop ID is missing.");
+        if (twoPane) {
+            sendEditResultToShopDetailFragment(shopId);
+        }
+        sendEditResultToShopListFragment(shopId);
+    }
+
+    private void sendEditResultToShopDetailFragment(@NonNull String shopId) {
+        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.shopDetailContainer);
+        if (fragment instanceof IShopDetailView) {
+            ((IShopDetailView) fragment).onEditShopResult(shopId);
+        }
+    }
+
+    private void sendEditResultToShopListFragment(@NonNull String shopId) {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onEditShopResult(shopId);
         }
     }
 
@@ -223,6 +275,12 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         actionDone.setVisible(editState);
         actionRemove.setVisible(!editState);
         actionCreate.setVisible(!editState);
+    }
+
+    public void setEditButtonVisible(boolean visible) {
+        if (actionEdit != null) {
+            actionEdit.setVisible(visible);
+        }
     }
 
 }

@@ -17,14 +17,16 @@ public interface IShopsListView {
     void showProgress(boolean show);
 
     void onRemoveActionSelected();
-    void onDoneActionSelection();
-    void onCancelActionSelection();
-    void onCreateActionSelection();
+    void onDoneActionSelected();
+    void onCancelActionSelected();
+    void onCreateActionSelected();
 
     void setToolbarInEditState(boolean editState);
 
     void notifyItemRemoved(int position);
     void notifyItemChanged(int position);
+    void notifyItemInserted(int position);
 
     void showCreateShopView();
+    void onEditShopResult(String shopId);
 }

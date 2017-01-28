@@ -18,13 +18,17 @@ public class CheckableShopMapper {
 
     @NonNull
     public static List<SelectableShopModel> mapShopsToCheckableShops(@Nullable Collection<ShopModel> shopModels) {
-        return MapperUtil.transformList(shopModels, exist -> new SelectableShopModel(
-                exist.getId(),
-                exist.getName(),
-                exist.getImageUrl(),
-                exist.getCoordinate().clone(),
-                exist.getOwner().clone()
-        ));
+        return MapperUtil.transformList(shopModels, CheckableShopMapper::mapShopToCheckableShop);
+    }
+
+    public static SelectableShopModel mapShopToCheckableShop(@NonNull ShopModel shopModel) {
+        return new SelectableShopModel(
+                shopModel.getId(),
+                shopModel.getName(),
+                shopModel.getImageUrl(),
+                shopModel.getCoordinate().clone(),
+                shopModel.getOwner().clone()
+        );
     }
 
 }

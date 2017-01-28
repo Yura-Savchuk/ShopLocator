@@ -11,14 +11,15 @@ import java.util.List;
 
 public class CreateANdEditShopPresenterCash {
 
-    private long shopId;
+    private String shopId;
     private List<CheckableUserModel> users;
+    private boolean isDataPrefilled;
 
-    public void setShopId(long shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 
-    public long getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
@@ -32,5 +33,13 @@ public class CreateANdEditShopPresenterCash {
 
     public void setUsers(List<CheckableUserModel> users) {
         this.users = users;
+    }
+
+    public boolean isDataPrefilled() {
+        return isDataPrefilled;
+    }
+
+    public void setDataPrefilled(boolean dataPrefilled) {
+        isDataPrefilled = dataPrefilled;
     }
 }

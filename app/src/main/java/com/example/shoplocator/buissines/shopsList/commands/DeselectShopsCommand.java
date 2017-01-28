@@ -1,4 +1,4 @@
-package com.example.shoplocator.buissines.shopsList.commands.deselectSelected;
+package com.example.shoplocator.buissines.shopsList.commands;
 
 import android.support.annotation.NonNull;
 

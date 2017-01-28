@@ -17,5 +17,6 @@ public interface IShopsFDBService {
 
     Single<List<ShopDbModel>> getShops();
     Single<ShopDbModel> addShop(@NonNull ShopFormDbModel formModel);
+    Single<ShopDbModel> updateShop(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel);
 
 }

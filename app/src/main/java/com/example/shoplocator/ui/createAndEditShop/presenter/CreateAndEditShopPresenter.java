@@ -43,7 +43,7 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
     }
 
     @Override
-    public void setShopId(long shopId) {
+    public void setShopId(String shopId) {
         cash.setShopId(shopId);
     }
 

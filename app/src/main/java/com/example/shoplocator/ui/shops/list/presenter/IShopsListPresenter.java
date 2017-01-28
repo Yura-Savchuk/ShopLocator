@@ -1,5 +1,6 @@
 package com.example.shoplocator.ui.shops.list.presenter;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
@@ -18,12 +19,14 @@ public interface IShopsListPresenter {
     void onItemClick(int position, View itemView);
 
     void setupToolbarState();
-    void setToolbarInRemoveState();
+    void onRemoveActionSelected();
 
-    void removeSelectedShops();
-    void cancelRemoveShops();
+    void onDoneActionSelected();
+    void onCancelActionSelected();
 
-    void onCreateActionSelection();
+    void onCreateActionSelected();
 
-    void addShopById(String shopId);
+    void addShopById(@NonNull String shopId);
+    void onEditShopResult(@NonNull String shopId);
+
 }

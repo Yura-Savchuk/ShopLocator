@@ -8,6 +8,7 @@ import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
 
 import java.util.Collection;
+import java.util.LinkedList;
 import java.util.List;
 
 import rx.Single;
@@ -71,5 +72,17 @@ public class ShopsRepository implements IShopsRepository {
         return shopsFDBService.addShop(formDbModel)
                 .flatMap(shopDbModel -> shopsDBService.addShop(shopDbModel)
                         .map(o -> shopDbModel.getId()));
+    }
+
+    @Override
+    public Single<String> updateShopAndGetId(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel) {
+        return shopsFDBService.updateShop(shopId, formDbModel)
+                .flatMap(shopDbModel -> {
+                    Collection<String> ids = new LinkedList<>();
+                    ids.add(shopDbModel.getId());
+                    return shopsDBService.deleteShopsByIds(ids)
+                            .flatMap(o -> shopsDBService.addShop(shopDbModel));
+                })
+                .map(o -> shopId);
     }
 }

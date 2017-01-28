@@ -39,4 +39,9 @@ public interface ICreateAndEditShopView {
 
     void setInvalidErrors(@NonNull List<ShopFormInvalidField> fields);
     void showErrorMessage(@NonNull String message);
+
+    void setShopName(@NonNull String shopName);
+    void setImageUrl(@NonNull String imageUrl);
+    void setPositionX(@NonNull String position);
+    void setPositionY(@NonNull String position);
 }

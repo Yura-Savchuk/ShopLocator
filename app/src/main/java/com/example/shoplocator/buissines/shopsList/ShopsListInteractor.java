@@ -4,9 +4,11 @@ import android.support.annotation.NonNull;
 
 import com.example.shoplocator.buissines.mapper.CheckableShopMapper;
 import com.example.shoplocator.buissines.mapper.ShopsDbMapper;
-import com.example.shoplocator.buissines.shopsList.commands.deleteByIds.DeleteShopsCommand;
+import com.example.shoplocator.buissines.shopsList.commands.AddShopCommand;
+import com.example.shoplocator.buissines.shopsList.commands.DeleteShopsCommand;
 import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
-import com.example.shoplocator.buissines.shopsList.commands.deselectSelected.DeselectShopsCommand;
+import com.example.shoplocator.buissines.shopsList.commands.DeselectShopsCommand;
+import com.example.shoplocator.data.firebaseDb.mapper.ShopMapper;
 import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.model.ShopModel;
@@ -17,6 +19,7 @@ import java.util.Collection;
 import java.util.List;
 
 import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.
@@ -62,5 +65,14 @@ public class ShopsListInteractor implements IShopsListInteractor {
     @Override
     public ChangeItemsCommand deselectSelectedShops(@NonNull List<SelectableShopModel> shops) {
         return new DeselectShopsCommand(shops);
+    }
+
+    @Override
+    public Single<ChangeItemsCommand> addShopById(List<SelectableShopModel> shops, String shopId) {
+        return shopsRepository.getShopById(shopId)
+                .flatMap(shopDbModel -> usersRepository.getUserById(shopDbModel.getOwnerId())
+                        .map(userDbModel -> ShopsDbMapper.mapDbToUi(shopDbModel, userDbModel)))
+                .map(CheckableShopMapper::mapShopToCheckableShop)
+                .map(shop -> new AddShopCommand<>(shops, shop));
     }
 }

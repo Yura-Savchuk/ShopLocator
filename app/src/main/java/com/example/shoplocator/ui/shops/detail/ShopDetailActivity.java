@@ -2,16 +2,19 @@ package com.example.shoplocator.ui.shops.detail;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.NavUtils;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
+import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
@@ -56,7 +59,41 @@ public class ShopDetailActivity extends AppCompatActivity {
                 intent.getStringExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME));
         ShopDetailFragment fragment = new ShopDetailFragment();
         fragment.setArguments(arguments);
-        fragmentRoute.setFragment(this, fragment, R.id.shopDetailContainer);
+        fragmentRoute.setFragment(this, fragment);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_shop_detail, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.actionRemove: {
+                onRemoveActionSelected();
+                break;
+            }
+            case R.id.actionEdit: {
+                onEditActionSelected();
+                break;
+            }
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void onRemoveActionSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopDetailView) {
+            ((IShopDetailView) fragment).onRemoveActionSelected();
+        }
+    }
+
+    private void onEditActionSelected() {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopDetailView) {
+            ((IShopDetailView) fragment).onEditActionSelected();
+        }
+    }
 }

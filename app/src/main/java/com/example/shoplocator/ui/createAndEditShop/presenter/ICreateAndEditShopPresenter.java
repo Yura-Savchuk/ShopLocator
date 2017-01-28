@@ -9,7 +9,7 @@ import com.example.shoplocator.ui.createAndEditShop.view.ICreateAndEditShopView;
 
 public interface ICreateAndEditShopPresenter {
 
-    void setShopId(long shopId);
+    void setShopId(String shopId);
 
     void bindView(ICreateAndEditShopView view);
     void unbindView();

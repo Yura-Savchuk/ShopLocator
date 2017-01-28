@@ -15,4 +15,9 @@ public interface IShopDetailPresenter {
     void unbindView();
 
     void setupShopDetails();
+
+    void onEditActionSelected();
+    void onRemoveActionSelected();
+
+    void onEditShopResult(String shopId);
 }

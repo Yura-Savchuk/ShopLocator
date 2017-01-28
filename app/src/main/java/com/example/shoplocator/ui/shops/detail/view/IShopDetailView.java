@@ -14,4 +14,10 @@ public interface IShopDetailView {
     void setImage(@NonNull String imageUrl);
     void setOwner(@NonNull String name);
     void setCoordinate(@NonNull ShopCoordinate coordinate);
+
+    void onEditActionSelected();
+    void onRemoveActionSelected();
+
+    void showEditView(String shopId);
+    void onEditShopResult(String shopId);
 }

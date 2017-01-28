@@ -5,6 +5,8 @@ import android.view.View;
 
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
 import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
+import com.example.shoplocator.buissines.shopsList.commands.CommandExecutedListener;
+import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
@@ -12,6 +14,7 @@ import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 import java.util.List;
 
 import rx.Subscription;
+import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -95,13 +98,13 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     @Override
-    public void setToolbarInRemoveState() {
+    public void onRemoveActionSelected() {
         cash.setToolbarInEditState(true);
         setupToolbarState();
     }
 
     @Override
-    public void removeSelectedShops() {
+    public void onDoneActionSelected() {
         setToolbarNoInRemoveState();
         Subscription subscription = shopsInteractor.removeSelectedShops(cash.getShops())
                 .compose(schedulers.getIOToMainTransformerSingle())
@@ -119,7 +122,7 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     @Override
-    public void cancelRemoveShops() {
+    public void onCancelActionSelected() {
         setToolbarNoInRemoveState();
         deselectSelectedShops();
     }
@@ -130,12 +133,26 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     @Override
-    public void onCreateActionSelection() {
+    public void onCreateActionSelected() {
         view.showCreateShopView();
     }
 
     @Override
-    public void addShopById(String shopId) {
+    public void addShopById(@NonNull String shopId) {
+        Subscription subscription = shopsInteractor.addShopById(cash.getShops(), shopId)
+                .compose(schedulers.getIOToMainTransformerSingle())
+                .subscribe(this::handleAddShopByIdSuccess, throwable -> {});
+        compositeSubscription.add(subscription);
+    }
+
+    private void handleAddShopByIdSuccess(ChangeItemsCommand command) {
+        command.executeWithListener(position -> view.notifyItemInserted(position));
+    }
+
+    @Override
+    public void onEditShopResult(@NonNull String shopId) {
 
     }
 }
+
+

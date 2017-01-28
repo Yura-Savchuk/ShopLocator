@@ -74,7 +74,7 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
 
     private void fetchArguments() {
         Bundle arguments = getArguments();
-        long shopId = arguments.getLong(PARAM_SHOP_ID);
+        String shopId = arguments.getString(PARAM_SHOP_ID);
         presenter.setShopId(shopId);
     }
 
@@ -231,5 +231,25 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
     @Override
     public void showErrorMessage(@NonNull String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setShopName(@NonNull String shopName) {
+        editTextCardName.setText(shopName);
+    }
+
+    @Override
+    public void setImageUrl(@NonNull String imageUrl) {
+        editTextImageUrl.setText(imageUrl);
+    }
+
+    @Override
+    public void setPositionX(@NonNull String position) {
+        editTextPosX.setText(position);
+    }
+
+    @Override
+    public void setPositionY(@NonNull String position) {
+        editTextPosY.setText(position);
     }
 }

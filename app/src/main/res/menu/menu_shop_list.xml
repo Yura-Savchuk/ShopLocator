@@ -29,4 +29,11 @@
         app:showAsAction="ifRoom"
         />
 
+    <item android:id="@+id/actionEdit"
+        android:title="@string/action_edit"
+        android:icon="@drawable/vector_edit"
+        android:visible="false"
+        app:showAsAction="ifRoom"
+        />
+
 </menu>

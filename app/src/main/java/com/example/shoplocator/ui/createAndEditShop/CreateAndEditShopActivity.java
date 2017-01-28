@@ -20,7 +20,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CreatAndEditShopActivity extends AppCompatActivity {
+public class CreateAndEditShopActivity extends AppCompatActivity {
 
     public static final String PARAM_SHOP_ID = "shop_id";
     public static final long EMPTY_VALUE = -1;
@@ -53,7 +53,7 @@ public class CreatAndEditShopActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             CreateAndEditShopFragment fragment = new CreateAndEditShopFragment();
             Bundle arguments = new Bundle();
-            arguments.putLong(CreateAndEditShopFragment.PARAM_SHOP_ID, getIntent().getLongExtra(PARAM_SHOP_ID, EMPTY_VALUE));
+            arguments.putString(CreateAndEditShopFragment.PARAM_SHOP_ID, getIntent().getStringExtra(PARAM_SHOP_ID));
             fragment.setArguments(arguments);
             fragmentRouteAbs.addFragment(this, fragment);
         }

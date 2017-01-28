@@ -1,7 +1,6 @@
 package com.example.shoplocator.ui.createAndEditShop.presenter.formStrategy;
 
 import com.example.shoplocator.buissines.createAndEditShop.ICreateAndEditShopInteractor;
-import com.example.shoplocator.ui.createAndEditShop.CreatAndEditShopActivity;
 import com.example.shoplocator.ui.createAndEditShop.presenter.CreateANdEditShopPresenterCash;
 import com.example.shoplocator.ui.createAndEditShop.view.ICreateAndEditShopView;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
@@ -25,10 +24,10 @@ public class ShopFormFactory {
     }
 
     public IShopFormStrategy createShopFormStrategy() {
-        if (cash.getShopId() == CreatAndEditShopActivity.EMPTY_VALUE) {
+        if (cash.getShopId() == null) {
             return new CreateShopForm(view, interactor, cash, rxSchedulers);
         }
-        return new EditShopForm(view, interactor, cash);
+        return new EditShopForm(view, interactor, cash, rxSchedulers);
     }
 
 }

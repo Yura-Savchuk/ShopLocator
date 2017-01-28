@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsList.ShopsModule;
-import com.example.shoplocator.ui.createAndEditShop.CreatAndEditShopActivity;
+import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.ShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
@@ -85,7 +85,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     private void onCreateShopResult(@NonNull Intent intent) {
-        String shopId = intent.getStringExtra(CreatAndEditShopActivity.PARAM_SHOP_ID);
+        String shopId = intent.getStringExtra(CreateAndEditShopActivity.PARAM_SHOP_ID);
         if (shopId == null) throw new RuntimeException("Shop id is missing.");
         presenter.addShopById(shopId);
     }
@@ -116,22 +116,22 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     @Override
     public void onRemoveActionSelected() {
-        presenter.setToolbarInRemoveState();
+        presenter.onRemoveActionSelected();
     }
 
     @Override
-    public void onDoneActionSelection() {
-        presenter.removeSelectedShops();
+    public void onDoneActionSelected() {
+        presenter.onDoneActionSelected();
     }
 
     @Override
-    public void onCancelActionSelection() {
-        presenter.cancelRemoveShops();
+    public void onCancelActionSelected() {
+        presenter.onCancelActionSelected();
     }
 
     @Override
-    public void onCreateActionSelection() {
-        presenter.onCreateActionSelection();
+    public void onCreateActionSelected() {
+        presenter.onCreateActionSelected();
     }
 
     @Override
@@ -153,8 +153,18 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
+    public void notifyItemInserted(int position) {
+        recyclerViewAdapter.notifyItemInserted(position);
+    }
+
+    @Override
     public void showCreateShopView() {
-        Intent intent = new Intent(getActivity(), CreatAndEditShopActivity.class);
+        Intent intent = new Intent(getActivity(), CreateAndEditShopActivity.class);
         startActivityForResult(intent, CREATE_SHOP_REQUEST_CODE);
+    }
+
+    @Override
+    public void onEditShopResult(String shopId) {
+        presenter.onEditShopResult(shopId);
     }
 }

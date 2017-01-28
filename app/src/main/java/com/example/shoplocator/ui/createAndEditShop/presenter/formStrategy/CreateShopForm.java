@@ -40,6 +40,7 @@ public class CreateShopForm implements IShopFormStrategy {
                     .compose(rxSchedulers.getIOToMainTransformerSingle())
                     .subscribe(this::handleGetUsersSuccess, this::handleGetUsersError);
         }
+        view.setupUserSelector(cash.getUsers());
         return Single.just(1).subscribe();
     }
 
