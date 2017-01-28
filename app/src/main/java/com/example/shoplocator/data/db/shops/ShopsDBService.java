@@ -10,13 +10,9 @@ import com.example.shoplocator.data.model.ShopDbModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.realm.Realm;
-import io.realm.RealmList;
-import io.realm.RealmResults;
 import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Created by seotm on 23.01.17.
@@ -84,5 +80,25 @@ public class ShopsDBService implements IShopsDBService {
             if (realmObject != null) realmObjects.add(realmObject);
         }
         return realmObjects;
+    }
+
+    @Override
+    public Single<Object> addShop(@NonNull ShopDbModel shop) {
+        return Single.fromCallable(() -> {
+            ShopRealmObject realmShop = ShopRealmObjectMapper.mapDbToRealm(shop);
+            Realm realm = client.getRealm();
+            realm.beginTransaction();
+            deleteShopByIdFromRealmIfExist(realmShop.getId(), realm);
+            realm.copyToRealm(realmShop);
+            realm.commitTransaction();
+            return null;
+        });
+    }
+
+    private void deleteShopByIdFromRealmIfExist(long shopId, Realm realm) {
+        if (!realm.isInTransaction()) throw new RuntimeException("Realm must be in transaction state in this scope.");
+        ShopRealmObject oldRealmShop = realm.where(ShopRealmObject.class)
+                .equalTo(FIELD_SHOP_ID, shopId).findFirst();
+        if (oldRealmShop != null) oldRealmShop.deleteFromRealm();
     }
 }

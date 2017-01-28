@@ -3,7 +3,10 @@ package com.example.shoplocator.data.firebaseDb.shops;
 import android.support.annotation.NonNull;
 
 import com.example.shoplocator.data.firebaseDb.RealTimeDatabaseConfig;
+import com.example.shoplocator.data.firebaseDb.mapper.ShopMapper;
+import com.example.shoplocator.data.firebaseDb.model.ShopFdbModel;
 import com.example.shoplocator.data.model.ShopDbModel;
+import com.example.shoplocator.data.model.ShopFormDbModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -11,7 +14,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import rx.Single;
@@ -78,6 +83,29 @@ public class ShopsFDBService implements IShopsFDBService {
         float coordY = dataCoordinate.child(PARAM_Y).getValue(Float.class);
         long ownerId = dataSnapshot.child(PARAM_OWNER_ID).getValue(Long.class);
         return new ShopDbModel(id, name, imageUrl, coordX, coordY, ownerId);
+    }
+
+    @Override
+    public Single<Long> addShopAngGetId(@NonNull ShopFormDbModel formModel) {
+        return Single.create(new Single.OnSubscribe<Long>() {
+            @Override
+            public void call(SingleSubscriber<? super Long> subscriber) {
+                String key = shopsDataRefrence.push().getKey();
+                ShopFdbModel shopModel = ShopMapper.createFrom(key, formModel);
+                shopsDataRefrence.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        subscriber.onSuccess((long)1);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        subscriber.onError(databaseError.toException());
+                    }
+                });
+                shopsDataRefrence.child(key).setValue(shopModel);
+            }
+        });
     }
 
 }

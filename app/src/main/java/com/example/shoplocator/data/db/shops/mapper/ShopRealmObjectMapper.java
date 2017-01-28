@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.example.shoplocator.data.db.shops.model.ShopRealmObject;
 import com.example.shoplocator.data.model.ShopDbModel;
-import com.example.shoplocator.util.mapper.Mapper;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
 import java.util.Collection;
@@ -40,7 +39,7 @@ public class ShopRealmObjectMapper {
     }
 
     @NonNull
-    private static ShopRealmObject mapDbToRealm(@NonNull ShopDbModel dbModel) {
+    public static ShopRealmObject mapDbToRealm(@NonNull ShopDbModel dbModel) {
         ShopRealmObject shopRealmObject = new ShopRealmObject();
         shopRealmObject.setId(dbModel.getId());
         shopRealmObject.setName(dbModel.getName());

@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.model.ShopDbModel;
+import com.example.shoplocator.data.model.ShopFormDbModel;
 
 import java.util.Collection;
 import java.util.List;
@@ -64,5 +65,10 @@ public class ShopsRepository implements IShopsRepository {
     @Override
     public Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<Long> ids) {
         return shopsDBService.deleteShopsByIds(ids);
+    }
+
+    @Override
+    public Single<Long> addShopAndGetId(@NonNull ShopFormDbModel formDbModel) {
+        return shopsFDBService.addShopAngGetId(formDbModel);
     }
 }

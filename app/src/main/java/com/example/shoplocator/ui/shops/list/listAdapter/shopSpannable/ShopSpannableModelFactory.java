@@ -51,7 +51,7 @@ public class ShopSpannableModelFactory implements IShopSpannableModelFactory {
     }
 
     private ForegroundColorSpan createColorSecondaryText() {
-        return new ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorSecondaryText));
+        return new ForegroundColorSpan(ContextCompat.getColor(context, R.color.textColorSecondary));
     }
 
     private RelativeSizeSpan createSmallTextSpan() {
@@ -59,7 +59,7 @@ public class ShopSpannableModelFactory implements IShopSpannableModelFactory {
     }
 
     private ForegroundColorSpan createColorPrimaryText() {
-        return new ForegroundColorSpan(ContextCompat.getColor(context, R.color.colorPrimaryText));
+        return new ForegroundColorSpan(ContextCompat.getColor(context, R.color.textColorPrimary));
     }
 
     @Override

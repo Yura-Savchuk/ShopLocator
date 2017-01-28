@@ -1,6 +1,9 @@
 package com.example.shoplocator.data.firebaseDb.shops;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.data.model.ShopDbModel;
+import com.example.shoplocator.data.model.ShopFormDbModel;
 
 import java.util.List;
 
@@ -13,5 +16,6 @@ import rx.Single;
 public interface IShopsFDBService {
 
     Single<List<ShopDbModel>> getShops();
+    Single<Long> addShopAngGetId(@NonNull ShopFormDbModel formModel);
 
 }

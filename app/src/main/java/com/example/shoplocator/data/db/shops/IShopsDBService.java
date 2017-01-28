@@ -20,4 +20,5 @@ public interface IShopsDBService {
     void setShops(@NonNull List<ShopDbModel> shops);
 
     Single<Object> deleteShopsByIds(@NonNull Collection<Long> ids);
+    Single<Object> addShop(@NonNull ShopDbModel shop);
 }
