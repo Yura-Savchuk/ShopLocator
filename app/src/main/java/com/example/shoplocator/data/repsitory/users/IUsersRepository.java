@@ -1,5 +1,7 @@
 package com.example.shoplocator.data.repsitory.users;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.data.model.UserDbModel;
 import com.example.shoplocator.ui.model.ShopModel;
 
@@ -14,5 +16,5 @@ import rx.Single;
 public interface IUsersRepository {
 
     Single<List<UserDbModel>> getUsers();
-    Single<UserDbModel> getUserById(long userId);
+    Single<UserDbModel> getUserById(@NonNull String userId);
 }

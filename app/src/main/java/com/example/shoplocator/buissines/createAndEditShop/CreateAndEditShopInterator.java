@@ -1,7 +1,11 @@
 package com.example.shoplocator.buissines.createAndEditShop;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.example.shoplocator.buissines.createAndEditShop.validation.IShopFormValidation;
+import com.example.shoplocator.buissines.createAndEditShop.validation.ShopFormValidation;
+import com.example.shoplocator.buissines.createAndEditShop.validation.util.ValidationUtil;
 import com.example.shoplocator.buissines.mapper.ShopFormMapper;
 import com.example.shoplocator.buissines.mapper.UserMapper;
 import com.example.shoplocator.data.model.ShopFormDbModel;
@@ -11,6 +15,7 @@ import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.createAndEditShop.model.ShopFormModel;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import rx.Single;
 
@@ -22,10 +27,12 @@ public class CreateAndEditShopInterator implements ICreateAndEditShopInteractor 
 
     private final IShopsRepository shopsRepository;
     private final IUsersRepository usersRepository;
+    private final IShopFormValidation shopFormValidation;
 
-    public CreateAndEditShopInterator(IShopsRepository shopsRepository, IUsersRepository usersRepository) {
+    public CreateAndEditShopInterator(IShopsRepository shopsRepository, IUsersRepository usersRepository, IShopFormValidation shopFormValidation) {
         this.shopsRepository = shopsRepository;
         this.usersRepository = usersRepository;
+        this.shopFormValidation = shopFormValidation;
     }
 
     @Override
@@ -35,8 +42,13 @@ public class CreateAndEditShopInterator implements ICreateAndEditShopInteractor 
     }
 
     @Override
-    public Single<Long> addShopAngGetId(@NonNull ShopFormModel fromModel) {
+    public Single<String> addShopAngGetId(@NonNull ShopFormModel fromModel) {
         ShopFormDbModel formDbModel = ShopFormMapper.transform(fromModel);
         return shopsRepository.addShopAndGetId(formDbModel);
+    }
+
+    @Override
+    public Single<ShopFormModel> validateForm(ShopFormModel shopForm) {
+        return shopFormValidation.validate(shopForm);
     }
 }

@@ -32,7 +32,7 @@ public class EditShopForm implements IShopFormStrategy {
     }
 
     @Override
-    public Single<Long> saveShopAndGetId(@NonNull ShopFormModel fromModel) {
+    public Single<String> saveFormAndGetId(@NonNull ShopFormModel fromModel) {
         return null;
     }
 }

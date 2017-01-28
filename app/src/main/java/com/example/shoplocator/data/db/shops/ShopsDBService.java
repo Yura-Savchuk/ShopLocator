@@ -35,7 +35,7 @@ public class ShopsDBService implements IShopsDBService {
     }
 
     @Override
-    public Single<ShopDbModel> getShopById(long shopId) {
+    public Single<ShopDbModel> getShopById(@NonNull String shopId) {
         return Single.fromCallable(() -> client.getRealm().where(ShopRealmObject.class).equalTo(FIELD_SHOP_ID, shopId).findFirst())
                 .flatMap(shopRealmObject -> {
                     if (shopRealmObject == null) {
@@ -58,7 +58,7 @@ public class ShopsDBService implements IShopsDBService {
     }
 
     @Override
-    public Single<Object> deleteShopsByIds(@NonNull Collection<Long> ids) {
+    public Single<Object> deleteShopsByIds(@NonNull Collection<String> ids) {
         return Single.fromCallable(() -> {
             Realm realm = client.getRealm();
             Collection<ShopRealmObject> shops = getShopsFromRealmByIds(realm, ids);
@@ -72,9 +72,9 @@ public class ShopsDBService implements IShopsDBService {
     }
 
     @NonNull
-    private Collection<ShopRealmObject> getShopsFromRealmByIds(@NonNull Realm realm, @NonNull Collection<Long> ids) {
+    private Collection<ShopRealmObject> getShopsFromRealmByIds(@NonNull Realm realm, @NonNull Collection<String> ids) {
         Collection<ShopRealmObject> realmObjects = new ArrayList<>();
-        for (Long id : ids) {
+        for (String id : ids) {
             ShopRealmObject realmObject = realm.where(ShopRealmObject.class)
                     .equalTo(FIELD_SHOP_ID, id).findFirst();
             if (realmObject != null) realmObjects.add(realmObject);
@@ -95,7 +95,7 @@ public class ShopsDBService implements IShopsDBService {
         });
     }
 
-    private void deleteShopByIdFromRealmIfExist(long shopId, Realm realm) {
+    private void deleteShopByIdFromRealmIfExist(String shopId, Realm realm) {
         if (!realm.isInTransaction()) throw new RuntimeException("Realm must be in transaction state in this scope.");
         ShopRealmObject oldRealmShop = realm.where(ShopRealmObject.class)
                 .equalTo(FIELD_SHOP_ID, shopId).findFirst();

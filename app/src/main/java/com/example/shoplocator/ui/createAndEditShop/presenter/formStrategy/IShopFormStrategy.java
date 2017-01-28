@@ -14,6 +14,6 @@ import rx.Subscription;
 public interface IShopFormStrategy {
 
     Subscription prepareForm();
-    Single<Long> saveShopAndGetId(@NonNull ShopFormModel fromModel);
+    Single<String> saveFormAndGetId(@NonNull ShopFormModel fromModel);
 
 }

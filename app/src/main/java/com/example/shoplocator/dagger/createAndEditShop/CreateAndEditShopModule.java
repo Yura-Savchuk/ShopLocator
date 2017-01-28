@@ -1,7 +1,12 @@
 package com.example.shoplocator.dagger.createAndEditShop;
 
+import android.content.Context;
+
 import com.example.shoplocator.buissines.createAndEditShop.CreateAndEditShopInterator;
 import com.example.shoplocator.buissines.createAndEditShop.ICreateAndEditShopInteractor;
+import com.example.shoplocator.buissines.createAndEditShop.validation.IShopFormValidation;
+import com.example.shoplocator.buissines.createAndEditShop.validation.ShopFormValidation;
+import com.example.shoplocator.buissines.createAndEditShop.validation.util.ValidationUtil;
 import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.createAndEditShop.presenter.CreateAndEditShopPresenter;
@@ -22,9 +27,11 @@ public class CreateAndEditShopModule {
     @CreateAndEditShopScope
     ICreateAndEditShopPresenter createAndEditShopPresenter(IShopsRepository shopsRepository,
                                                            IUsersRepository usersRepository,
-                                                           RxSchedulersAbs rxSchedulers) {
-        ICreateAndEditShopInteractor interactor = new CreateAndEditShopInterator(shopsRepository, usersRepository);
-        return new CreateAndEditShopPresenter(interactor, rxSchedulers);
+                                                           RxSchedulersAbs rxSchedulers,
+                                                           Context context) {
+        IShopFormValidation validation = new ShopFormValidation(new ValidationUtil(context));
+        ICreateAndEditShopInteractor interactor = new CreateAndEditShopInterator(shopsRepository, usersRepository, validation);
+        return new CreateAndEditShopPresenter(interactor, rxSchedulers, context);
     }
 
 }

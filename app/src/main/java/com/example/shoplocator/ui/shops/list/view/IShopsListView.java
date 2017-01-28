@@ -13,7 +13,7 @@ import java.util.List;
 public interface IShopsListView {
 
     void setupShopsList(@NonNull List<SelectableShopModel> shops);
-    void showShopDetail(long shopId, View itemView);
+    void showShopDetail(String shopId, View itemView);
     void showProgress(boolean show);
 
     void onRemoveActionSelected();

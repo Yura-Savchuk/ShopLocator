@@ -16,6 +16,6 @@ import rx.Single;
 public interface IShopsFDBService {
 
     Single<List<ShopDbModel>> getShops();
-    Single<Long> addShopAngGetId(@NonNull ShopFormDbModel formModel);
+    Single<ShopDbModel> addShop(@NonNull ShopFormDbModel formModel);
 
 }

@@ -135,7 +135,7 @@ public class ShopsPresenter implements IShopsListPresenter {
     }
 
     @Override
-    public void addShopById(long shopId) {
+    public void addShopById(String shopId) {
 
     }
 }

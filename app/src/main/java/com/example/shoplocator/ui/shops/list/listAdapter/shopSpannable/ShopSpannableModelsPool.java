@@ -13,7 +13,7 @@ import java.util.HashMap;
 
 public class ShopSpannableModelsPool {
 
-    private final HashMap<Long, ShopSpannableModel> shopSpannableModels;
+    private final HashMap<String, ShopSpannableModel> shopSpannableModels;
     private final ShopSpannableModelFactory factory;
 
     public ShopSpannableModelsPool(Context context) {

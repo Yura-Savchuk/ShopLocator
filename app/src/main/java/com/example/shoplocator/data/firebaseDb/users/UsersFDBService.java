@@ -63,7 +63,7 @@ public class UsersFDBService implements IUsersFDBService {
     }
 
     private UserDbModel getUserFromData(DataSnapshot dataSnapshot) {
-        long id = dataSnapshot.child(PARAM_ID).getValue(Long.class);
+        String id = dataSnapshot.child(PARAM_ID).getValue(String.class);
         String name = dataSnapshot.child(PARAM_NAME).getValue(String.class);
         return new UserDbModel(id, name);
     }

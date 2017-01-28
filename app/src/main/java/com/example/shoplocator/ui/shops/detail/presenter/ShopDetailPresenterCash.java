@@ -7,14 +7,14 @@ import com.example.shoplocator.ui.model.ShopModel;
  */
 public class ShopDetailPresenterCash {
 
-    private long shopId;
+    private String shopId;
     private ShopModel shopModel;
 
-    public long getShopId() {
+    public String getShopId() {
         return shopId;
     }
 
-    public void setShopId(long shopId) {
+    public void setShopId(String shopId) {
         this.shopId = shopId;
     }
 

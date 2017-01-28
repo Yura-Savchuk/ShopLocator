@@ -13,7 +13,7 @@ public class CheckableUserModel extends UserModel implements Checkable {
 
     private boolean selected;
 
-    public CheckableUserModel(long id, String name) {
+    public CheckableUserModel(String id, String name) {
         super(id, name);
     }
 

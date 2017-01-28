@@ -50,8 +50,8 @@ public class ShopDetailActivity extends AppCompatActivity {
     private void setupFragment() {
         Bundle arguments = new Bundle();
         Intent intent = getIntent();
-        arguments.putLong(ShopDetailFragment.PARAM_SHOP_ID,
-                intent.getLongExtra(ShopDetailFragment.PARAM_SHOP_ID, 0));
+        arguments.putString(ShopDetailFragment.PARAM_SHOP_ID,
+                intent.getStringExtra(ShopDetailFragment.PARAM_SHOP_ID));
         arguments.putString(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME,
                 intent.getStringExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME));
         ShopDetailFragment fragment = new ShopDetailFragment();

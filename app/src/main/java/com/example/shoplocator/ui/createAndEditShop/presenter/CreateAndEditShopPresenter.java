@@ -1,8 +1,12 @@
 package com.example.shoplocator.ui.createAndEditShop.presenter;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
+import com.example.shoplocator.R;
 import com.example.shoplocator.buissines.createAndEditShop.ICreateAndEditShopInteractor;
+import com.example.shoplocator.buissines.createAndEditShop.exception.ShopFormIsInvalid;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.createAndEditShop.model.ShopFormModel;
 import com.example.shoplocator.ui.createAndEditShop.presenter.formStrategy.IShopFormStrategy;
@@ -23,15 +27,18 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
     private final CreateANdEditShopPresenterCash cash;
     private final ICreateAndEditShopInteractor interactor;
     private final RxSchedulersAbs rxSchedulers;
+    private final Context context;
 
     private ICreateAndEditShopView view;
     private CompositeSubscription compositeSubscription;
     private IShopFormStrategy shopFormStrategy;
 
     public CreateAndEditShopPresenter(@NonNull ICreateAndEditShopInteractor interactor,
-                                      @NonNull RxSchedulersAbs rxSchedulers) {
+                                      @NonNull RxSchedulersAbs rxSchedulers,
+                                      @NonNull Context context) {
         this.interactor = interactor;
         this.rxSchedulers = rxSchedulers;
+        this.context = context;
         cash = new CreateANdEditShopPresenterCash();
     }
 
@@ -62,7 +69,8 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
     public void submitForm() {
         view.showProgress(true);
         ShopFormModel shopForm = getShopForm();
-        Subscription subscription = shopFormStrategy.saveShopAndGetId(shopForm)
+        Subscription subscription = interactor.validateForm(shopForm)
+                .flatMap(shopFormStrategy::saveFormAndGetId)
                 .compose(rxSchedulers.getIOToMainTransformerSingle())
                 .subscribe(this::handleSaveShopAndGetIdSuccess, this::handleSaveShopAndGetIdFailure);
         compositeSubscription.add(subscription);
@@ -77,17 +85,17 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
         return new ShopFormModel(shopName, imageUrl, userModel, posX, posY);
     }
 
-    @NonNull
+    @Nullable
     private UserModel getSelectedUserModel() {
         for (CheckableUserModel user : cash.getUsers()) {
             if (user.isSelected()) {
                 return user;
             }
         }
-        throw new RuntimeException("One user must be checked in any case.");
+        return null;
     }
 
-    private void handleSaveShopAndGetIdSuccess(long shopId) {
+    private void handleSaveShopAndGetIdSuccess(String shopId) {
         view.showProgress(false);
         view.returnSuccessResult(shopId);
         view.close();
@@ -95,7 +103,12 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
 
     private void handleSaveShopAndGetIdFailure(Throwable throwable) {
         view.showProgress(false);
-        //TODO handle the error
+        if (throwable instanceof ShopFormIsInvalid) {
+            view.setInvalidErrors(((ShopFormIsInvalid) throwable).getInvalidFields());
+            view.showErrorMessage(context.getString(R.string.one_or_more_fields_are_invalid));
+        } else {
+            view.showErrorMessage(context.getString(R.string.un_error_ocurred));
+        }
     }
 
 }

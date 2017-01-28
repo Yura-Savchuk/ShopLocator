@@ -64,7 +64,7 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
             throw new RuntimeException("Param shop_id is missing.");
         }
         imageViewTransitionName = arguments.getString(PARAM_IMAGE_VIEW_TRANSITION_NAME);
-        presenter.setShopId(arguments.getLong(PARAM_SHOP_ID));
+        presenter.setShopId(arguments.getString(PARAM_SHOP_ID));
     }
 
     @Override

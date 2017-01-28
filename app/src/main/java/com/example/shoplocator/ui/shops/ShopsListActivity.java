@@ -2,6 +2,7 @@ package com.example.shoplocator.ui.shops;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
@@ -189,9 +190,9 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
     }
 
     @Override
-    public void showShopDetail(long shopId, View itemView) {
+    public void showShopDetail(@NonNull String shopId, View itemView) {
         Bundle arguments = new Bundle();
-        arguments.putLong(ShopDetailFragment.PARAM_SHOP_ID, shopId);
+        arguments.putString(ShopDetailFragment.PARAM_SHOP_ID, shopId);
         if (twoPane) {
             ShopDetailFragment fragment = new ShopDetailFragment();
             fragment.setArguments(arguments);

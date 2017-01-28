@@ -6,15 +6,15 @@ package com.example.shoplocator.data.model;
 
 public class UserDbModel {
 
-    private final long id;
+    private final String id;
     private final String name;
 
-    public UserDbModel(long id, String name) {
+    public UserDbModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

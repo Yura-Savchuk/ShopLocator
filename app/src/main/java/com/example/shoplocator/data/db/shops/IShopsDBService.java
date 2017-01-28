@@ -16,9 +16,9 @@ import rx.Single;
 public interface IShopsDBService {
 
     Single<List<ShopDbModel>> getShops();
-    Single<ShopDbModel> getShopById(long shopId);
+    Single<ShopDbModel> getShopById(@NonNull String shopId);
     void setShops(@NonNull List<ShopDbModel> shops);
 
-    Single<Object> deleteShopsByIds(@NonNull Collection<Long> ids);
+    Single<Object> deleteShopsByIds(@NonNull Collection<String> ids);
     Single<Object> addShop(@NonNull ShopDbModel shop);
 }

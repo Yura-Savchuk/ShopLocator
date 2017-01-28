@@ -55,7 +55,7 @@ public class CreateShopForm implements IShopFormStrategy {
     }
 
     @Override
-    public Single<Long> saveShopAndGetId(@NonNull ShopFormModel fromModel) {
+    public Single<String> saveFormAndGetId(@NonNull ShopFormModel fromModel) {
         return interactor.addShopAngGetId(fromModel);
     }
 

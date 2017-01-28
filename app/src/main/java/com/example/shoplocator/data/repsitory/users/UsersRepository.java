@@ -38,7 +38,7 @@ public class UsersRepository implements IUsersRepository {
     }
 
     @Override
-    public Single<UserDbModel> getUserById(long userId) {
+    public Single<UserDbModel> getUserById(@NonNull String userId) {
         return usersDBService.getUserById(userId)
                 .onErrorResumeNext(new Func1<Throwable, Single<UserDbModel>>() {
                     @Override
@@ -48,10 +48,10 @@ public class UsersRepository implements IUsersRepository {
                 });
     }
 
-    private Single<UserDbModel> getUserByIdFromFDBService(long userId) {
+    private Single<UserDbModel> getUserByIdFromFDBService(String userId) {
         return getUsers().map(userDbModels -> {
             for (UserDbModel user : userDbModels) {
-                if (user.getId() == userId) {
+                if (user.getId().equals(userId)) {
                     return user;
                 }
             }

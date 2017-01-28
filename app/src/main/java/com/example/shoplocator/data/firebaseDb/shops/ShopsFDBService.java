@@ -75,27 +75,27 @@ public class ShopsFDBService implements IShopsFDBService {
     }
 
     private ShopDbModel getShopFromData(@NonNull DataSnapshot dataSnapshot) {
-        long id = dataSnapshot.child(PARAM_ID).getValue(Long.class);
+        String id = dataSnapshot.child(PARAM_ID).getValue(String.class);
         String imageUrl = dataSnapshot.child(PARAM_IMAGE_URL).getValue(String.class);
         String name = dataSnapshot.child(PARAM_NAME).getValue(String.class);
         DataSnapshot dataCoordinate = dataSnapshot.child(PARAM_COORDINATE);
         float coordX = dataCoordinate.child(PARAM_X).getValue(Float.class);
         float coordY = dataCoordinate.child(PARAM_Y).getValue(Float.class);
-        long ownerId = dataSnapshot.child(PARAM_OWNER_ID).getValue(Long.class);
+        String ownerId = dataSnapshot.child(PARAM_OWNER_ID).getValue(String.class);
         return new ShopDbModel(id, name, imageUrl, coordX, coordY, ownerId);
     }
 
     @Override
-    public Single<Long> addShopAngGetId(@NonNull ShopFormDbModel formModel) {
-        return Single.create(new Single.OnSubscribe<Long>() {
+    public Single<ShopDbModel> addShop(@NonNull ShopFormDbModel formModel) {
+        return Single.create(new Single.OnSubscribe<ShopDbModel>() {
             @Override
-            public void call(SingleSubscriber<? super Long> subscriber) {
+            public void call(SingleSubscriber<? super ShopDbModel> subscriber) {
                 String key = shopsDataRefrence.push().getKey();
                 ShopFdbModel shopModel = ShopMapper.createFrom(key, formModel);
                 shopsDataRefrence.child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        subscriber.onSuccess((long)1);
+                        subscriber.onSuccess(getShopFromData(dataSnapshot));
                     }
 
                     @Override

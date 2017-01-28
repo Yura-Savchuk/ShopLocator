@@ -17,14 +17,14 @@ import java.util.Set;
 public class DeleteShopsCommand implements ChangeItemsCommand {
 
     private final List<? extends ShopModel> uiShopModels;
-    private final Set<Long> removedShopIds = new HashSet<>();
+    private final Set<String> removedShopIds = new HashSet<>();
     private boolean executed = false;
 
     public DeleteShopsCommand(List<? extends ShopModel> uiShopModels) {
         this.uiShopModels = uiShopModels;
     }
 
-    public void addRemovedId(long shopId) {
+    public void addRemovedId(String shopId) {
         removedShopIds.add(shopId);
     }
 

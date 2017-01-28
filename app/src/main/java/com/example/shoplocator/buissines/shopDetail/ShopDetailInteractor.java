@@ -24,7 +24,7 @@ public class ShopDetailInteractor implements IShopDetailInteractor {
     }
 
     @Override
-    public Single<ShopModel> getShopById(long shopId) {
+    public Single<ShopModel> getShopById(@NonNull String shopId) {
         return shopsRepository.getShopById(shopId)
                 .flatMap(shopDbModel -> usersRepository.getUserById(shopDbModel.getOwnerId())
                         .map(userDbModel -> ShopsDbMapper.mapDbToUi(shopDbModel, userDbModel)));

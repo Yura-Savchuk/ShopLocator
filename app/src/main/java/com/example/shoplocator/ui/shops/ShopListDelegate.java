@@ -1,5 +1,6 @@
 package com.example.shoplocator.ui.shops;
 
+import android.support.annotation.NonNull;
 import android.view.View;
 
 /**
@@ -8,7 +9,7 @@ import android.view.View;
 
 public interface ShopListDelegate {
 
-    void showShopDetail(long shopId, View itemView);
+    void showShopDetail(@NonNull String shopId, View itemView);
 
     void setEditState(boolean editState);
 

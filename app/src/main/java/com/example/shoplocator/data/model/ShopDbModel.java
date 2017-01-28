@@ -6,14 +6,14 @@ package com.example.shoplocator.data.model;
 
 public class ShopDbModel {
 
-    private final long id;
+    private final String id;
     private final String name;
     private final String imageUrl;
     private final float coordinateX;
     private final float coordinateY;
-    private final long ownerId;
+    private final String ownerId;
 
-    public ShopDbModel(long id, String name, String imageUrl, float coordinateX, float coordinateY, long ownerId) {
+    public ShopDbModel(String id, String name, String imageUrl, float coordinateX, float coordinateY, String ownerId) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -22,7 +22,7 @@ public class ShopDbModel {
         this.ownerId = ownerId;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
@@ -42,7 +42,7 @@ public class ShopDbModel {
         return coordinateY;
     }
 
-    public long getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 }

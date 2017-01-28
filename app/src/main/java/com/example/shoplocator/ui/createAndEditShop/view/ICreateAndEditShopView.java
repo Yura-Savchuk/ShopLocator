@@ -2,6 +2,8 @@ package com.example.shoplocator.ui.createAndEditShop.view;
 
 import android.support.annotation.NonNull;
 
+import com.example.shoplocator.buissines.createAndEditShop.exception.ShopFormIsInvalid;
+import com.example.shoplocator.buissines.createAndEditShop.validation.field.ShopFormInvalidField;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 
 import java.util.List;
@@ -15,7 +17,7 @@ public interface ICreateAndEditShopView {
 
     void showProgress(boolean progress);
 
-    void returnSuccessResult(long shopId);
+    void returnSuccessResult(@NonNull String shopId);
 
     void close();
 
@@ -34,4 +36,7 @@ public interface ICreateAndEditShopView {
     void setupUserSelector(@NonNull List<CheckableUserModel> users);
 
     void showErrorView();
+
+    void setInvalidErrors(@NonNull List<ShopFormInvalidField> fields);
+    void showErrorMessage(@NonNull String message);
 }

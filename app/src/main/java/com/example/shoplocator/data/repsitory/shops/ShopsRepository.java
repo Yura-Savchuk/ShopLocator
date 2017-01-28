@@ -11,7 +11,6 @@ import java.util.Collection;
 import java.util.List;
 
 import rx.Single;
-import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -41,7 +40,7 @@ public class ShopsRepository implements IShopsRepository {
     }
 
     @Override
-    public Single<ShopDbModel> getShopById(long shopId) {
+    public Single<ShopDbModel> getShopById(@NonNull String shopId) {
         return shopsDBService.getShopById(shopId)
                 .onErrorResumeNext(new Func1<Throwable, Single<ShopDbModel>>() {
                     @Override
@@ -51,10 +50,10 @@ public class ShopsRepository implements IShopsRepository {
                 });
     }
 
-    private Single<ShopDbModel> getShopByIdFromFDBService(long shopId) {
+    private Single<ShopDbModel> getShopByIdFromFDBService(String shopId) {
         return getShops().map(shopDbModels -> {
             for (ShopDbModel shop : shopDbModels) {
-                if (shop.getId() == shopId) {
+                if (shop.getId().equals(shopId)) {
                     return shop;
                 }
             }
@@ -63,12 +62,14 @@ public class ShopsRepository implements IShopsRepository {
     }
 
     @Override
-    public Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<Long> ids) {
+    public Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<String> ids) {
         return shopsDBService.deleteShopsByIds(ids);
     }
 
     @Override
-    public Single<Long> addShopAndGetId(@NonNull ShopFormDbModel formDbModel) {
-        return shopsFDBService.addShopAngGetId(formDbModel);
+    public Single<String> addShopAndGetId(@NonNull ShopFormDbModel formDbModel) {
+        return shopsFDBService.addShop(formDbModel)
+                .flatMap(shopDbModel -> shopsDBService.addShop(shopDbModel)
+                        .map(o -> shopDbModel.getId()));
     }
 }

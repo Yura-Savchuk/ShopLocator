@@ -16,6 +16,7 @@ import rx.Single;
 public interface ICreateAndEditShopInteractor {
 
     Single<List<CheckableUserModel>> getCheckableUsers();
-    Single<Long> addShopAngGetId(@NonNull ShopFormModel fromModel);
+    Single<String> addShopAngGetId(@NonNull ShopFormModel fromModel);
 
+    Single<ShopFormModel> validateForm(ShopFormModel shopForm);
 }

@@ -19,8 +19,6 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ShopMapPresenter implements IShopMapPresenter {
 
-    private static final int EMPTY_POSITION = -1;
-
     private final ShopsMapPresenterCash cash;
     private final IShopsMapInteractor shopsMapInteractor;
 
@@ -94,25 +92,25 @@ public class ShopMapPresenter implements IShopMapPresenter {
 
     private void filterShopsWithQuery() {
         List<ShopModel> shops = cash.getShopListFilterModel().getUpdatableShops();
-        long shopId = getSelectedShopId(shops);
+        String shopId = getSelectedShopId(shops);
         shopsMapInteractor.filterShopList(cash.getShopListFilterModel(), cash.getQuery());
         view.setupShopsList(shops);
         restoreSelectedShopPosition(shops, shopId);
     }
 
-    private long getSelectedShopId(List<ShopModel> shops) {
+    private String getSelectedShopId(List<ShopModel> shops) {
         if (shops.size() > cash.getSelectedShopPosition()
                 && cash.getSelectedShopPosition() > 0) {
             return shops.get(cash.getSelectedShopPosition()).getId();
         }
-        return EMPTY_POSITION;
+        return null;
     }
 
-    private void restoreSelectedShopPosition(List<ShopModel> shops, long shopIdBeforeFilter) {
-        if (!shops.isEmpty() && shopIdBeforeFilter != EMPTY_POSITION) {
+    private void restoreSelectedShopPosition(List<ShopModel> shops, String shopIdBeforeFilter) {
+        if (!shops.isEmpty() && shopIdBeforeFilter != null) {
             for (int i = 0; i < shops.size(); i++) {
                 ShopModel shopModel = shops.get(i);
-                if (shopModel.getId() == shopIdBeforeFilter) {
+                if (shopModel.getId().equals(shopIdBeforeFilter)) {
                     cash.setSelectedShopPosition(i);
                     view.setShopByPositionOnPager(i);
                     break;

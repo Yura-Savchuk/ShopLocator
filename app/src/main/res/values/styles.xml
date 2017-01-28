@@ -9,6 +9,7 @@
         <item name="android:windowBackground">@color/colorWindowBackground</item>
         <item name="android:textColorSecondary">@color/textColorSecondary</item>
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="textColorError">@color/textColorError</item>
     </style>
 
     <style name="ShpashTheme" parent="Theme.AppCompat.NoActionBar">

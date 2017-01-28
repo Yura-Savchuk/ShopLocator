@@ -9,7 +9,7 @@ import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 
 public interface IShopDetailPresenter {
 
-    void setShopId(long shopId);
+    void setShopId(String shopId);
 
     void bindView(IShopDetailView view);
     void unbindView();

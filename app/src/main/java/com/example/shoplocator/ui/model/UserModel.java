@@ -6,15 +6,15 @@ package com.example.shoplocator.ui.model;
 
 public class UserModel implements Cloneable {
 
-    private final long id;
+    private final String id;
     private final String name;
 
-    public UserModel(long id, String name) {
+    public UserModel(String id, String name) {
         this.id = id;
         this.name = name;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

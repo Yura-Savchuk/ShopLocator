@@ -18,8 +18,8 @@ import rx.Single;
 public interface IShopsRepository {
 
     Single<List<ShopDbModel>> getShops();
-    Single<ShopDbModel> getShopById(long shopId);
-    Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<Long> ids);
+    Single<ShopDbModel> getShopById(@NonNull String shopId);
+    Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<String> ids);
 
-    Single<Long> addShopAndGetId(@NonNull ShopFormDbModel formDbModel);
+    Single<String> addShopAndGetId(@NonNull ShopFormDbModel formDbModel);
 }

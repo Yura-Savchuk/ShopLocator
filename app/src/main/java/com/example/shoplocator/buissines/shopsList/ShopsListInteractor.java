@@ -48,7 +48,7 @@ public class ShopsListInteractor implements IShopsListInteractor {
     public Single<ChangeItemsCommand> removeSelectedShops(@NonNull List<SelectableShopModel> shops) {
         //TODO This code can be written asynchronously
         DeleteShopsCommand deleteShopsCommand = new DeleteShopsCommand(shops);
-        Collection<Long> idsToRemove = new ArrayList<>();
+        Collection<String> idsToRemove = new ArrayList<>();
         for (SelectableShopModel shop : shops) {
             if (shop.isSelected()) {
                 idsToRemove.add(shop.getId());

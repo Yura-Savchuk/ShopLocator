@@ -38,9 +38,9 @@ public final class ShopsDbMapper {
     }
 
     @Nullable
-    private UserDbModel getUserById(long userId) {
+    private UserDbModel getUserById(String userId) {
         for (UserDbModel user : users) {
-            if (user.getId() == userId) return user;
+            if (user.getId().equals(userId)) return user;
         }
         return null;
     }

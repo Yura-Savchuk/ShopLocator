@@ -11,13 +11,13 @@ import java.util.List;
 
 public class ShopModel {
 
-    private final long id;
+    private final String id;
     private final String name;
     private final String imageUrl;
     private final ShopCoordinate coordinate;
     private final UserModel owner;
 
-    public ShopModel(long id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
+    public ShopModel(String id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -25,7 +25,7 @@ public class ShopModel {
         this.owner = owner;
     }
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 

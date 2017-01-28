@@ -36,8 +36,6 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     private static final int CREATE_SHOP_REQUEST_CODE = 1;
 
-    private static final long INVALID_SHOP_ID = -1;
-
     @Inject IShopsListPresenter presenter;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
@@ -87,8 +85,8 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     private void onCreateShopResult(@NonNull Intent intent) {
-        long shopId = intent.getLongExtra(CreatAndEditShopActivity.PARAM_SHOP_ID, INVALID_SHOP_ID);
-        if (shopId == INVALID_SHOP_ID) throw new RuntimeException("Shop id is invalid.");
+        String shopId = intent.getStringExtra(CreatAndEditShopActivity.PARAM_SHOP_ID);
+        if (shopId == null) throw new RuntimeException("Shop id is missing.");
         presenter.addShopById(shopId);
     }
 
@@ -100,7 +98,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
-    public void showShopDetail(long shopId, View itemView) {
+    public void showShopDetail(@NonNull String shopId, View itemView) {
         Activity activity = getActivity();
         if (activity instanceof ShopListDelegate) {
             ((ShopListDelegate) activity).showShopDetail(shopId, itemView);

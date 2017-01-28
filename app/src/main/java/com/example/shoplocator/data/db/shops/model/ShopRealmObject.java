@@ -8,18 +8,18 @@ import io.realm.RealmObject;
 
 public class ShopRealmObject extends RealmObject {
 
-    private long id;
+    private String id;
     private String name;
     private String imageUrl;
     private float coordinateX;
     private float coordinateY;
-    private long ownerId;
+    private String ownerId;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -55,11 +55,11 @@ public class ShopRealmObject extends RealmObject {
         this.coordinateY = coordinateY;
     }
 
-    public long getOwnerId() {
+    public String getOwnerId() {
         return ownerId;
     }
 
-    public void setOwnerId(long ownerId) {
+    public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
 }

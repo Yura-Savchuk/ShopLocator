@@ -1,5 +1,7 @@
 package com.example.shoplocator.buissines.shopDetail;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.ui.model.ShopModel;
 
 import rx.Single;
@@ -10,6 +12,6 @@ import rx.Single;
 
 public interface IShopDetailInteractor {
 
-    Single<ShopModel> getShopById(long shopId);
+    Single<ShopModel> getShopById(@NonNull String shopId);
 
 }

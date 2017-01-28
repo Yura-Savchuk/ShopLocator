@@ -1,5 +1,7 @@
 package com.example.shoplocator.data.db.users;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.data.db.client.IDatabaseClient;
 import com.example.shoplocator.data.db.users.mapper.UserRealmObjectMapper;
 import com.example.shoplocator.data.db.users.model.UserRealmObject;
@@ -31,7 +33,7 @@ public class UserDBService implements IUsersDBService {
     }
 
     @Override
-    public Single<UserDbModel> getUserById(long userId) {
+    public Single<UserDbModel> getUserById(@NonNull String userId) {
         return Single.fromCallable(() -> client.getRealm().where(UserRealmObject.class).equalTo(FIELD_USER_ID, userId).findFirst())
                 .flatMap(userRealmObject -> {
                     if (userRealmObject == null) {
@@ -42,7 +44,7 @@ public class UserDBService implements IUsersDBService {
     }
 
     @Override
-    public void setUsers(List<UserDbModel> users) {
+    public void setUsers(@NonNull List<UserDbModel> users) {
         List<UserRealmObject> realmShops = UserRealmObjectMapper.mapDbToRealm(users);
         Realm realm = client.getRealm();
         realm.beginTransaction();

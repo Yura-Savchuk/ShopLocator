@@ -14,7 +14,7 @@ public class SelectableShopModel extends ShopModel {
 
     private boolean selected;
 
-    public SelectableShopModel(long id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
+    public SelectableShopModel(String id, String name, String imageUrl, ShopCoordinate coordinate, @NonNull UserModel owner) {
         super(id, name, imageUrl, coordinate, owner);
     }
 

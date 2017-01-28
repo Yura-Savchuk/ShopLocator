@@ -25,5 +25,5 @@ public interface IShopsListPresenter {
 
     void onCreateActionSelection();
 
-    void addShopById(long shopId);
+    void addShopById(String shopId);
 }

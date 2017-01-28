@@ -30,7 +30,7 @@ public class ShopDetailPresenter implements IShopDetailPresenter {
     }
 
     @Override
-    public void setShopId(long shopId) {
+    public void setShopId(String shopId) {
         cash.setShopId(shopId);
     }
 

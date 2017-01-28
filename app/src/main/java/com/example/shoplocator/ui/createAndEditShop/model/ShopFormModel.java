@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.createAndEditShop.model;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.example.shoplocator.ui.model.UserModel;
 
@@ -18,7 +19,7 @@ public class ShopFormModel {
 
     public ShopFormModel(@NonNull String name,
                          @NonNull String imageUrl,
-                         @NonNull UserModel userModel,
+                         @Nullable UserModel userModel,
                          @NonNull String posX,
                          @NonNull String posY) {
         this.name = name;
