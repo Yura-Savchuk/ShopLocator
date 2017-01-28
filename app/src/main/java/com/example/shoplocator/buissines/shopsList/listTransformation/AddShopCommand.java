@@ -1,4 +1,4 @@
-package com.example.shoplocator.buissines.shopsList.commands;
+package com.example.shoplocator.buissines.shopsList.listTransformation;
 
 import android.support.annotation.NonNull;
 

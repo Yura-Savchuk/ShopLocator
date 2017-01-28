@@ -8,6 +8,7 @@ import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
+import rx.Subscription;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -86,11 +87,22 @@ public class ShopDetailPresenter implements IShopDetailPresenter {
 
     @Override
     public void onRemoveActionSelected() {
+        view.showProgress(true);
+        Subscription subscription = shopDetailInteractor.deleteShopById(cash.getShopId())
+                .compose(rxSchedulers.getIOToMainTransformerSingle())
+                .subscribe(this::handleDeleteShopByIdSuccess, throwable -> {});
+        compositeSubscription.add(subscription);
+    }
 
+    private void handleDeleteShopByIdSuccess(Object o) {
+        view.showProgress(false);
+        view.returnShopHasBeenRemovedResult(cash.getShopId());
+        view.close();
     }
 
     @Override
     public void onEditShopResult(String shopId) {
-
+        cash.setShopModel(null);
+        setupShopDetails();
     }
 }

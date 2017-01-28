@@ -164,7 +164,12 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
-    public void onEditShopResult(String shopId) {
+    public void onEditShopResult(@NonNull String shopId) {
         presenter.onEditShopResult(shopId);
+    }
+
+    @Override
+    public void onDeleteShopResult(@NonNull String shopId) {
+        presenter.onDeleteShopResult(shopId);
     }
 }

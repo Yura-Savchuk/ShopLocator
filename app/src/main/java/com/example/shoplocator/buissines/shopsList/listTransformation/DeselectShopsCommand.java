@@ -1,9 +1,7 @@
-package com.example.shoplocator.buissines.shopsList.commands;
+package com.example.shoplocator.buissines.shopsList.listTransformation;
 
 import android.support.annotation.NonNull;
 
-import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
-import com.example.shoplocator.buissines.shopsList.commands.CommandExecutedListener;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 
 import java.util.List;

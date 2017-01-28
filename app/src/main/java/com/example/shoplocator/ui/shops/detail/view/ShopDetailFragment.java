@@ -23,9 +23,11 @@ import com.example.shoplocator.dagger.shopDetail.ShopDetailModule;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
+import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.presenter.IShopDetailPresenter;
 import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModelFactory;
 import com.example.shoplocator.util.fragment.FragmentTag;
+import com.example.shoplocator.util.ui.progress.ProgressDialog;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -167,5 +169,27 @@ public class ShopDetailFragment extends Fragment implements IShopDetailView {
     @Override
     public void onEditShopResult(String shopId) {
         presenter.onEditShopResult(shopId);
+    }
+
+    @Override
+    public void showProgress(boolean progress) {
+        if (progress) {
+            ProgressDialog.showIfHidden(getActivity());
+        } else {
+            ProgressDialog.hideIfShown();
+        }
+    }
+
+    @Override
+    public void returnShopHasBeenRemovedResult(@NonNull String shopId) {
+        Intent intent = new Intent();
+        intent.putExtra(ShopDetailActivity.PARAM_SHOP_ID, shopId);
+        intent.putExtra(ShopDetailActivity.PARAM_SHOP_HAS_BEEN_REMOVED, true);
+        getActivity().setResult(Activity.RESULT_OK, intent);
+    }
+
+    @Override
+    public void close() {
+        getActivity().finish();
     }
 }

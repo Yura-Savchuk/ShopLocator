@@ -13,5 +13,6 @@ import rx.Single;
 public interface IShopDetailInteractor {
 
     Single<ShopModel> getShopById(@NonNull String shopId);
+    Single<Object> deleteShopById(@NonNull String shopId);
 
 }

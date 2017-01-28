@@ -28,5 +28,6 @@ public interface IShopsListPresenter {
 
     void addShopById(@NonNull String shopId);
     void onEditShopResult(@NonNull String shopId);
+    void onDeleteShopResult(@NonNull String shopId);
 
 }

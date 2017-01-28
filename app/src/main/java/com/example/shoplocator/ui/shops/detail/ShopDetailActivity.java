@@ -1,7 +1,9 @@
 package com.example.shoplocator.ui.shops.detail;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,7 @@ import android.view.View;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
+import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
@@ -24,6 +27,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ShopDetailActivity extends AppCompatActivity {
+
+    public static final String PARAM_SHOP_ID = "shop_id";
+    public static final String PARAM_SHOP_HAS_BEEN_EDITED = "shop_has_been_edited";
+    public static final String PARAM_SHOP_HAS_BEEN_REMOVED = "shop_has_been_removed";
 
     @Inject FragmentRouteAbs fragmentRoute;
 
@@ -96,4 +103,35 @@ public class ShopDetailActivity extends AppCompatActivity {
             ((IShopDetailView) fragment).onEditActionSelected();
         }
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case ShopDetailFragment.REQUEST_CODE_EDIT_SHOP: {
+                    onEditShopResult(data);
+                    break;
+                }
+            }
+        }
+    }
+
+    private void onEditShopResult(@NonNull Intent data) {
+        String shopId = data.getStringExtra(CreateAndEditShopActivity.PARAM_SHOP_ID);
+        if (shopId == null) throw new RuntimeException("Shop ID is missing.");
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopDetailView) {
+            ((IShopDetailView) fragment).onEditShopResult(shopId);
+        }
+        setShopEditedResult(shopId);
+    }
+
+    private void setShopEditedResult(@NonNull String shopId) {
+        Intent intent = new Intent();
+        intent.putExtra(PARAM_SHOP_ID, shopId);
+        intent.putExtra(PARAM_SHOP_HAS_BEEN_EDITED, true);
+        setResult(RESULT_OK, intent);
+    }
+
 }

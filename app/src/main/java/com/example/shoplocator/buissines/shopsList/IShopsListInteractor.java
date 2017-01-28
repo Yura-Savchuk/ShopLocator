@@ -2,8 +2,7 @@ package com.example.shoplocator.buissines.shopsList;
 
 import android.support.annotation.NonNull;
 
-import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
-import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
+import com.example.shoplocator.buissines.shopsList.listTransformation.ChangeItemsCommand;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 
@@ -23,5 +22,7 @@ public interface IShopsListInteractor {
     Single<ChangeItemsCommand> removeSelectedShops(@NonNull List<SelectableShopModel> shops);
     ChangeItemsCommand deselectSelectedShops(@NonNull List<SelectableShopModel> shops);
 
-    Single<ChangeItemsCommand> addShopById(List<SelectableShopModel> shops, String shopId);
+    Single<ChangeItemsCommand> addShopById(@NonNull List<SelectableShopModel> shops, @NonNull String shopId);
+    Single<ChangeItemsCommand> updateShopById(@NonNull List<SelectableShopModel> shops, @NonNull String shopId);
+
 }

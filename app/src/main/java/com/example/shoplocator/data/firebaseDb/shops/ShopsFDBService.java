@@ -1,6 +1,7 @@
 package com.example.shoplocator.data.firebaseDb.shops;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.example.shoplocator.data.firebaseDb.RealTimeDatabaseConfig;
 import com.example.shoplocator.data.firebaseDb.mapper.ShopMapper;
@@ -106,7 +107,13 @@ public class ShopsFDBService implements IShopsFDBService {
                 subscriber.onError(databaseError.toException());
             }
         });
-        shopsDataRefrence.child(key).setValue(shopModel);
+        shopsDataRefrence.child(key).setValue(shopModel, (databaseError, databaseReference) -> {
+            if (databaseError != null) {
+                Log.e("Firebase", "error: ", databaseError.toException());
+            } else {
+                Log.d("Firebase", "write successfully");
+            }
+        });
     }
 
     @Override

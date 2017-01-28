@@ -29,5 +29,4 @@ public class ShopDetailPresenterCash {
     public boolean isShopModelExist() {
         return shopModel != null;
     }
-
 }

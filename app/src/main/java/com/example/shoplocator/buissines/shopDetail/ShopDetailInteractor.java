@@ -7,6 +7,10 @@ import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.model.ShopModel;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.LinkedList;
+
 import rx.Single;
 
 /**
@@ -28,5 +32,12 @@ public class ShopDetailInteractor implements IShopDetailInteractor {
         return shopsRepository.getShopById(shopId)
                 .flatMap(shopDbModel -> usersRepository.getUserById(shopDbModel.getOwnerId())
                         .map(userDbModel -> ShopsDbMapper.mapDbToUi(shopDbModel, userDbModel)));
+    }
+
+    @Override
+    public Single<Object> deleteShopById(@NonNull String shopId) {
+        Collection<String> ids = new LinkedList<>();
+        ids.add(shopId);
+        return shopsRepository.deleteShopsByIdsFromDb(ids);
     }
 }

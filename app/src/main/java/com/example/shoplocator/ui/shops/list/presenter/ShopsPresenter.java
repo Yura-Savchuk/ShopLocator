@@ -4,9 +4,7 @@ import android.support.annotation.NonNull;
 import android.view.View;
 
 import com.example.shoplocator.buissines.shopsList.IShopsListInteractor;
-import com.example.shoplocator.buissines.shopsList.commands.ChangeItemsCommand;
-import com.example.shoplocator.buissines.shopsList.commands.CommandExecutedListener;
-import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
+import com.example.shoplocator.buissines.shopsList.listTransformation.ChangeItemsCommand;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
@@ -14,7 +12,6 @@ import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 import java.util.List;
 
 import rx.Subscription;
-import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -151,8 +148,29 @@ public class ShopsPresenter implements IShopsListPresenter {
 
     @Override
     public void onEditShopResult(@NonNull String shopId) {
-
+        Subscription subscription = shopsInteractor.updateShopById(cash.getShops(), shopId)
+                .compose(schedulers.getIOToMainTransformerSingle())
+                .subscribe(this::handleUpdateShopByIdSuccess, throwable -> {});
+        compositeSubscription.add(subscription);
     }
+
+    private void handleUpdateShopByIdSuccess(ChangeItemsCommand command) {
+        command.executeWithListener(position -> view.notifyItemChanged(position));
+    }
+
+    @Override
+    public void onDeleteShopResult(@NonNull String shopId) {
+        List<SelectableShopModel> shops = cash.getShops();
+        for (int i=0; i<shops.size(); i++) {
+            SelectableShopModel item = shops.get(i);
+            if (item.getId().equals(shopId)) {
+                shops.remove(i);
+                view.notifyItemRemoved(i);
+                break;
+            }
+        }
+    }
+
 }
 
 

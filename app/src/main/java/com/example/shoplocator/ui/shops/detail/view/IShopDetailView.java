@@ -20,4 +20,10 @@ public interface IShopDetailView {
 
     void showEditView(String shopId);
     void onEditShopResult(String shopId);
+
+    void showProgress(boolean progress);
+
+    void returnShopHasBeenRemovedResult(@NonNull String shopId);
+
+    void close();
 }

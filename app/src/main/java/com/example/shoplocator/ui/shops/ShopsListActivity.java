@@ -35,6 +35,8 @@ import butterknife.ButterKnife;
 
 public class ShopsListActivity extends AppCompatActivity implements ShopListDelegate {
 
+    private static final int REQUEST_CODE_SHOP_DETAIL = 3;
+
     @Inject FragmentRouteAbs fragmentRoute;
 
     /**
@@ -214,6 +216,10 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
                     onEditShopResult(data);
                     break;
                 }
+                case REQUEST_CODE_SHOP_DETAIL: {
+                    onShopDetailResult(data);
+                    break;
+                }
             }
         }
     }
@@ -241,6 +247,23 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         }
     }
 
+    private void onShopDetailResult(@NonNull Intent data) {
+        String shopId = data.getStringExtra(ShopDetailActivity.PARAM_SHOP_ID);
+        if (shopId == null) throw new RuntimeException("Shop ID is missing.");
+        if (data.getBooleanExtra(ShopDetailActivity.PARAM_SHOP_HAS_BEEN_REMOVED, false)) {
+            sendDeleteResultToShopListFragment(shopId);
+        } else if (data.getBooleanExtra(ShopDetailActivity.PARAM_SHOP_HAS_BEEN_EDITED, false)) {
+            sendEditResultToShopListFragment(shopId);
+        }
+    }
+
+    private void sendDeleteResultToShopListFragment(@NonNull String shopId) {
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onDeleteShopResult(shopId);
+        }
+    }
+
     @Override
     public void showShopDetail(@NonNull String shopId, View itemView) {
         Bundle arguments = new Bundle();
@@ -263,9 +286,9 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
             intent.putExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME, transitionName);
             ActivityOptionsCompat options = ActivityOptionsCompat.
                     makeSceneTransitionAnimation(this, imageView, transitionName);
-            startActivity(intent, options.toBundle());
+            startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL, options.toBundle());
         } else {
-            startActivity(intent);
+            startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL);
         }
     }
 

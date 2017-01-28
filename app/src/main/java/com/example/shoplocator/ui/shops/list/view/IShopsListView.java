@@ -28,5 +28,6 @@ public interface IShopsListView {
     void notifyItemInserted(int position);
 
     void showCreateShopView();
-    void onEditShopResult(String shopId);
+    void onEditShopResult(@NonNull String shopId);
+    void onDeleteShopResult(@NonNull String shopId);
 }
