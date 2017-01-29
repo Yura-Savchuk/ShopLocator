@@ -62,4 +62,16 @@ public class ShopRealmObject extends RealmObject {
     public void setOwnerId(String ownerId) {
         this.ownerId = ownerId;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", coordinateX=" + coordinateX +
+                ", coordinateY=" + coordinateY +
+                ", ownerId='" + ownerId + '\'' +
+                '}';
+    }
 }

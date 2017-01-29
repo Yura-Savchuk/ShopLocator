@@ -1,4 +1,4 @@
-package com.example.shoplocator.ui.settings.preferenceView;
+package com.example.shoplocator.ui.settings.preferences;
 
 import android.content.Context;
 import android.preference.EditTextPreference;

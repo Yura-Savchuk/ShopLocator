@@ -102,4 +102,9 @@ public class ShopsRepository implements IShopsRepository {
                 .flatMap(shopDbModels -> shopsDBService.addShops(shopDbModels)
                         .map(o -> shopDbModels));
     }
+
+    @Override
+    public Single<String> getLocalDbStructure() {
+        return shopsDBService.getDbStructure();
+    }
 }

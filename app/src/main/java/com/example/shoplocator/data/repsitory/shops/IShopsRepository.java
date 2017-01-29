@@ -25,4 +25,7 @@ public interface IShopsRepository {
     Single<String> updateShopAndGetId(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel);
 
     Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId);
+
+    Single<String> getLocalDbStructure();
+
 }

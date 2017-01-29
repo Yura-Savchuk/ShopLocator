@@ -2,6 +2,7 @@ package com.example.shoplocator.data.db.shops;
 
 import android.support.annotation.NonNull;
 
+import com.example.shoplocator.data.db.ListPrinter;
 import com.example.shoplocator.data.db.client.IDatabaseClient;
 import com.example.shoplocator.data.db.shops.mapper.ShopRealmObjectMapper;
 import com.example.shoplocator.data.db.shops.model.ShopRealmObject;
@@ -13,6 +14,7 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Single;
 
 /**
@@ -123,5 +125,14 @@ public class ShopsDBService implements IShopsDBService {
         return Single.fromCallable(() -> client.getRealm().where(ShopRealmObject.class)
                 .equalTo("ownerId", userId).findAll())
                 .map(ShopRealmObjectMapper::mapRealmToDb);
+    }
+
+    @Override
+    public Single<String> getDbStructure() {
+        return Single.fromCallable(() -> {
+            Realm realm = client.getRealm();
+            RealmResults<ShopRealmObject> shops = realm.where(ShopRealmObject.class).findAll();
+            return new ListPrinter(shops).toString();
+        });
     }
 }

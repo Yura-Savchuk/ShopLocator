@@ -13,6 +13,7 @@ import com.example.shoplocator.dagger.userDetail.UserDetailModule;
 import com.example.shoplocator.dagger.usersList.UsersListComponent;
 import com.example.shoplocator.dagger.usersList.UsersListModule;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
+import com.example.shoplocator.ui.settings.preferences.SendDbPreference;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.splash.view.SplashActivity;
@@ -45,4 +46,5 @@ public interface AppComponent {
     UsersListComponent plus(UsersListModule module);
     UserDetailComponent plus(UserDetailModule module);
 
+    void inject(SendDbPreference preference);
 }

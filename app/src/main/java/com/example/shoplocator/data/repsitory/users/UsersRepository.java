@@ -59,4 +59,9 @@ public class UsersRepository implements IUsersRepository {
         });
     }
 
+    @Override
+    public Single<String> getLocalDbStructure() {
+        return usersDBService.getDbStructure();
+    }
+
 }

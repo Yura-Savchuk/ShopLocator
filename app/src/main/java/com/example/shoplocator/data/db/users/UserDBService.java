@@ -2,14 +2,17 @@ package com.example.shoplocator.data.db.users;
 
 import android.support.annotation.NonNull;
 
+import com.example.shoplocator.data.db.ListPrinter;
 import com.example.shoplocator.data.db.client.IDatabaseClient;
 import com.example.shoplocator.data.db.users.mapper.UserRealmObjectMapper;
 import com.example.shoplocator.data.db.users.model.UserRealmObject;
 import com.example.shoplocator.data.model.UserDbModel;
 
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 import rx.Single;
 
 /**
@@ -53,5 +56,14 @@ public class UserDBService implements IUsersDBService {
             realm.copyToRealm(user);
         }
         realm.commitTransaction();
+    }
+
+    @Override
+    public Single<String> getDbStructure() {
+        return Single.fromCallable(() -> {
+            Realm realm = client.getRealm();
+            RealmResults<UserRealmObject> users = realm.where(UserRealmObject.class).findAll();
+            return new ListPrinter(users).toString();
+        });
     }
 }

@@ -24,4 +24,6 @@ public interface IShopsDBService {
     Single<Object> addShops(@NonNull Collection<ShopDbModel> shops);
 
     Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId);
+
+    Single<String> getDbStructure();
 }

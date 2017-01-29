@@ -17,4 +17,6 @@ public interface IUsersRepository {
 
     Single<List<UserDbModel>> getUsers();
     Single<UserDbModel> getUserById(@NonNull String userId);
+    Single<String> getLocalDbStructure();
+
 }

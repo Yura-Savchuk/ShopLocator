@@ -115,4 +115,10 @@
 
     <string name="pref_title_vibrate">Vibrate</string>
     <string name="spalsh_screen_delay">Splash Screeen Delay</string>
+    <string name="send">Send</string>
+    <string name="e_mail">E-mail</string>
+    <string name="shop_database_message_subject">Shop Locator Database</string>
+    <string name="no_email_client_installed">There are no email clients installed.</string>
+    <string name="send_mail_">Send mail…</string>
+    <string name="error_when_fetch_db_structure">\"Error when fetch Db structure: \"</string>
 </resources>
