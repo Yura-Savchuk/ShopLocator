@@ -47,15 +47,18 @@ public class UserDBService implements IUsersDBService {
     }
 
     @Override
-    public void setUsers(@NonNull List<UserDbModel> users) {
-        List<UserRealmObject> realmShops = UserRealmObjectMapper.mapDbToRealm(users);
-        Realm realm = client.getRealm();
-        realm.beginTransaction();
-        realm.where(UserRealmObject.class).findAll().deleteAllFromRealm();
-        for (UserRealmObject user : realmShops) {
-            realm.copyToRealm(user);
-        }
-        realm.commitTransaction();
+    public Single<Object> setUsers(@NonNull List<UserDbModel> users) {
+        return Single.fromCallable(() -> {
+            List<UserRealmObject> realmShops = UserRealmObjectMapper.mapDbToRealm(users);
+            Realm realm = client.getRealm();
+            realm.beginTransaction();
+            realm.where(UserRealmObject.class).findAll().deleteAllFromRealm();
+            for (UserRealmObject user : realmShops) {
+                realm.copyToRealm(user);
+            }
+            realm.commitTransaction();
+            return null;
+        });
     }
 
     @Override
@@ -64,6 +67,20 @@ public class UserDBService implements IUsersDBService {
             Realm realm = client.getRealm();
             RealmResults<UserRealmObject> users = realm.where(UserRealmObject.class).findAll();
             return new ListPrinter(users).toString();
+        });
+    }
+
+    @Override
+    public Single<Object> addUser(@NonNull UserDbModel userDbModel) {
+        return Single.fromCallable(() -> {
+            Realm realm = client.getRealm();
+            UserRealmObject oldUser = realm.where(UserRealmObject.class).findFirst();
+            UserRealmObject newUser = UserRealmObjectMapper.mapDbToRealm(userDbModel);
+            realm.beginTransaction();
+            if (oldUser != null) oldUser.deleteFromRealm();
+            realm.copyToRealm(newUser);
+            realm.commitTransaction();
+            return null;
         });
     }
 }

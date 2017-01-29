@@ -13,5 +13,6 @@ import rx.Single;
 public interface IUsersFDBService {
 
     Single<List<UserDbModel>> getUsers();
+    Single<UserDbModel> getUserById(String userId);
 
 }

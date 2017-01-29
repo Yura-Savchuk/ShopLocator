@@ -48,7 +48,7 @@ public class UsersFDBService implements IUsersFDBService {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                //TODO
+                subscriber.onError(databaseError.toException());
             }
         });
     }
@@ -66,6 +66,27 @@ public class UsersFDBService implements IUsersFDBService {
         String id = dataSnapshot.child(PARAM_ID).getValue(String.class);
         String name = dataSnapshot.child(PARAM_NAME).getValue(String.class);
         return new UserDbModel(id, name);
+    }
+
+    @Override
+    public Single<UserDbModel> getUserById(String userId) {
+        return Single.create(subscriber -> shopsDataRefrence.orderByChild("id")
+                .equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                List<UserDbModel> shopDbModels = getUsersFromData(dataSnapshot);
+                if (shopDbModels != null && !shopDbModels.isEmpty()) {
+                    subscriber.onSuccess(shopDbModels.get(0));
+                } else {
+                    subscriber.onError(new RuntimeException("User by id: " + userId + "undefined."));
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                subscriber.onError(databaseError.toException());
+            }
+        }));
     }
 
 }

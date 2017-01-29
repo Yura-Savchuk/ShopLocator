@@ -27,36 +27,35 @@ public class UsersRepository implements IUsersRepository {
 
     @Override
     public Single<List<UserDbModel>> getUsers() {
-        return usersDBService.getUsers()
-                .flatMap(userDbModels -> {
-                    if (userDbModels == null || userDbModels.isEmpty()) {
-                        return usersFDBService.getUsers()
-                                .doOnSuccess(usersDBService::setUsers);
-                    }
-                    return Single.just(userDbModels);
-                });
+        return getUsersFromFDb()
+                .onErrorResumeNext(throwable -> getUsersFromDb());
+    }
+
+    private Single<List<UserDbModel>> getUsersFromFDb() {
+        return usersFDBService.getUsers()
+                .flatMap(userDbModels -> usersDBService.setUsers(userDbModels)
+                        .map(o -> userDbModels));
+    }
+
+    private Single<List<UserDbModel>> getUsersFromDb() {
+        return usersDBService.getUsers();
     }
 
     @Override
     public Single<UserDbModel> getUserById(@NonNull String userId) {
-        return usersDBService.getUserById(userId)
-                .onErrorResumeNext(new Func1<Throwable, Single<UserDbModel>>() {
-                    @Override
-                    public Single<UserDbModel> call(Throwable throwable) {
-                        return getUserByIdFromFDBService(userId);
-                    }
-                });
+        return getUserByIdFromFDBService(userId)
+                .onErrorResumeNext(throwable -> getUserByIdsFromDb(userId));
+    }
+
+    @NonNull
+    private Single<UserDbModel> getUserByIdsFromDb(@NonNull final String userId) {
+        return usersDBService.getUserById(userId);
     }
 
     private Single<UserDbModel> getUserByIdFromFDBService(String userId) {
-        return getUsers().map(userDbModels -> {
-            for (UserDbModel user : userDbModels) {
-                if (user.getId().equals(userId)) {
-                    return user;
-                }
-            }
-            return null;
-        });
+        return usersFDBService.getUserById(userId)
+                .flatMap(userDbModel -> usersDBService.addUser(userDbModel)
+                        .map(o -> userDbModel));
     }
 
     @Override
