@@ -20,4 +20,6 @@ public interface IShopsFDBService {
     Single<ShopDbModel> updateShop(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel);
 
     Single<List<ShopDbModel>> getShopsByUserId(String userId);
+
+    Single<ShopDbModel> getShopsById(String shopId);
 }

@@ -7,11 +7,13 @@ import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 
 import rx.Single;
+import rx.functions.Action1;
 import rx.functions.Func1;
 
 /**
@@ -30,36 +32,38 @@ public class ShopsRepository implements IShopsRepository {
 
     @Override
     public Single<List<ShopDbModel>> getShops() {
-        return shopsDBService.getShops()
-                .flatMap(shopDbModels -> {
-                    if (shopDbModels == null || shopDbModels.isEmpty()) {
-                        return shopsFDBService.getShops()
-                                .doOnSuccess(shopsDBService::setShops);
-                    }
-                    return Single.just(shopDbModels);
-                });
+        return getShopsFromFDb()
+                .onErrorResumeNext(throwable -> getShopsFromDb());
+    }
+
+    private Single<List<ShopDbModel>> getShopsFromFDb() {
+        return shopsFDBService.getShops()
+                .doOnSuccess(shopsDBService::setShops);
+    }
+
+    private Single<List<ShopDbModel>> getShopsFromDb() {
+        return shopsDBService.getShops();
     }
 
     @Override
     public Single<ShopDbModel> getShopById(@NonNull String shopId) {
-        return shopsDBService.getShopById(shopId)
-                .onErrorResumeNext(new Func1<Throwable, Single<ShopDbModel>>() {
-                    @Override
-                    public Single<ShopDbModel> call(Throwable throwable) {
-                        return getShopByIdFromFDBService(shopId);
-                    }
+        return getShopByIdFromFdb(shopId)
+                .onErrorResumeNext(throwable -> getShopByIdFromDb(shopId));
+    }
+
+    private Single<ShopDbModel> getShopByIdFromFdb(@NonNull String shopId) {
+        return shopsFDBService.getShopsById(shopId)
+                .flatMap(shopDbModel -> {
+                    Collection<ShopDbModel> shops = new ArrayList<>();
+                    shops.add(shopDbModel);
+                    return shopsDBService.addShops(shops)
+                            .map(o -> shopDbModel);
                 });
     }
 
-    private Single<ShopDbModel> getShopByIdFromFDBService(String shopId) {
-        return getShops().map(shopDbModels -> {
-            for (ShopDbModel shop : shopDbModels) {
-                if (shop.getId().equals(shopId)) {
-                    return shop;
-                }
-            }
-            return null;
-        });
+    @NonNull
+    private Single<ShopDbModel> getShopByIdFromDb(@NonNull final String shopId) {
+        return shopsDBService.getShopById(shopId);
     }
 
     @Override
@@ -89,12 +93,7 @@ public class ShopsRepository implements IShopsRepository {
     @Override
     public Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId) {
         return getShopsFromFDB(userId)
-                .onErrorResumeNext(new Func1<Throwable, Single<? extends List<ShopDbModel>>>() {
-                    @Override
-                    public Single<? extends List<ShopDbModel>> call(Throwable throwable) {
-                        return shopsDBService.getShopsByUserId(userId);
-                    }
-                });
+                .onErrorResumeNext(throwable -> shopsDBService.getShopsByUserId(userId));
     }
 
     private Single<List<ShopDbModel>> getShopsFromFDB(@NonNull String userId) {

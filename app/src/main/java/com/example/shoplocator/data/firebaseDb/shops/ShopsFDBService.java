@@ -139,4 +139,29 @@ public class ShopsFDBService implements IShopsFDBService {
         });
     }
 
+    @Override
+    public Single<ShopDbModel> getShopsById(String shopId) {
+        return Single.create(new Single.OnSubscribe<ShopDbModel>() {
+            @Override
+            public void call(SingleSubscriber<? super ShopDbModel> subscriber) {
+                shopsDataRefrence.orderByChild("id").equalTo(shopId).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        List<ShopDbModel> shopDbModels = getShopsFromData(dataSnapshot);
+                        if (shopDbModels != null && !shopDbModels.isEmpty()) {
+                            subscriber.onSuccess(shopDbModels.get(0));
+                        } else {
+                            subscriber.onError(new Throwable("Shop by ID: " + shopId + " not found."));
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        subscriber.onError(databaseError.toException());
+                    }
+                });
+            }
+        });
+    }
+
 }
