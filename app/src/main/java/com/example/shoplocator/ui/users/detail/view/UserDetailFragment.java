@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.users.detail.view;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +19,7 @@ import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.userDetail.UserDetailModule;
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 import com.example.shoplocator.ui.users.detail.presenter.IUserDetailPresenter;
 import com.example.shoplocator.ui.users.detail.shopsListAdapter.ShopsRecyclerViewAdapter;
@@ -36,10 +39,14 @@ import butterknife.ButterKnife;
 @FragmentTag(tag = "Detail_fragment")
 public class UserDetailFragment extends Fragment implements IUserDetailView {
 
+    private static final int REQUEST_CODE_SHOP_DETAIL = 1;
+
     @Inject IUserDetailPresenter presenter;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.progressBar) ProgressBar progressBar;
+
+    private ShopsRecyclerViewAdapter shopsAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +86,32 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && resultCode == Activity.RESULT_OK) {
+            switch (requestCode) {
+                case REQUEST_CODE_SHOP_DETAIL: {
+                    onShopDetailResult(data);
+                    break;
+                }
+                default:{
+                    throw new RuntimeException("Unexpected request code.");
+                }
+            }
+        }
+    }
+
+    private void onShopDetailResult(@NonNull Intent data) {
+        String shopId = data.getStringExtra(ShopDetailActivity.PARAM_SHOP_ID);
+        if (shopId == null) throw new RuntimeException("Shop ID is missing.");
+        if (data.getBooleanExtra(ShopDetailActivity.PARAM_SHOP_HAS_BEEN_REMOVED, false)) {
+            presenter.onShopHasBeenRemovedFromDetailView(shopId);
+        } else if (data.getBooleanExtra(ShopDetailActivity.PARAM_SHOP_HAS_BEEN_EDITED, false)) {
+            presenter.onShopHasBeenEditedFromDetailView(shopId);
+        }
+    }
+
+    @Override
     public void setTitle(@NonNull String title) {
         FragmentActivity activity = getActivity();
         if (activity instanceof AppCompatActivity) {
@@ -96,13 +129,30 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
 
     @Override
     public void setupShopsList(@NonNull List<ShopModel> shops) {
-        ShopsRecyclerViewAdapter recyclerViewAdapter = new ShopsRecyclerViewAdapter(shops, getContext());
-        recyclerViewAdapter.setDelegate(position -> presenter.onItemClick(position));
-        recyclerView.setAdapter(recyclerViewAdapter);
+        shopsAdapter = new ShopsRecyclerViewAdapter(shops, getContext());
+        shopsAdapter.setDelegate(position -> presenter.onItemClick(position));
+        recyclerView.setAdapter(shopsAdapter);
     }
 
     @Override
     public void shopErrorView() {
 
+    }
+
+    @Override
+    public void showDetailShopView(@NonNull String shopId) {
+        Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
+        intent.putExtra(ShopDetailActivity.PARAM_SHOP_ID, shopId);
+        startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL);
+    }
+
+    @Override
+    public void notifyShopItemRemoved(int position) {
+        shopsAdapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void notifyShopItemChanged(int position) {
+        shopsAdapter.notifyItemChanged(position);
     }
 }

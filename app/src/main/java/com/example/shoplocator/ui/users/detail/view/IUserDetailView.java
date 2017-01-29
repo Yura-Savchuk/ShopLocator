@@ -19,4 +19,9 @@ public interface IUserDetailView {
     void setupShopsList(@NonNull List<ShopModel> shops);
 
     void shopErrorView();
+
+    void showDetailShopView(@NonNull String shopId);
+
+    void notifyShopItemRemoved(int position);
+    void notifyShopItemChanged(int position);
 }

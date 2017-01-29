@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.users.detail.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.ui.users.detail.view.IUserDetailView;
 import com.example.shoplocator.ui.users.detail.view.UserDetailFragment;
 
@@ -19,4 +21,8 @@ public interface IUserDetailPresenter {
     void setupUserShops();
 
     void onItemClick(int position);
+
+    void onShopHasBeenRemovedFromDetailView(@NonNull String shopId);
+    void onShopHasBeenEditedFromDetailView(@NonNull String shopId);
+
 }

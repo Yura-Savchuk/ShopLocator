@@ -7,11 +7,13 @@ import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.model.UserModel;
+import com.example.shoplocator.util.mapper.Mapper;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
 import java.util.List;
 
 import rx.Single;
+import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.
@@ -32,16 +34,24 @@ public class UserDetailInteractor implements IUserDetailInteractor {
     }
 
     private List<ShopModel> mapShopDbByUserName(List<ShopDbModel> shopDbModels, @NonNull UserModel userModel) {
-        return MapperUtil.transformList(shopDbModels, exist -> {
-            ShopCoordinate coordinate = new ShopCoordinate(exist.getCoordinateX(), exist.getCoordinateY());
-            return new ShopModel(
-                    exist.getId(),
-                    exist.getName(),
-                    exist.getImageUrl(),
-                    coordinate,
-                    userModel.clone()
-            );
-        });
+        return MapperUtil.transformList(shopDbModels, exist -> mapShopDbByUserModel(exist, userModel));
+    }
+
+    private ShopModel mapShopDbByUserModel(@NonNull ShopDbModel shopDbModel, @NonNull UserModel userMode) {
+        ShopCoordinate coordinate = new ShopCoordinate(shopDbModel.getCoordinateX(), shopDbModel.getCoordinateY());
+        return new ShopModel(
+                shopDbModel.getId(),
+                shopDbModel.getName(),
+                shopDbModel.getImageUrl(),
+                coordinate,
+                userMode.clone()
+        );
+    }
+
+    @Override
+    public Single<ShopModel> getShopById(@NonNull String shopId, @NonNull String userId, @NonNull String userName) {
+        return shopsRepository.getShopById(shopId)
+                .map(shopDbModel -> mapShopDbByUserModel(shopDbModel, new UserModel(userId, userName)));
     }
 
 }

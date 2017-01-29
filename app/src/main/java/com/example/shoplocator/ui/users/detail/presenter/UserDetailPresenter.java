@@ -1,5 +1,7 @@
 package com.example.shoplocator.ui.users.detail.presenter;
 
+import android.support.annotation.NonNull;
+
 import com.example.shoplocator.buissines.userDetail.IUserDetailInteractor;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.users.detail.view.IUserDetailView;
@@ -8,6 +10,7 @@ import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 import java.util.List;
 
 import rx.Subscription;
+import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -90,7 +93,44 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
     @Override
     public void onItemClick(int position) {
+        view.showDetailShopView(cash.getShops().get(position).getId());
+    }
 
+    @Override
+    public void onShopHasBeenRemovedFromDetailView(@NonNull String shopId) {
+        List<ShopModel> shops = cash.getShops();
+        for (int i=0; i<shops.size(); i++) {
+            ShopModel item = shops.get(i);
+            if (item.getId().equals(shopId)) {
+                shops.remove(i);
+                view.notifyShopItemRemoved(i);
+                break;
+            }
+        }
+    }
+
+    @Override
+    public void onShopHasBeenEditedFromDetailView(@NonNull String shopId) {
+        view.setProgress(true);
+        Subscription subscription = interactor.getShopById(shopId, cash.getUserId(), cash.getUserName())
+                .compose(rxSchedulers.getIOToMainTransformerSingle())
+                .subscribe(this::handleUpdateShopByIdSuccess, throwable -> {
+                    view.setProgress(false);
+                });
+        compositeSubscription.add(subscription);
+    }
+
+    private void handleUpdateShopByIdSuccess(@NonNull ShopModel shopModel) {
+        view.setProgress(false);
+        List<ShopModel> shops = cash.getShops();
+        for (int i=0; i<shops.size(); i++) {
+            ShopModel item = shops.get(i);
+            if (item.getId().equals(shopModel.getId())) {
+                shops.set(i, shopModel);
+                view.notifyShopItemChanged(i);
+                break;
+            }
+        }
     }
 
 }
