@@ -55,6 +55,9 @@
         </activity>
         <activity android:name=".ui.createAndEditShop.CreateAndEditShopActivity"
             android:windowSoftInputMode="stateVisible|adjustResize"/>
+        <activity
+            android:name=".ui.users.UsersListActivity"
+            android:label="@string/title_users_list" />
     </application>
 
 </manifest>

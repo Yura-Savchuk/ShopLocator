@@ -40,4 +40,5 @@
     <string name="shop_icon">Shop icon</string>
     <string name="button_edit_shop">Edit Shop</string>
     <string name="action_edit">Edit</string>
+    <string name="title_users_list">Users List</string>
 </resources>
