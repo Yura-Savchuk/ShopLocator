@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.example.shoplocator.ui.settings.preferenceView.IntEditTextPreference
+        android:defaultValue="@integer/default_splash_delay"
+        android:key="splash_delay"
+        android:title="Splash Screen Delay"
+        android:dialogTitle="Splash Screen Delay (milliseconds)"
+        android:inputType="numberDecimal"
+        />
+</PreferenceScreen>

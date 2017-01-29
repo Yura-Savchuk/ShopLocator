@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
 import com.example.shoplocator.BuildConfig;
+import com.example.shoplocator.R;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.
@@ -12,7 +13,6 @@ import com.example.shoplocator.BuildConfig;
 
 public class SettingsPrefService implements ISettingsPrefService {
 
-    private static final String PREFERENCE_NAME = "SETTINGS";
     private static final String PARAM_SPLASH_DELAY = "splash_delay";
 
     private final Context context;
@@ -23,7 +23,7 @@ public class SettingsPrefService implements ISettingsPrefService {
 
     @Override
     public int getSplashDelayInMillis() {
-        return getIntValue(PARAM_SPLASH_DELAY, BuildConfig.DEFAULT_SPLASH_DELAY_MILLIS);
+        return getIntValue(PARAM_SPLASH_DELAY, context.getResources().getInteger(R.integer.default_splash_delay));
     }
 
     private int getIntValue(@NonNull String paramName, int defaultValue) {
@@ -31,7 +31,7 @@ public class SettingsPrefService implements ISettingsPrefService {
     }
 
     private SharedPreferences getPrefs() {
-        return context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        return context.getSharedPreferences(BuildConfig.APP_PREFERENCE_FILE_NAME, Context.MODE_PRIVATE);
     }
 
     @Override

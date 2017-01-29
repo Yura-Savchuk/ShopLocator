@@ -20,6 +20,7 @@ import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
+import com.example.shoplocator.ui.settings.SettingsActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
@@ -104,6 +105,10 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
                         onNavToUsersListSelected();
                         break;
                     }
+                    case R.id.nav_settings: {
+                        onNavToSettingsSelected();
+                        break;
+                    }
                 }
                 drawerLayout.closeDrawer(GravityCompat.START);
                 return false;
@@ -120,6 +125,11 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
 
     private void onNavToUsersListSelected() {
         Intent intent = new Intent(this, UsersListActivity.class);
+        startActivity(intent);
+    }
+
+    private void onNavToSettingsSelected() {
+        Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }
 
