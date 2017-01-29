@@ -10,6 +10,7 @@ import com.example.shoplocator.data.model.ShopDbModel;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import io.realm.Realm;
 import rx.Single;
@@ -100,5 +101,27 @@ public class ShopsDBService implements IShopsDBService {
         ShopRealmObject oldRealmShop = realm.where(ShopRealmObject.class)
                 .equalTo(FIELD_SHOP_ID, shopId).findFirst();
         if (oldRealmShop != null) oldRealmShop.deleteFromRealm();
+    }
+
+    @Override
+    public Single<Object> addShops(@NonNull Collection<ShopDbModel> shops) {
+        return Single.fromCallable(() -> {
+            Realm realm = client.getRealm();
+            realm.beginTransaction();
+            for (ShopDbModel shop : shops) {
+                ShopRealmObject realmShop = ShopRealmObjectMapper.mapDbToRealm(shop);
+                deleteShopByIdFromRealmIfExist(realmShop.getId(), realm);
+                realm.copyToRealm(realmShop);
+            }
+            realm.commitTransaction();
+            return null;
+        });
+    }
+
+    @Override
+    public Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId) {
+        return Single.fromCallable(() -> client.getRealm().where(ShopRealmObject.class)
+                .equalTo("ownerId", userId).findAll())
+                .map(ShopRealmObjectMapper::mapRealmToDb);
     }
 }

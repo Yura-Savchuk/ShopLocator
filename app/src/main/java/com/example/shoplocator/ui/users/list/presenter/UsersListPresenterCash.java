@@ -1,6 +1,6 @@
 package com.example.shoplocator.ui.users.list.presenter;
 
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
+import com.example.shoplocator.ui.model.UserModel;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
 
 public class UsersListPresenterCash {
 
-    private List<SelectableUserModel> users;
+    private List<UserModel> users;
 
-    public List<SelectableUserModel> getUsers() {
+    public List<UserModel> getUsers() {
         return users;
     }
 
@@ -20,7 +20,7 @@ public class UsersListPresenterCash {
         return users != null;
     }
 
-    public void setUsers(List<SelectableUserModel> users) {
+    public void setUsers(List<UserModel> users) {
         this.users = users;
     }
 }

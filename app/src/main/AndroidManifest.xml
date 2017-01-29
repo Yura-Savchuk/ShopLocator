@@ -58,6 +58,8 @@
         <activity
             android:name=".ui.users.UsersListActivity"
             android:label="@string/title_users_list" />
+        <activity
+            android:name=".ui.users.detail.UserDetailActivity"/>
     </application>
 
 </manifest>

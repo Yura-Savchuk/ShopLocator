@@ -1,16 +1,12 @@
-package com.example.shoplocator.buissines.users;
+package com.example.shoplocator.buissines.usersList;
 
 import com.example.shoplocator.buissines.mapper.UserMapper;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
-import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.model.UserModel;
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.
@@ -25,8 +21,8 @@ public class UsersListInteractor implements IUsersListInteractor {
     }
 
     @Override
-    public Single<List<SelectableUserModel>> getSelectableUsers() {
+    public Single<List<UserModel>> getSelectableUsers() {
         return usersRepository.getUsers()
-                .map(UserMapper::transformToSelectableUsers);
+                .map(UserMapper::transform);
     }
 }

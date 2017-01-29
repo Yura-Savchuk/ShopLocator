@@ -8,6 +8,7 @@ import com.example.shoplocator.data.firebaseDb.mapper.ShopMapper;
 import com.example.shoplocator.data.firebaseDb.model.ShopFdbModel;
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
+import com.example.shoplocator.ui.model.ShopModel;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -119,6 +120,23 @@ public class ShopsFDBService implements IShopsFDBService {
     @Override
     public Single<ShopDbModel> updateShop(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel) {
         return Single.create(subscriber -> setShopFormTo(formDbModel, subscriber, shopId));
+    }
+
+    @Override
+    public Single<List<ShopDbModel>> getShopsByUserId(String userId) {
+        return Single.create(subscriber -> {
+            shopsDataRefrence.orderByChild("owner_id").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    subscriber.onSuccess(getShopsFromData(dataSnapshot));
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    subscriber.onError(databaseError.toException());
+                }
+            });
+        });
     }
 
 }

@@ -1,7 +1,7 @@
-package com.example.shoplocator.dagger.users;
+package com.example.shoplocator.dagger.usersList;
 
-import com.example.shoplocator.buissines.users.IUsersListInteractor;
-import com.example.shoplocator.buissines.users.UsersListInteractor;
+import com.example.shoplocator.buissines.usersList.IUsersListInteractor;
+import com.example.shoplocator.buissines.usersList.UsersListInteractor;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.users.list.presenter.IUsersListPresenter;
 import com.example.shoplocator.ui.users.list.presenter.UsersListPresenter;

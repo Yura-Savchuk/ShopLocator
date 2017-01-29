@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.example.shoplocator.R;
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
+import com.example.shoplocator.ui.model.UserModel;
 
 import java.util.List;
 
@@ -17,11 +17,11 @@ import java.util.List;
 
 public class UsersRecyclerViewAdapter extends RecyclerView.Adapter {
 
-    private final List<SelectableUserModel> users;
+    private final List<UserModel> users;
     private final LayoutInflater inflater;
     private final UsersRecyclerViewDelegateProxy delegateProxy;
 
-    public UsersRecyclerViewAdapter(List<SelectableUserModel> users, Context context) {
+    public UsersRecyclerViewAdapter(List<UserModel> users, Context context) {
         this.users = users;
         inflater = LayoutInflater.from(context);
         delegateProxy = new UsersRecyclerViewDelegateProxy();
@@ -39,7 +39,7 @@ public class UsersRecyclerViewAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         UserViewHolder vh = (UserViewHolder) holder;
-        SelectableUserModel model = users.get(position);
+        UserModel model = users.get(position);
         vh.textViewUserName.setText(model.getName());
     }
 

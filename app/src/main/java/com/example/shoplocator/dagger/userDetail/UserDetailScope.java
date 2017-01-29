@@ -1,4 +1,4 @@
-package com.example.shoplocator.dagger.users;
+package com.example.shoplocator.dagger.userDetail;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -11,5 +11,5 @@ import javax.inject.Scope;
 
 @Scope
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UsersListScope {
+public @interface UserDetailScope {
 }

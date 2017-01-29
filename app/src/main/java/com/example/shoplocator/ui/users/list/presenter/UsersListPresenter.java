@@ -1,8 +1,8 @@
 package com.example.shoplocator.ui.users.list.presenter;
 
-import com.example.shoplocator.buissines.users.IUsersListInteractor;
+import com.example.shoplocator.buissines.usersList.IUsersListInteractor;
+import com.example.shoplocator.ui.model.UserModel;
 import com.example.shoplocator.ui.users.list.view.IUsersListView;
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import java.util.List;
@@ -52,7 +52,8 @@ public class UsersListPresenter implements IUsersListPresenter {
 
     @Override
     public void onItemClick(int position) {
-
+        UserModel user = cash.getUsers().get(position);
+        view.showUserDetailView(user.getId(), user.getName());
     }
 
     private void setupUsersFromCash() {
@@ -67,7 +68,7 @@ public class UsersListPresenter implements IUsersListPresenter {
         compositeSubscription.add(subscription);
     }
 
-    private void handleGetSelectableUsersSuccess(List<SelectableUserModel> users) {
+    private void handleGetSelectableUsersSuccess(List<UserModel> users) {
         view.setProgress(false);
         cash.setUsers(users);
         setupUsersFromCash();

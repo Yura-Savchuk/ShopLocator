@@ -1,13 +1,16 @@
 package com.example.shoplocator.ui.users;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
-import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
+import com.example.shoplocator.ui.users.detail.UserDetailActivity;
+import com.example.shoplocator.ui.users.detail.view.UserDetailFragment;
 import com.example.shoplocator.ui.users.list.view.UsersListFragment;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
@@ -16,7 +19,7 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UsersListActivity extends AppCompatActivity {
+public class UsersListActivity extends AppCompatActivity implements UserListDelegate {
 
     @Inject FragmentRouteAbs fragmentRoute;
 
@@ -57,7 +60,26 @@ public class UsersListActivity extends AppCompatActivity {
     }
 
     private void deleteReduantDetailFragment() {
-        fragmentRoute.deleteFragmentIfExist(this, ShopDetailFragment.class);
+        fragmentRoute.deleteFragmentIfExist(this, UserDetailFragment.class);
     }
 
+    @Override
+    public void showUserDetail(@NonNull String userId, @NonNull String userName) {
+        Bundle arguments = new Bundle();
+        arguments.putString(UserDetailActivity.PARAM_USER_ID, userId);
+        arguments.putString(UserDetailActivity.PARAM_USER_NAME, userName);
+        if (twoPane) {
+            UserDetailFragment fragment = new UserDetailFragment();
+            fragment.setArguments(arguments);
+            fragmentRoute.replaceFragment(this, fragment, R.id.shopDetailContainer);
+        } else {
+            shopUserDetailActivity(arguments);
+        }
+    }
+
+    private void shopUserDetailActivity(@NonNull Bundle arguments) {
+        Intent intent = new Intent(this, UserDetailActivity.class);
+        intent.putExtras(arguments);
+        startActivity(intent);
+    }
 }

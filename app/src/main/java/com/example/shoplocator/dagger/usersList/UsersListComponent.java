@@ -1,4 +1,4 @@
-package com.example.shoplocator.dagger.users;
+package com.example.shoplocator.dagger.usersList;
 
 import com.example.shoplocator.ui.users.list.view.UsersListFragment;
 

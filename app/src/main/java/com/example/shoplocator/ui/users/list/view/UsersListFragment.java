@@ -1,6 +1,8 @@
 package com.example.shoplocator.ui.users.list.view;
 
+import android.app.Activity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -10,10 +12,11 @@ import android.view.ViewGroup;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
-import com.example.shoplocator.dagger.users.UsersListModule;
+import com.example.shoplocator.dagger.usersList.UsersListModule;
+import com.example.shoplocator.ui.model.UserModel;
+import com.example.shoplocator.ui.users.UserListDelegate;
 import com.example.shoplocator.ui.users.list.listAdapter.UsersRecyclerViewAdapter;
 import com.example.shoplocator.ui.users.list.presenter.IUsersListPresenter;
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
 import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
@@ -63,7 +66,7 @@ public class UsersListFragment extends Fragment implements IUsersListView {
     }
 
     @Override
-    public void setupUsersList(List<SelectableUserModel> users) {
+    public void setupUsersList(List<UserModel> users) {
         usersAdapter = new UsersRecyclerViewAdapter(users, getContext());
         usersAdapter.setDelegate(position -> presenter.onItemClick(position));
         recyclerView.setAdapter(usersAdapter);
@@ -81,5 +84,13 @@ public class UsersListFragment extends Fragment implements IUsersListView {
     @Override
     public void showErrorView() {
 
+    }
+
+    @Override
+    public void showUserDetailView(@NonNull String userId, @NonNull String userName) {
+        Activity activity = getActivity();
+        if (activity instanceof UserListDelegate) {
+            ((UserListDelegate) activity).showUserDetail(userId, userName);
+        }
     }
 }

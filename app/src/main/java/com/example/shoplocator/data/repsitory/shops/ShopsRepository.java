@@ -85,4 +85,21 @@ public class ShopsRepository implements IShopsRepository {
                 })
                 .map(o -> shopId);
     }
+
+    @Override
+    public Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId) {
+        return getShopsFromFDB(userId)
+                .onErrorResumeNext(new Func1<Throwable, Single<? extends List<ShopDbModel>>>() {
+                    @Override
+                    public Single<? extends List<ShopDbModel>> call(Throwable throwable) {
+                        return shopsDBService.getShopsByUserId(userId);
+                    }
+                });
+    }
+
+    private Single<List<ShopDbModel>> getShopsFromFDB(@NonNull String userId) {
+        return shopsFDBService.getShopsByUserId(userId)
+                .flatMap(shopDbModels -> shopsDBService.addShops(shopDbModels)
+                        .map(o -> shopDbModels));
+    }
 }

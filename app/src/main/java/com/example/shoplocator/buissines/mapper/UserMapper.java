@@ -5,7 +5,6 @@ import android.support.annotation.NonNull;
 import com.example.shoplocator.data.model.UserDbModel;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.model.UserModel;
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
 import java.util.ArrayList;
@@ -17,7 +16,7 @@ import java.util.List;
 
 public class UserMapper {
 
-    public static ArrayList<CheckableUserModel> transform(List<UserDbModel> userDbModels) {
+    public static ArrayList<CheckableUserModel> transformToCheckableUsers(List<UserDbModel> userDbModels) {
         return MapperUtil.transformList(userDbModels,
                 exist -> new CheckableUserModel(exist.getId(), exist.getName()));
     }
@@ -26,9 +25,9 @@ public class UserMapper {
         return new UserDbModel(user.getId(), user.getName());
     }
 
-    public static ArrayList<SelectableUserModel> transformToSelectableUsers(List<UserDbModel> userDbModels) {
+    public static ArrayList<UserModel> transform(List<UserDbModel> userDbModels) {
         return MapperUtil.transformList(userDbModels,
-                exist -> new SelectableUserModel(exist.getId(), exist.getName()));
+                exist -> new UserModel(exist.getId(), exist.getName()));
     }
 
 }

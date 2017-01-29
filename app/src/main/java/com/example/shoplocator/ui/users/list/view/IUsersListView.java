@@ -1,6 +1,8 @@
 package com.example.shoplocator.ui.users.list.view;
 
-import com.example.shoplocator.ui.users.model.SelectableUserModel;
+import android.support.annotation.NonNull;
+
+import com.example.shoplocator.ui.model.UserModel;
 
 import java.util.List;
 
@@ -10,9 +12,11 @@ import java.util.List;
 
 public interface IUsersListView {
 
-    void setupUsersList(List<SelectableUserModel> users);
+    void setupUsersList(List<UserModel> users);
 
     void setProgress(boolean progress);
 
     void showErrorView();
+
+    void showUserDetailView(@NonNull String userId, @NonNull String userName);
 }

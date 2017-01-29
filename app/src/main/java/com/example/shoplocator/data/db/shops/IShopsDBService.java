@@ -21,4 +21,7 @@ public interface IShopsDBService {
 
     Single<Object> deleteShopsByIds(@NonNull Collection<String> ids);
     Single<Object> addShop(@NonNull ShopDbModel shop);
+    Single<Object> addShops(@NonNull Collection<ShopDbModel> shops);
+
+    Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId);
 }
