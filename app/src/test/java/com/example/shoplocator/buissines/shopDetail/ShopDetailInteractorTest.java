@@ -83,10 +83,9 @@ public class ShopDetailInteractorTest {
         //perform testable action
         shopDetailInteractor.getShopById(targetShop.getId()).subscribe(testSubscriber);
         testSubscriber.awaitTerminalEvent();
-        //test no errors was not occurred
+        //check emited data
         testSubscriber.assertNoErrors();
         testSubscriber.assertCompleted();
-        //check emited data
         ShopModel formModel = testSubscriber.getOnNextEvents().get(0);
         assertThat(formModel.getImageUrl()).isEqualTo(targetShop.getImageUrl());
         assertThat(formModel.getName()).isEqualTo(targetShop.getName());
