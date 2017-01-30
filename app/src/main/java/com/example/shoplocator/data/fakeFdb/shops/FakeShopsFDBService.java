@@ -21,11 +21,13 @@ public class FakeShopsFDBService implements IShopsFDBService {
 
     private static final int EMPTY_POSITION = -1;
 
+    private static final int COUNT_FOR_SHOPS_GENERATION = 20;
+
     private static List<ShopDbModel> shops;
 
     public FakeShopsFDBService() {
         if (shops == null) {
-            shops = new FakeShopsListGenerator().getNewList();
+            shops = new FakeShopsListGenerator().getNewList(COUNT_FOR_SHOPS_GENERATION);
         }
     }
 

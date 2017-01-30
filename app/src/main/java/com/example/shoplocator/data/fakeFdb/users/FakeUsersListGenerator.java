@@ -11,16 +11,22 @@ import java.util.List;
 
 public class FakeUsersListGenerator {
 
-    private final List<UserDbModel> userDbModels = new LinkedList<UserDbModel>() {{
-        add(new UserDbModel("1", "User 1"));
-        add(new UserDbModel("2", "User 2"));
-        add(new UserDbModel("3", "User 3"));
-        add(new UserDbModel("4", "User 4"));
-        add(new UserDbModel("5", "User 5"));
-    }};
+    public static final int USERS_COUNT = 5;
+    public static final String USER_NAME = "User ";
+
+    private final List<UserDbModel> userDbModels = new LinkedList<>();
 
     public List<UserDbModel> getNewList() {
+        userDbModels.clear();
+        for (int i=1; i<=USERS_COUNT; i++) {
+            UserDbModel user = generateUser(i);
+            userDbModels.add(user);
+        }
         return userDbModels;
+    }
+
+    private UserDbModel generateUser(int index) {
+        return new UserDbModel(String.valueOf(index), USER_NAME + index);
     }
 
 }

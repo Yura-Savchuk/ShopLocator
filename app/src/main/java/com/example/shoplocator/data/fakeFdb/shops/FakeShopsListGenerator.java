@@ -13,8 +13,7 @@ import java.util.Random;
 
 public class FakeShopsListGenerator {
 
-    private static final int COUNT_FOR_ONE_GENERATION = 20;
-    private static final String FAKE_SHOP_NAME = "Fake Shop Name ";
+    public static final String FAKE_SHOP_NAME = "Fake Shop Name ";
     private static final String FAKE_SHOP_URL = "http://news.images.itv.com/image/file/812875/stream_img.jpg";
     private static final float MIN_COORD_X = 50.f;
     private static final float MIN_COORD_Y = 50.f;
@@ -24,8 +23,9 @@ public class FakeShopsListGenerator {
     private List<ShopDbModel> shopDbModels = new LinkedList<>();
     private final Random random = new Random();
 
-    public List<ShopDbModel> getNewList() {
-        for (int i=0; i<COUNT_FOR_ONE_GENERATION; i++) {
+    public List<ShopDbModel> getNewList(int count) {
+        if (!shopDbModels.isEmpty()) shopDbModels.clear();
+        for (int i=0; i<count; i++) {
             ShopDbModel shopDbModel = generateNewShop(i);
             shopDbModels.add(shopDbModel);
         }
