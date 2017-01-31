@@ -34,14 +34,6 @@ android {
         it.buildConfigField 'int', 'DATA_BASE_VERSION', '3'
         it.buildConfigField 'String', 'APP_PREFERENCE_FILE_NAME', APP_PREFERENCE_FILE_NAME
     }
-    buildTypes {
-        debug {
-//            buildConfigField "String", "SERVER_URL", SERVER_URL_DEBUG
-        }
-        release {
-//            buildConfigField "String", "SERVER_URL", SERVER_URL_RELEASE
-        }
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -59,11 +51,30 @@ ext {
     playServicesVersion = '10.0.1';
     jacksonVersion = '2.8.6';
     butteryKnifeVersion = '8.2.1';
+    dagger2Version = '2.5';
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    //multidex
+    compile 'com.android.support:multidex:1.0.1'
+    //play services
+    compile 'com.google.android.gms:play-services:10.0.1'
+    //support libs
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support:support-v4:${supportLibraryVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
+    compile "com.android.support:design:${supportLibraryVersion}"
+    compile "com.android.support:cardview-v7:${supportLibraryVersion}"
+    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
+    compile "com.android.support:support-v4:${supportLibraryVersion}"
+    compile "com.android.support:support-vector-drawable:${supportLibraryVersion}"
+    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
+    //ui
+    compile 'com.coulcod.selectorview:selectorview:1.0.2'
+    compile 'com.squareup.picasso:picasso:2.5.3-SNAPSHOT'
     //testing
+    testCompile 'junit:junit:4.12'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
@@ -71,40 +82,18 @@ dependencies {
     testCompile "org.assertj:assertj-core:3.0.0"
     testCompile "org.robolectric:robolectric:3.1-rc1"
     testCompile "org.robolectric:shadows-support-v4:3.1-rc1"
-    //ui
-    compile "com.android.support:appcompat-v7:${supportLibraryVersion}"
-    compile "com.android.support:support-v4:${supportLibraryVersion}"
-    compile "com.android.support:recyclerview-v7:${supportLibraryVersion}"
-    compile "com.android.support:design:${supportLibraryVersion}"
-    compile "com.android.support:cardview-v7:${supportLibraryVersion}"
     //tools
-
     compile "com.jakewharton:butterknife:${butteryKnifeVersion}"
     apt "com.jakewharton:butterknife-compiler:${butteryKnifeVersion}"
     //net
     //db
-
+    compile 'com.google.firebase:firebase-database:10.0.1'
     //di
+    compile "com.google.dagger:dagger:${dagger2Version}"
+    apt "com.google.dagger:dagger-compiler:${dagger2Version}"
     //rx
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.coulcod.selectorview:selectorview:1.0.2'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
-    compile 'com.squareup.okhttp3:okhttp:3.4.2'
-    compile 'com.squareup.retrofit2:retrofit:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.1.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:converter-jackson:2.1.0'
-    compile 'com.squareup.picasso:picasso:2.5.3-SNAPSHOT'
-    compile 'com.google.dagger:dagger:2.5'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'io.reactivex:rxjava:1.1.6'
-    compile 'com.google.firebase:firebase-database:10.0.1'
-    compile 'com.google.android.gms:play-services:10.0.1'
-    compile 'com.android.support:appcompat-v7:25.1.0'
-    compile 'com.android.support:support-v4:25.1.0'
-    compile 'com.android.support:support-vector-drawable:25.1.0'
-    testCompile 'junit:junit:4.12'
-    apt 'com.google.dagger:dagger-compiler:2.5'
 }
 
 apply plugin: 'com.google.gms.google-services'
