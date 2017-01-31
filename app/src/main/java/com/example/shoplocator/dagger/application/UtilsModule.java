@@ -1,9 +1,13 @@
 package com.example.shoplocator.dagger.application;
 
+import com.example.shoplocator.ui.errorFragment.ErrorFragmentConfig;
+import com.example.shoplocator.ui.errorFragment.ErrorFragmentFactory;
+import com.example.shoplocator.ui.errorFragment.IErrorFragmentFactory;
 import com.example.shoplocator.util.fragment.FragmentRoute;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulers;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import javax.inject.Singleton;
 
@@ -40,10 +44,16 @@ public class UtilsModule {
 //        return new NetworkUtil();
 //    }
 
-//    @Provides
-//    @Singleton
-//    InternetConnectionUtil provideInternetConnectionUtil(Context context) {
-//        return new InternetConnectionUtil(context);
-//    }
+    @Provides
+    @Singleton
+    RxValidation provideInternetConnectionUtil() {
+        return new RxValidation();
+    }
+
+    @Provides
+    @Singleton
+    IErrorFragmentFactory provideErrorFragmentFactory() {
+        return new ErrorFragmentFactory(new ErrorFragmentConfig());
+    }
 
 }

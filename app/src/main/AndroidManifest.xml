@@ -46,7 +46,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ui.shopsMap.view.ShopsMapActivity"
+            android:name=".ui.shopsMap.ShopsMapActivity"
             android:label="@string/title_activity_shops_map"
             android:windowSoftInputMode="adjustResize|stateHidden">
             <meta-data

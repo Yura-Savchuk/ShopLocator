@@ -1,4 +1,4 @@
-package com.example.shoplocator.ui.shopsMap.view;
+package com.example.shoplocator.ui.shopsMap;
 
 import android.app.SearchManager;
 import android.content.Context;
@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.shoplocator.R;
+import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

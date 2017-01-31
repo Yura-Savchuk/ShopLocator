@@ -1,11 +1,8 @@
 package com.example.shoplocator.ui.shopsMap.presenter;
 
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
-import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
-import com.google.android.gms.maps.GoogleMap;
 
 import rx.Single;
 

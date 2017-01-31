@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.example.shoplocator.data.db.users.IUsersDBService;
 import com.example.shoplocator.data.firebaseDb.users.IUsersFDBService;
 import com.example.shoplocator.data.model.UserDbModel;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import java.util.List;
 
@@ -19,16 +20,19 @@ public class UsersRepository implements IUsersRepository {
 
     private final IUsersFDBService usersFDBService;
     private final IUsersDBService usersDBService;
+    private final RxValidation rxValidation;
 
-    public UsersRepository(@NonNull IUsersFDBService usersFDBService, @NonNull IUsersDBService usersDBService) {
+    public UsersRepository(@NonNull IUsersFDBService usersFDBService, @NonNull IUsersDBService usersDBService, RxValidation rxValidation) {
         this.usersFDBService = usersFDBService;
         this.usersDBService = usersDBService;
+        this.rxValidation = rxValidation;
     }
 
     @Override
     public Single<List<UserDbModel>> getUsers() {
         return getUsersFromFDb()
-                .onErrorResumeNext(throwable -> getUsersFromDb());
+                .onErrorResumeNext(throwable -> getUsersFromDb()
+                      .compose(rxValidation.collectionNotEmpty(new RuntimeException("Users not exist in data base yet."))));
     }
 
     private Single<List<UserDbModel>> getUsersFromFDb() {

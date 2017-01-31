@@ -7,8 +7,6 @@ import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.db.shops.ShopsDBService;
 import com.example.shoplocator.data.db.users.IUsersDBService;
 import com.example.shoplocator.data.db.users.UserDBService;
-import com.example.shoplocator.data.fakeFdb.shops.FakeShopsFDBService;
-import com.example.shoplocator.data.fakeFdb.users.FakeUsersFDBService;
 import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.firebaseDb.shops.ShopsFDBService;
 import com.example.shoplocator.data.firebaseDb.users.IUsersFDBService;
@@ -21,6 +19,7 @@ import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.data.repsitory.users.UsersRepository;
 import com.example.shoplocator.data.sharedPreference.settings.ISettingsPrefService;
 import com.example.shoplocator.data.sharedPreference.settings.SettingsPrefService;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 import com.google.firebase.database.FirebaseDatabase;
 
 import javax.inject.Singleton;
@@ -44,20 +43,20 @@ public class BaseRepositoriesModule {
 
     @Provides
     @Singleton
-    IUsersRepository usersRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
+    IUsersRepository usersRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient, RxValidation rxValidation) {
         IUsersFDBService usersFDBService = new UsersFDBService(firebaseDatabase); //master
 //        IUsersFDBService usersFDBService = new FakeUsersFDBService(); //fake
         IUsersDBService usersDBService = new UserDBService(databaseClient);
-        return new UsersRepository(usersFDBService, usersDBService);
+        return new UsersRepository(usersFDBService, usersDBService, rxValidation);
     }
 
     @Provides
     @Singleton
-    IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
+    IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient, RxValidation rxValidation) {
         IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase); //master
 //        IShopsFDBService shopsFDBService = new FakeShopsFDBService(); //fake
         IShopsDBService shopsDBService = new ShopsDBService(databaseClient);
-        return new ShopsRepository(shopsFDBService, shopsDBService);
+        return new ShopsRepository(shopsFDBService, shopsDBService, rxValidation);
     }
 
 }

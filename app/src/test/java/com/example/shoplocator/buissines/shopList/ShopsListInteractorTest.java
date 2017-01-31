@@ -1,9 +1,7 @@
 package com.example.shoplocator.buissines.shopList;
 
-import com.example.shoplocator.buissines.shopDetail.ShopDetailInteractor;
 import com.example.shoplocator.buissines.shopsList.ShopsListInteractor;
 import com.example.shoplocator.buissines.shopsList.listTransformation.ChangeItemsCommand;
-import com.example.shoplocator.buissines.shopsList.listTransformation.CommandExecutedListener;
 import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.db.users.IUsersDBService;
 import com.example.shoplocator.data.fakeFdb.shops.FakeShopsListGenerator;
@@ -15,7 +13,6 @@ import com.example.shoplocator.data.model.UserDbModel;
 import com.example.shoplocator.data.repsitory.shops.ShopsRepository;
 import com.example.shoplocator.data.repsitory.users.UsersRepository;
 import com.example.shoplocator.ui.model.ShopCoordinate;
-import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.model.UserModel;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 
@@ -59,11 +56,11 @@ public class ShopsListInteractorTest {
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);
-        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService);
+        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService, rxValidation);
         //setup users repository
         mockedUsersDBService = mock(IUsersDBService.class);
         mockedUsersFDBService = mock(IUsersFDBService.class);
-        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService);
+        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService, rxValidation);
         //setup interactor
         shopsListInteractor = new ShopsListInteractor(shopsRepository, usersRepository);
     }

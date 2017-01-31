@@ -20,13 +20,16 @@ import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
+import com.example.shoplocator.ui.errorFragment.IErrorFragmentFactory;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
+import com.example.shoplocator.ui.errorFragment.fragment.RetryButtonListener;
 import com.example.shoplocator.ui.settings.SettingsActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 import com.example.shoplocator.ui.shops.list.view.IShopsListView;
 import com.example.shoplocator.ui.shops.list.view.ShopsListFragment;
-import com.example.shoplocator.ui.shopsMap.view.ShopsMapActivity;
+import com.example.shoplocator.ui.shopsMap.ShopsMapActivity;
 import com.example.shoplocator.ui.users.UsersListActivity;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
@@ -35,11 +38,12 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShopsListActivity extends AppCompatActivity implements ShopListDelegate {
+public class ShopsListActivity extends AppCompatActivity implements ShopListDelegate, ShowErrorFragmentDelegate {
 
     private static final int REQUEST_CODE_SHOP_DETAIL = 3;
 
     @Inject FragmentRouteAbs fragmentRoute;
+    @Inject IErrorFragmentFactory errorFragmentFactory;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -318,4 +322,17 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
         }
     }
 
+    @Override
+    public void showNoInternetConnectionError() {
+        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment(retryButtonListener);
+        fragmentRoute.addFragment(this, fragment);
+    }
+
+    private RetryButtonListener retryButtonListener = view -> {
+        fragmentRoute.removeTopFragmentSync(this);
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IShopsListView) {
+            ((IShopsListView) fragment).onRetryButtonClick(view);
+        }
+    };
 }

@@ -50,11 +50,11 @@ public class ShopDetailInteractorTest {
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);
-        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService);
+        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService, rxValidation);
         //setup users repository
         mockedUsersDBService = mock(IUsersDBService.class);
         mockedUsersFDBService = mock(IUsersFDBService.class);
-        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService);
+        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService, rxValidation);
         //setup interactor
         shopDetailInteractor = new ShopDetailInteractor(shopsRepository, usersRepository);
     }

@@ -2,7 +2,6 @@ package com.example.shoplocator.buissines.createAndEditShop;
 
 import com.example.shoplocator.buissines.createAndEditShop.exception.ShopFormIsInvalid;
 import com.example.shoplocator.buissines.createAndEditShop.validation.ShopFormValidation;
-import com.example.shoplocator.buissines.createAndEditShop.validation.util.ValidationUtilAbs;
 import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.db.users.IUsersDBService;
 import com.example.shoplocator.data.fakeFdb.shops.FakeShopsListGenerator;
@@ -59,11 +58,11 @@ public class CreateAndEditShopInteractorTest {
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);
-        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService);
+        shopsRepository = new ShopsRepository(mockedShopsFDBService, mockedShopsDBService, rxValidation);
         //setup users repository
         mockedUsersDBService = mock(IUsersDBService.class);
         mockedUsersFDBService = mock(IUsersFDBService.class);
-        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService);
+        usersRepository = new UsersRepository(mockedUsersFDBService, mockedUsersDBService, rxValidation);
         //mock validation messages
         shopFormValidation = new ShopFormValidation(new ValidationUtilTest());
         //setup interactor

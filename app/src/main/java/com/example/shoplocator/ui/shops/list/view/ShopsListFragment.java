@@ -15,6 +15,7 @@ import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsList.ShopsModule;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.CheckableShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
@@ -171,5 +172,18 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     @Override
     public void onDeleteShopResult(@NonNull String shopId) {
         presenter.onDeleteShopResult(shopId);
+    }
+
+    @Override
+    public void showErrorView() {
+        Activity activity = getActivity();
+        if (activity instanceof ShowErrorFragmentDelegate) {
+            ((ShowErrorFragmentDelegate) activity).showNoInternetConnectionError();
+        }
+    }
+
+    @Override
+    public void onRetryButtonClick(View view) {
+        presenter.onRetryButtonClick();
     }
 }

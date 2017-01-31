@@ -30,4 +30,5 @@ public interface IShopsListPresenter {
     void onEditShopResult(@NonNull String shopId);
     void onDeleteShopResult(@NonNull String shopId);
 
+    void onRetryButtonClick();
 }

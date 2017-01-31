@@ -30,4 +30,7 @@ public interface IShopsListView {
     void showCreateShopView();
     void onEditShopResult(@NonNull String shopId);
     void onDeleteShopResult(@NonNull String shopId);
+
+    void showErrorView();
+    void onRetryButtonClick(View view);
 }

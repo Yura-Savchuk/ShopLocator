@@ -1,5 +1,6 @@
 package com.example.shoplocator.ui.shopsMap.view;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -8,10 +9,12 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsMap.ShopsMapModule;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shopsMap.pagerAdapter.TextViewPagerAdapter;
@@ -73,11 +76,11 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         ListenerToSingle<GoogleMap> listenerToSingle = new ListenerToSingle<>();
-        Single<Object> single = listenerToSingle
+        Single<Object> mapAccessability = listenerToSingle
                 .getSingle()
-                .timeout(10, TimeUnit.SECONDS)
+                .timeout(1, TimeUnit.SECONDS)
                 .map(m -> null);
-        presenter.loadShopsAndControlAccessablity(single);
+        presenter.loadShopsAndControlAccessablity(mapAccessability);
         mapFragment.getMapAsync(googleMap -> {
             mMap = googleMap;
             listenerToSingle.emitNextValue(googleMap);
@@ -145,6 +148,11 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
     @Override
     public void notifyShopsDataChanged() {
         if (pagerAdapter != null) pagerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void showErrorMessage() {
+        Toast.makeText(getContext(), R.string.no_internet_connection_message, Toast.LENGTH_SHORT).show();
     }
 
 }

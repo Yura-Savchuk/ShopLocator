@@ -6,6 +6,7 @@ import com.example.shoplocator.buissines.shopsMap.IShopsMapInteractor;
 import com.example.shoplocator.buissines.shopsMap.filtration.ShopListFilterModel;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shopsMap.view.IShopMapView;
+import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 
 import java.util.List;
 
@@ -21,12 +22,14 @@ public class ShopMapPresenter implements IShopMapPresenter {
 
     private final ShopsMapPresenterCash cash;
     private final IShopsMapInteractor shopsMapInteractor;
+    private final RxSchedulersAbs rxSchedulers;
 
     private IShopMapView view;
     private CompositeSubscription compositeSubscription;
 
-    public ShopMapPresenter(IShopsMapInteractor shopsMapInteractor) {
+    public ShopMapPresenter(IShopsMapInteractor shopsMapInteractor, RxSchedulersAbs rxSchedulers) {
         this.shopsMapInteractor = shopsMapInteractor;
+        this.rxSchedulers = rxSchedulers;
         cash = new ShopsMapPresenterCash();
     }
 
@@ -43,9 +46,11 @@ public class ShopMapPresenter implements IShopMapPresenter {
     }
 
     @Override
-    public void loadShopsAndControlAccessablity(Single<Object> single) {
+    public void loadShopsAndControlAccessablity(Single<Object> mapAccessability) {
         view.shopProgress(true);
-        Subscription subscription = Single.zip(getShops(), single, (shops, o) -> shops)
+        mapAccessability = mapAccessability.onErrorResumeNext(Single.just(null));
+        Subscription subscription = Single.zip(getShops(), mapAccessability, (shops, o) -> shops)
+                .compose(rxSchedulers.getIOToMainTransformerSingle())
                 .subscribe(this::handleLoadShopsSuccess, this::handleLoadShopsError);
         compositeSubscription.add(subscription);
     }
@@ -59,6 +64,7 @@ public class ShopMapPresenter implements IShopMapPresenter {
 
     private void handleLoadShopsError(Throwable throwable) {
         view.shopProgress(false);
+        view.showErrorMessage();
     }
 
     private void handleLoadShopsSuccess(ShopListFilterModel filterModel) {

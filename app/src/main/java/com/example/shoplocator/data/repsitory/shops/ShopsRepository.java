@@ -6,6 +6,7 @@ import com.example.shoplocator.data.db.shops.IShopsDBService;
 import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,16 +25,19 @@ public class ShopsRepository implements IShopsRepository {
 
     private final IShopsFDBService shopsFDBService;
     private final IShopsDBService shopsDBService;
+    private final RxValidation rxValidation;
 
-    public ShopsRepository(@NonNull IShopsFDBService shopsFDBService, @NonNull IShopsDBService shopsDBService) {
+    public ShopsRepository(@NonNull IShopsFDBService shopsFDBService, @NonNull IShopsDBService shopsDBService, RxValidation rxValidation) {
         this.shopsFDBService = shopsFDBService;
         this.shopsDBService = shopsDBService;
+        this.rxValidation = rxValidation;
     }
 
     @Override
     public Single<List<ShopDbModel>> getShops() {
         return getShopsFromFDb()
-                .onErrorResumeNext(throwable -> getShopsFromDb());
+                .onErrorResumeNext(throwable -> getShopsFromDb()
+                        .compose(rxValidation.collectionNotEmpty(new RuntimeException("Shops list not exist in db."))));
     }
 
     private Single<List<ShopDbModel>> getShopsFromFDb() {

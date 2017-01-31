@@ -77,4 +77,13 @@ public abstract class FragmentRouteAbs {
                     .commit();
         }
     }
+
+    public void removeTopFragmentSync(FragmentActivity activity) {
+        Fragment fragment = getCurrentFragment(activity);
+        if (fragment != null) {
+            activity.getSupportFragmentManager().beginTransaction()
+                    .remove(fragment)
+                    .commitNow();
+        }
+    }
 }

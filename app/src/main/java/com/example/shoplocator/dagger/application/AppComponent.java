@@ -16,6 +16,7 @@ import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.settings.preferences.SendDbPreference;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
+import com.example.shoplocator.ui.shopsMap.ShopsMapActivity;
 import com.example.shoplocator.ui.splash.view.SplashActivity;
 import com.example.shoplocator.ui.users.UsersListActivity;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
@@ -39,12 +40,12 @@ public interface AppComponent {
     void inject(UsersListActivity activity);
     void inject(UserDetailActivity activity);
 
+    void inject(SendDbPreference preference);
+
     ShopsComponent plus(ShopsModule module);
     ShopDetailComponent plus(ShopDetailModule module);
     ShopsMapComponent plus(ShopsMapModule module);
     CreateAndEditShopComponent plus(CreateAndEditShopModule module);
     UsersListComponent plus(UsersListModule module);
     UserDetailComponent plus(UserDetailModule module);
-
-    void inject(SendDbPreference preference);
 }
