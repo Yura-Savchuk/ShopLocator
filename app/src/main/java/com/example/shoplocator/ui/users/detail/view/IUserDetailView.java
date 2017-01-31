@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.users.detail.view;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.example.shoplocator.ui.model.ShopModel;
 
@@ -20,7 +21,7 @@ public interface IUserDetailView {
 
     void shopErrorView();
 
-    void showDetailShopView(@NonNull String shopId);
+    void showDetailShopView(@NonNull String shopId, View itemView);
 
     void notifyShopItemRemoved(int position);
     void notifyShopItemChanged(int position);

@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shoplocator.R;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopViewHolder;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelegate;
 import com.example.shoplocator.util.sugar.CompareUtil;
 
 import butterknife.BindView;
@@ -18,19 +20,14 @@ import butterknife.ButterKnife;
  * Created by {@author yura.savchuk22@gmail.com} on 22.01.17.
  */
 
-public class CheckableShopViewHolder extends RecyclerView.ViewHolder {
+public class CheckableShopViewHolder extends ShopViewHolder {
 
-    @BindView(R.id.imageView) ImageView imageView;
-    @BindView(R.id.textViewShopName) TextView textViewShopName;
-    @BindView(R.id.textViewShopOwner) TextView textViewShopOwner;
-    @BindView(R.id.textViewShopCoords) TextView textViewShopCoords;
     @BindView(R.id.viewSelection) View viewSelection;
 
     private boolean selectionState;
 
-    public CheckableShopViewHolder(View itemView, @NonNull CheckableShopsRecyclerViewDelegate delegate) {
-        super(itemView);
-        ButterKnife.bind(this, itemView);
+    public CheckableShopViewHolder(View itemView, @NonNull ShopsRecyclerViewDelegate delegate) {
+        super(itemView, delegate);
         itemView.setOnClickListener(v -> delegate.onItemClick(getAdapterPosition(), itemView));
     }
 

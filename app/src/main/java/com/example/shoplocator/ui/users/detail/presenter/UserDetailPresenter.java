@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.users.detail.presenter;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.example.shoplocator.buissines.userDetail.IUserDetailInteractor;
 import com.example.shoplocator.ui.model.ShopModel;
@@ -92,8 +93,8 @@ public class UserDetailPresenter implements IUserDetailPresenter {
     }
 
     @Override
-    public void onItemClick(int position) {
-        view.showDetailShopView(cash.getShops().get(position).getId());
+    public void onItemClick(int position, View itemView) {
+        view.showDetailShopView(cash.getShops().get(position).getId(), itemView);
     }
 
     @Override

@@ -8,6 +8,6 @@ import android.view.View;
 
 public interface ShopsRecyclerViewDelegate {
 
-    void onItemClick(int position);
+    void onItemClick(int position, View itemView);
 
 }

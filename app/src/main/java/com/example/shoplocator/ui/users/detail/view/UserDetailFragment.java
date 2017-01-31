@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.ActionBar;
@@ -20,6 +21,8 @@ import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.userDetail.UserDetailModule;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
+import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelegate;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 import com.example.shoplocator.ui.users.detail.presenter.IUserDetailPresenter;
 import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewAdapter;
@@ -130,7 +133,7 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     @Override
     public void setupShopsList(@NonNull List<ShopModel> shops) {
         shopsAdapter = new ShopsRecyclerViewAdapter(shops, getContext());
-        shopsAdapter.setDelegate(position -> presenter.onItemClick(position));
+        shopsAdapter.setDelegate((position, itemView) -> presenter.onItemClick(position, itemView));
         recyclerView.setAdapter(shopsAdapter);
     }
 
@@ -140,10 +143,19 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     }
 
     @Override
-    public void showDetailShopView(@NonNull String shopId) {
+    public void showDetailShopView(@NonNull String shopId, View itemView) {
         Intent intent = new Intent(getActivity(), ShopDetailActivity.class);
         intent.putExtra(ShopDetailActivity.PARAM_SHOP_ID, shopId);
-        startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            View imageView = itemView.findViewById(R.id.imageView);
+            String transitionName = imageView.getTransitionName();
+            intent.putExtra(ShopDetailFragment.PARAM_IMAGE_VIEW_TRANSITION_NAME, transitionName);
+            ActivityOptionsCompat options = ActivityOptionsCompat.
+                    makeSceneTransitionAnimation(getActivity(), imageView, transitionName);
+            startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL, options.toBundle());
+        } else {
+            startActivityForResult(intent, REQUEST_CODE_SHOP_DETAIL);
+        }
     }
 
     @Override

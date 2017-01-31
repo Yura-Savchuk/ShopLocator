@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelegate;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelegateProxy;
 import com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable.ShopSpannableModel;
 import com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable.ShopSpannableModelsPool;
 import com.example.shoplocator.util.picasso.CircleTransform;
@@ -25,16 +27,16 @@ public class CheckableShopsRecyclerViewAdapter extends RecyclerView.Adapter {
     private final List<SelectableShopModel> shops;
     private final LayoutInflater inflater;
     private final ShopSpannableModelsPool spannableModelsPool;
-    private final CheckableShopsRecyclerViewDelegateProxy delegateProxy;
+    private final ShopsRecyclerViewDelegateProxy delegateProxy;
 
     public CheckableShopsRecyclerViewAdapter(@NonNull List<SelectableShopModel> shops, Context context) {
         this.shops = shops;
         inflater = LayoutInflater.from(context);
         spannableModelsPool = new ShopSpannableModelsPool(context);
-        delegateProxy = new CheckableShopsRecyclerViewDelegateProxy();
+        delegateProxy = new ShopsRecyclerViewDelegateProxy();
     }
 
-    public void setDelegate(CheckableShopsRecyclerViewDelegate delegate) {
+    public void setDelegate(ShopsRecyclerViewDelegate delegate) {
         delegateProxy.setRecyclerViewDelegate(delegate);
     }
 
