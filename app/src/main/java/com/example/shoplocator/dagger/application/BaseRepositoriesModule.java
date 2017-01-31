@@ -54,8 +54,8 @@ public class BaseRepositoriesModule {
     @Provides
     @Singleton
     IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
-//        IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase); //master
-        IShopsFDBService shopsFDBService = new FakeShopsFDBService(); //fake
+        IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase); //master
+//        IShopsFDBService shopsFDBService = new FakeShopsFDBService(); //fake
         IShopsDBService shopsDBService = new ShopsDBService(databaseClient);
         return new ShopsRepository(shopsFDBService, shopsDBService);
     }
