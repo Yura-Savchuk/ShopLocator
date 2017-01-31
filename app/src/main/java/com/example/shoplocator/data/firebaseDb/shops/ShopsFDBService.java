@@ -16,6 +16,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -120,6 +121,31 @@ public class ShopsFDBService implements IShopsFDBService {
     @Override
     public Single<ShopDbModel> updateShop(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel) {
         return Single.create(subscriber -> setShopFormTo(formDbModel, subscriber, shopId));
+    }
+
+    @Override
+    public Single<Object> deleteShopsByIds(@NonNull Collection<String> ids) {
+        return Single.create(new Single.OnSubscribe<Object>() {
+            @Override
+            public void call(SingleSubscriber<? super Object> singleSubscriber) {
+                Map<String, Object> childUpdates = new HashMap<>();
+                for (String id : ids) {
+                    childUpdates.put(id, null);
+                }
+                shopsDataRefrence.updateChildren(childUpdates, new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                        if (databaseError != null) {
+                            singleSubscriber.onError(databaseError.toException());
+                            Log.e("Firebase", "error: ", databaseError.toException());
+                        } else {
+                            singleSubscriber.onSuccess(null);
+                            Log.d("Firebase", "write successfully");
+                        }
+                    }
+                });
+            }
+        });
     }
 
     @Override

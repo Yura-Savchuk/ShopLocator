@@ -45,8 +45,8 @@ public class BaseRepositoriesModule {
     @Provides
     @Singleton
     IUsersRepository usersRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
-//        IUsersFDBService usersFDBService = new UsersFDBService(firebaseDatabase); //master
-        IUsersFDBService usersFDBService = new FakeUsersFDBService(); //fake
+        IUsersFDBService usersFDBService = new UsersFDBService(firebaseDatabase); //master
+//        IUsersFDBService usersFDBService = new FakeUsersFDBService(); //fake
         IUsersDBService usersDBService = new UserDBService(databaseClient);
         return new UsersRepository(usersFDBService, usersDBService);
     }
@@ -54,8 +54,8 @@ public class BaseRepositoriesModule {
     @Provides
     @Singleton
     IShopsRepository shopsRepository(FirebaseDatabase firebaseDatabase, IDatabaseClient databaseClient) {
-//        IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase); //master
-        IShopsFDBService shopsFDBService = new FakeShopsFDBService(); //fake
+        IShopsFDBService shopsFDBService = new ShopsFDBService(firebaseDatabase); //master
+//        IShopsFDBService shopsFDBService = new FakeShopsFDBService(); //fake
         IShopsDBService shopsDBService = new ShopsDBService(databaseClient);
         return new ShopsRepository(shopsFDBService, shopsDBService);
     }

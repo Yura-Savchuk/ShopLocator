@@ -7,7 +7,6 @@ import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.data.repsitory.users.IUsersRepository;
 import com.example.shoplocator.ui.model.ShopModel;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -38,6 +37,6 @@ public class ShopDetailInteractor implements IShopDetailInteractor {
     public Single<Object> deleteShopById(@NonNull String shopId) {
         Collection<String> ids = new LinkedList<>();
         ids.add(shopId);
-        return shopsRepository.deleteShopsByIdsFromDb(ids);
+        return shopsRepository.deleteShopsByIds(ids);
     }
 }

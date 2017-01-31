@@ -67,8 +67,10 @@ public class ShopsRepository implements IShopsRepository {
     }
 
     @Override
-    public Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<String> ids) {
-        return shopsDBService.deleteShopsByIds(ids);
+    public Single<Object> deleteShopsByIds(@NonNull Collection<String> ids) {
+//        return shopsDBService.deleteShopsByIds(ids);
+        return shopsFDBService.deleteShopsByIds(ids)
+                .flatMap(o -> shopsDBService.deleteShopsByIds(ids));
     }
 
     @Override

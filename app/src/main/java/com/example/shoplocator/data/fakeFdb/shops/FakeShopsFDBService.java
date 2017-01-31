@@ -8,8 +8,10 @@ import com.example.shoplocator.data.firebaseDb.shops.IShopsFDBService;
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
 
+import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import rx.Single;
 
@@ -87,6 +89,19 @@ public class FakeShopsFDBService implements IShopsFDBService {
                         shops.add(shopDbModel);
                     }
                 });
+    }
+
+    @Override
+    public Single<Object> deleteShopsByIds(@NonNull Collection<String> ids) {
+        return Single.fromCallable(() -> {
+            for (int i=0; i<shops.size(); i++) {
+                ShopDbModel shop = shops.get(i);
+                if (ids.contains(shop.getId())) {
+                    shops.remove(i--);
+                }
+            }
+            return null;
+        });
     }
 
     @Override

@@ -57,7 +57,7 @@ public class ShopsListInteractor implements IShopsListInteractor {
                 deleteShopsCommand.addRemovedId(shop.getId());
             }
         }
-        return shopsRepository.deleteShopsByIdsFromDb(idsToRemove)
+        return shopsRepository.deleteShopsByIds(idsToRemove)
                 .map(o -> deleteShopsCommand);
     }
 
