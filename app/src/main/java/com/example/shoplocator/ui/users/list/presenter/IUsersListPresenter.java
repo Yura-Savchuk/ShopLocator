@@ -15,4 +15,6 @@ public interface IUsersListPresenter {
     void setupUsersList();
 
     void onItemClick(int position);
+
+    void onRetryButtonClick();
 }

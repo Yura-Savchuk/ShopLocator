@@ -19,7 +19,7 @@ public interface IUserDetailView {
 
     void setupShopsList(@NonNull List<ShopModel> shops);
 
-    void shopErrorView();
+    void shopErrorMessage();
 
     void showDetailShopView(@NonNull String shopId, View itemView);
 

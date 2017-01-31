@@ -1,6 +1,7 @@
 package com.example.shoplocator.ui.users.list.view;
 
 import android.support.annotation.NonNull;
+import android.view.View;
 
 import com.example.shoplocator.ui.model.UserModel;
 
@@ -17,6 +18,7 @@ public interface IUsersListView {
     void setProgress(boolean progress);
 
     void showErrorView();
+    void onRetryButtonClick(View view);
 
     void showUserDetailView(@NonNull String userId, @NonNull String userName);
 }

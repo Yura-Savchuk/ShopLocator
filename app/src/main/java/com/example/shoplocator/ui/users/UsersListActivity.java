@@ -3,14 +3,19 @@ package com.example.shoplocator.ui.users;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
+import com.example.shoplocator.ui.errorFragment.IErrorFragmentFactory;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
+import com.example.shoplocator.ui.errorFragment.fragment.RetryButtonListener;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 import com.example.shoplocator.ui.users.detail.view.UserDetailFragment;
+import com.example.shoplocator.ui.users.list.view.IUsersListView;
 import com.example.shoplocator.ui.users.list.view.UsersListFragment;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 
@@ -19,9 +24,10 @@ import javax.inject.Inject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class UsersListActivity extends AppCompatActivity implements UserListDelegate {
+public class UsersListActivity extends AppCompatActivity implements UserListDelegate, ShowErrorFragmentDelegate {
 
     @Inject FragmentRouteAbs fragmentRoute;
+    @Inject IErrorFragmentFactory errorFragmentFactory;
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -82,4 +88,18 @@ public class UsersListActivity extends AppCompatActivity implements UserListDele
         intent.putExtras(arguments);
         startActivity(intent);
     }
+
+    @Override
+    public void showNoInternetConnectionError() {
+        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment(retryButtonListener);
+        fragmentRoute.addFragment(this, fragment);
+    }
+
+    private RetryButtonListener retryButtonListener = view -> {
+        fragmentRoute.removeTopFragmentSync(this);
+        Fragment fragment = fragmentRoute.getCurrentFragment(this);
+        if (fragment instanceof IUsersListView) {
+            ((IUsersListView) fragment).onRetryButtonClick(view);
+        }
+    };
 }

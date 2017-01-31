@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
@@ -138,8 +139,8 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     }
 
     @Override
-    public void shopErrorView() {
-
+    public void shopErrorMessage() {
+        Toast.makeText(getContext(), getString(R.string.no_internet_connection_message), Toast.LENGTH_SHORT).show();
     }
 
     @Override

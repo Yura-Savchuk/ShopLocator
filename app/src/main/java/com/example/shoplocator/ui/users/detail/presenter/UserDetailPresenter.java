@@ -11,7 +11,6 @@ import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
 import java.util.List;
 
 import rx.Subscription;
-import rx.functions.Action1;
 import rx.subscriptions.CompositeSubscription;
 
 /**
@@ -89,7 +88,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
     private void handleGetShopsByUserIdError(Throwable throwable) {
         view.setProgress(false);
-        view.shopErrorView();
+        view.shopErrorMessage();
     }
 
     @Override

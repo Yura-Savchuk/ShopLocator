@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.usersList.UsersListModule;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.model.UserModel;
 import com.example.shoplocator.ui.users.UserListDelegate;
 import com.example.shoplocator.ui.users.list.listAdapter.UsersRecyclerViewAdapter;
@@ -83,7 +84,15 @@ public class UsersListFragment extends Fragment implements IUsersListView {
 
     @Override
     public void showErrorView() {
+        Activity activity = getActivity();
+        if (activity instanceof ShowErrorFragmentDelegate) {
+            ((ShowErrorFragmentDelegate) activity).showNoInternetConnectionError();
+        }
+    }
 
+    @Override
+    public void onRetryButtonClick(View view) {
+        presenter.onRetryButtonClick();
     }
 
     @Override

@@ -56,6 +56,11 @@ public class UsersListPresenter implements IUsersListPresenter {
         view.showUserDetailView(user.getId(), user.getName());
     }
 
+    @Override
+    public void onRetryButtonClick() {
+        setupUsersList();
+    }
+
     private void setupUsersFromCash() {
         view.setupUsersList(cash.getUsers());
     }
