@@ -16,6 +16,7 @@ import com.example.shoplocator.data.repsitory.users.UsersRepository;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.createAndEditShop.model.ShopFormModel;
 import com.example.shoplocator.ui.model.UserModel;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -55,6 +56,7 @@ public class CreateAndEditShopInteractorTest {
 
     @Before
     public void beforeEachTest() {
+        RxValidation rxValidation = new RxValidation();
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);

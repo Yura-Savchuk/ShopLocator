@@ -11,6 +11,7 @@ import com.example.shoplocator.data.model.UserDbModel;
 import com.example.shoplocator.data.repsitory.shops.ShopsRepository;
 import com.example.shoplocator.data.repsitory.users.UsersRepository;
 import com.example.shoplocator.ui.model.ShopModel;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -47,6 +48,7 @@ public class ShopDetailInteractorTest {
 
     @Before
     public void beforeEachTest() {
+        RxValidation rxValidation = new RxValidation();
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);
@@ -116,6 +118,7 @@ public class ShopDetailInteractorTest {
     public void deleteShopById_Success_test() {
         //mock shops
         when(mockedShopsDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.just(null));
+        when(mockedShopsFDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.just(null));
         //create TestSubscriber
         TestSubscriber<Object> testSubscriber = TestSubscriber.create();
         //perform testable action
@@ -131,7 +134,7 @@ public class ShopDetailInteractorTest {
         //setup testable data
         Throwable throwable = new RuntimeException("Not found in database");
         //mock shops
-        when(mockedShopsDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.error(throwable));
+        when(mockedShopsFDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.error(throwable));
         //create TestSubscriber
         TestSubscriber<Object> testSubscriber = TestSubscriber.create();
         //perform testable action

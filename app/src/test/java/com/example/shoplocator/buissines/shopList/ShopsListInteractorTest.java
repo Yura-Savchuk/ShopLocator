@@ -15,6 +15,7 @@ import com.example.shoplocator.data.repsitory.users.UsersRepository;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.UserModel;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
+import com.example.shoplocator.util.rx.validation.RxValidation;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -53,6 +54,7 @@ public class ShopsListInteractorTest {
 
     @Before
     public void beforeEachTest() {
+        RxValidation rxValidation = new RxValidation();
         //setup shops repository
         mockedShopsFDBService = mock(IShopsFDBService.class);
         mockedShopsDBService = mock(IShopsDBService.class);
@@ -103,8 +105,7 @@ public class ShopsListInteractorTest {
         shopsListInteractor.getCheckableShops().subscribe(testSubscriber);
         testSubscriber.awaitTerminalEvent();
         //check emited data
-        testSubscriber.assertNoErrors();
-        testSubscriber.assertCompleted();
+        assertThat(testSubscriber.getOnErrorEvents().get(0).getMessage()).endsWith("Shops list not exist in db.");
     }
 
     @Test
@@ -115,6 +116,7 @@ public class ShopsListInteractorTest {
         shops.get(2).setSelected(true);
         SelectableShopModel shop1 = shops.get(0);
         //mock shops
+        when(mockedShopsFDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.just(null));
         when(mockedShopsDBService.deleteShopsByIds(any(Collection.class))).thenReturn(Single.just(null));
         //create TestSubscriber
         TestSubscriber<ChangeItemsCommand> testSubscriber = TestSubscriber.create();
