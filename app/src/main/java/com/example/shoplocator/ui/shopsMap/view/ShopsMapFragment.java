@@ -26,11 +26,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import rx.Single;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 26.01.17.
@@ -71,7 +73,11 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager()
                 .findFragmentById(R.id.map);
         ListenerToSingle<GoogleMap> listenerToSingle = new ListenerToSingle<>();
-        presenter.loadShopsAndControlAccessablity(listenerToSingle.getSingle().map(m -> null));
+        Single<Object> single = listenerToSingle
+                .getSingle()
+                .timeout(10, TimeUnit.SECONDS)
+                .map(m -> null);
+        presenter.loadShopsAndControlAccessablity(single);
         mapFragment.getMapAsync(googleMap -> {
             mMap = googleMap;
             listenerToSingle.emitNextValue(googleMap);
