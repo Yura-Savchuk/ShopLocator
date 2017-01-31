@@ -55,7 +55,7 @@ public class CreateAndEditShopActivity extends AppCompatActivity {
             Bundle arguments = new Bundle();
             arguments.putString(CreateAndEditShopFragment.PARAM_SHOP_ID, getIntent().getStringExtra(PARAM_SHOP_ID));
             fragment.setArguments(arguments);
-            fragmentRouteAbs.addFragment(this, fragment);
+            fragmentRouteAbs.setFragment(this, fragment);
         }
     }
 
