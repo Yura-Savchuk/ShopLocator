@@ -47,7 +47,7 @@ public class App extends Application {
         instance = this;
         appComponent = prepareAppComponent().build();
         Realm.init(this);
-        ProgressDialogConfig.config().setCancelable(true);
+        ProgressDialogConfig.config().setCancelable(false);
     }
 
     @NonNull

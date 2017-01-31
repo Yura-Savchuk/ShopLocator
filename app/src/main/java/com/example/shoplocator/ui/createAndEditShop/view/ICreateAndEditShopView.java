@@ -35,7 +35,7 @@ public interface ICreateAndEditShopView {
 
     void setupUserSelector(@NonNull List<CheckableUserModel> users);
 
-    void showErrorView();
+    void showErrorMessage();
 
     void setInvalidErrors(@NonNull List<ShopFormInvalidField> fields);
     void showErrorMessage(@NonNull String message);

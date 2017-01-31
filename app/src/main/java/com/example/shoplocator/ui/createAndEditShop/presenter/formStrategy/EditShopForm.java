@@ -13,7 +13,6 @@ import java.util.List;
 
 import rx.Single;
 import rx.Subscription;
-import rx.functions.Func2;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 27.01.17.
@@ -83,7 +82,7 @@ public class EditShopForm implements IShopFormStrategy {
 
     private void handlePrefillFormError(Throwable throwable) {
         view.showProgress(false);
-        view.showErrorView();
+        view.showErrorMessage();
     }
 
     @Override

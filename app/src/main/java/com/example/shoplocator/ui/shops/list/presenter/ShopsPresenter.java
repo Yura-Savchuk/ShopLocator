@@ -62,9 +62,10 @@ public class ShopsPresenter implements IShopsListPresenter {
 
     private void setupShopsFromInteractor() {
         view.showProgress(true);
-        shopsInteractor.getCheckableShops()
+        Subscription subscription = shopsInteractor.getCheckableShops()
                 .compose(schedulers.getIOToMainTransformerSingle())
                 .subscribe(this::handleGetShopsSuccess, this::handleGetShopsError);
+        compositeSubscription.add(subscription);
     }
 
     private void handleGetShopsSuccess(@NonNull List<SelectableShopModel> shopModels) {

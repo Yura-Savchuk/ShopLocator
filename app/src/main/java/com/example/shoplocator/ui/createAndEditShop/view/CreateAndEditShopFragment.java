@@ -175,8 +175,8 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
     };
 
     @Override
-    public void showErrorView() {
-
+    public void showErrorMessage() {
+        Toast.makeText(getContext(), R.string.no_internet_connection_message, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -161,7 +161,9 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     @Override
     public void showCreateShopView() {
         Intent intent = new Intent(getActivity(), CreateAndEditShopActivity.class);
-        startActivityForResult(intent, CREATE_SHOP_REQUEST_CODE);
+//        startActivityForResult(intent, CREATE_SHOP_REQUEST_CODE);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
     }
 
     @Override
