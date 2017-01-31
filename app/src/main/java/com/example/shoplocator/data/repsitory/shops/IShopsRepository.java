@@ -19,7 +19,7 @@ public interface IShopsRepository {
 
     Single<List<ShopDbModel>> getShops();
     Single<ShopDbModel> getShopById(@NonNull String shopId);
-    Single<Object> deleteShopsByIdsFromDb(@NonNull Collection<String> ids);
+    Single<Object> deleteShopsByIds(@NonNull Collection<String> ids);
 
     Single<String> addShopAndGetId(@NonNull ShopFormDbModel formDbModel);
     Single<String> updateShopAndGetId(@NonNull String shopId, @NonNull ShopFormDbModel formDbModel);
