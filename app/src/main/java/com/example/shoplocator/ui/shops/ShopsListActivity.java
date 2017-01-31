@@ -324,15 +324,13 @@ public class ShopsListActivity extends AppCompatActivity implements ShopListDele
 
     @Override
     public void showNoInternetConnectionError() {
-        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment(retryButtonListener);
-        fragmentRoute.addFragment(this, fragment);
+        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment();
+        fragmentRoute.replaceFragmentWithBackStack(this, fragment);
     }
 
-    private RetryButtonListener retryButtonListener = view -> {
-        fragmentRoute.removeTopFragmentSync(this);
-        Fragment fragment = fragmentRoute.getCurrentFragment(this);
-        if (fragment instanceof IShopsListView) {
-            ((IShopsListView) fragment).onRetryButtonClick(view);
-        }
-    };
+    @Override
+    public void handleErrorViewRetryButtonClick() {
+        getSupportFragmentManager().popBackStackImmediate();
+    }
+
 }

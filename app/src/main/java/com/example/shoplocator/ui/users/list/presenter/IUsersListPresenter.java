@@ -16,5 +16,4 @@ public interface IUsersListPresenter {
 
     void onItemClick(int position);
 
-    void onRetryButtonClick();
 }

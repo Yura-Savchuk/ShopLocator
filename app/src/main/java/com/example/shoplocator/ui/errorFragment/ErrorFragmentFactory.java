@@ -18,12 +18,12 @@ public class ErrorFragmentFactory implements IErrorFragmentFactory {
     }
 
     @Override
-    public ErrorFragment createNoInternetConnectionFragment(@NonNull RetryButtonListener retryButtonListener) {
-        return ErrorFragment.create(config.noInternetConnectionModel(), retryButtonListener);
+    public ErrorFragment createNoInternetConnectionFragment() {
+        return ErrorFragment.create(config.noInternetConnectionModel());
     }
 
     @Override
-    public ErrorFragment createUndefinedErrorFragment(@NonNull RetryButtonListener retryButtonListener) {
-        return ErrorFragment.create(config.undefinedError(), retryButtonListener);
+    public ErrorFragment createUndefinedErrorFragment() {
+        return ErrorFragment.create(config.undefinedError());
     }
 }

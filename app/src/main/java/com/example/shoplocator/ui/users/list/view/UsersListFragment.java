@@ -91,11 +91,6 @@ public class UsersListFragment extends Fragment implements IUsersListView {
     }
 
     @Override
-    public void onRetryButtonClick(View view) {
-        presenter.onRetryButtonClick();
-    }
-
-    @Override
     public void showUserDetailView(@NonNull String userId, @NonNull String userName) {
         Activity activity = getActivity();
         if (activity instanceof UserListDelegate) {

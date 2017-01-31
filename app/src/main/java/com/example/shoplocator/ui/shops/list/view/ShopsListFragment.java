@@ -182,8 +182,4 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
         }
     }
 
-    @Override
-    public void onRetryButtonClick(View view) {
-        presenter.onRetryButtonClick();
-    }
 }

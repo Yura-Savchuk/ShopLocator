@@ -8,6 +8,7 @@ import android.support.multidex.MultiDex;
 import com.example.shoplocator.dagger.application.AppComponent;
 import com.example.shoplocator.dagger.application.AppModule;
 import com.example.shoplocator.dagger.application.DaggerAppComponent;
+import com.example.shoplocator.util.ui.progress.ProgressDialogConfig;
 
 import io.realm.Realm;
 
@@ -46,6 +47,7 @@ public class App extends Application {
         instance = this;
         appComponent = prepareAppComponent().build();
         Realm.init(this);
+        ProgressDialogConfig.config().setCancelable(true);
     }
 
     @NonNull

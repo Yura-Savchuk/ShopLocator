@@ -1,5 +1,6 @@
 package com.example.shoplocator.ui.errorFragment.fragment;
 
+import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shoplocator.R;
+import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.errorFragment.model.ErrorViewModel;
 import com.example.shoplocator.ui.errorFragment.model.ImageModel;
 
@@ -27,19 +29,15 @@ import butterknife.OnClick;
 
 public class ErrorFragment extends Fragment {
 
-    public static ErrorFragment create(@NonNull ErrorViewModel errorViewModel, @NonNull RetryButtonListener retryButtonListener) {
+    public static ErrorFragment create(@NonNull ErrorViewModel errorViewModel) {
         ErrorFragment fragment = new ErrorFragment();
         fragment.viewModel = errorViewModel;
-        fragment.retryButtonListener = retryButtonListener;
         return fragment;
     }
 
     @SuppressWarnings("NullableProblems")
     @NonNull
     private ErrorViewModel viewModel;
-    @SuppressWarnings("NullableProblems")
-    @NonNull
-    private RetryButtonListener retryButtonListener;
 
     @BindView(R.id.imageViewConnectionIcon) ImageView imageViewConnectionIcon;
     @BindView(R.id.textViewTitle) TextView textViewTitle;
@@ -80,7 +78,10 @@ public class ErrorFragment extends Fragment {
     }
 
     @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
-        retryButtonListener.onRetryButtonClick(view);
+        Activity activity = getActivity();
+        if (activity instanceof ShowErrorFragmentDelegate) {
+            ((ShowErrorFragmentDelegate) activity).handleErrorViewRetryButtonClick();
+        }
     }
 
 }

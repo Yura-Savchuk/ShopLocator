@@ -32,5 +32,4 @@ public interface IShopsListView {
     void onDeleteShopResult(@NonNull String shopId);
 
     void showErrorView();
-    void onRetryButtonClick(View view);
 }

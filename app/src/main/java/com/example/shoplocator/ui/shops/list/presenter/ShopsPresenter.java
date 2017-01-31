@@ -171,11 +171,6 @@ public class ShopsPresenter implements IShopsListPresenter {
         }
     }
 
-    @Override
-    public void onRetryButtonClick() {
-        setupShopsList();
-    }
-
 }
 
 

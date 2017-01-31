@@ -7,5 +7,6 @@ package com.example.shoplocator.ui.errorFragment;
 public interface ShowErrorFragmentDelegate {
 
     void showNoInternetConnectionError();
+    void handleErrorViewRetryButtonClick();
 
 }

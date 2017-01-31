@@ -11,7 +11,7 @@ import com.example.shoplocator.ui.errorFragment.fragment.RetryButtonListener;
 
 public interface IErrorFragmentFactory {
 
-    ErrorFragment createNoInternetConnectionFragment(@NonNull RetryButtonListener retryButtonListener);
-    ErrorFragment createUndefinedErrorFragment(@NonNull RetryButtonListener retryButtonListener);
+    ErrorFragment createNoInternetConnectionFragment();
+    ErrorFragment createUndefinedErrorFragment();
 
 }

@@ -91,15 +91,13 @@ public class UsersListActivity extends AppCompatActivity implements UserListDele
 
     @Override
     public void showNoInternetConnectionError() {
-        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment(retryButtonListener);
-        fragmentRoute.addFragment(this, fragment);
+        Fragment fragment = errorFragmentFactory.createNoInternetConnectionFragment();
+        fragmentRoute.replaceFragmentWithBackStack(this, fragment);
     }
 
-    private RetryButtonListener retryButtonListener = view -> {
-        fragmentRoute.removeTopFragmentSync(this);
-        Fragment fragment = fragmentRoute.getCurrentFragment(this);
-        if (fragment instanceof IUsersListView) {
-            ((IUsersListView) fragment).onRetryButtonClick(view);
-        }
-    };
+    @Override
+    public void handleErrorViewRetryButtonClick() {
+        getSupportFragmentManager().popBackStackImmediate();
+    }
+
 }
