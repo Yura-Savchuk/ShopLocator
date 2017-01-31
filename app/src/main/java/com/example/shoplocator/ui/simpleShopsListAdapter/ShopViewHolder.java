@@ -1,15 +1,12 @@
-package com.example.shoplocator.ui.users.detail.shopsListAdapter;
+package com.example.shoplocator.ui.simpleShopsListAdapter;
 
 import android.support.annotation.NonNull;
-import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shoplocator.R;
-import com.example.shoplocator.util.sugar.CompareUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

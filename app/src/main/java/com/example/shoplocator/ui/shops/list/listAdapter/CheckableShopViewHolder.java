@@ -18,7 +18,7 @@ import butterknife.ButterKnife;
  * Created by {@author yura.savchuk22@gmail.com} on 22.01.17.
  */
 
-public class ShopViewHolder extends RecyclerView.ViewHolder {
+public class CheckableShopViewHolder extends RecyclerView.ViewHolder {
 
     @BindView(R.id.imageView) ImageView imageView;
     @BindView(R.id.textViewShopName) TextView textViewShopName;
@@ -28,7 +28,7 @@ public class ShopViewHolder extends RecyclerView.ViewHolder {
 
     private boolean selectionState;
 
-    public ShopViewHolder(View itemView, @NonNull ShopsRecyclerViewDelegate delegate) {
+    public CheckableShopViewHolder(View itemView, @NonNull CheckableShopsRecyclerViewDelegate delegate) {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemView.setOnClickListener(v -> delegate.onItemClick(getAdapterPosition(), itemView));

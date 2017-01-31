@@ -1,4 +1,4 @@
-package com.example.shoplocator.ui.users.detail.shopsListAdapter.shopSpannable;
+package com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable;
 
 import android.support.annotation.NonNull;
 import android.text.Spannable;

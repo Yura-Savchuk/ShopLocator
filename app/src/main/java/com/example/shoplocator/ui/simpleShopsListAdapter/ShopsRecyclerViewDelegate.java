@@ -1,4 +1,4 @@
-package com.example.shoplocator.ui.users.detail.shopsListAdapter;
+package com.example.shoplocator.ui.simpleShopsListAdapter;
 
 import android.view.View;
 

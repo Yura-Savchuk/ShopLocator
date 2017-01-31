@@ -16,7 +16,7 @@ import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsList.ShopsModule;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.shops.ShopListDelegate;
-import com.example.shoplocator.ui.shops.list.listAdapter.ShopsRecyclerViewAdapter;
+import com.example.shoplocator.ui.shops.list.listAdapter.CheckableShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
 import com.example.shoplocator.util.ui.progress.ProgressDialog;
@@ -40,7 +40,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
 
-    private ShopsRecyclerViewAdapter recyclerViewAdapter;
+    private CheckableShopsRecyclerViewAdapter recyclerViewAdapter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +92,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     @Override
     public void setupShopsList(@NonNull List<SelectableShopModel> shops) {
-        recyclerViewAdapter = new ShopsRecyclerViewAdapter(shops, getContext());
+        recyclerViewAdapter = new CheckableShopsRecyclerViewAdapter(shops, getContext());
         recyclerView.setAdapter(recyclerViewAdapter);
         recyclerViewAdapter.setDelegate(presenter::onItemClick);
     }

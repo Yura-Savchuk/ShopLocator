@@ -25,7 +25,7 @@ import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.presenter.IShopDetailPresenter;
-import com.example.shoplocator.ui.shops.list.listAdapter.shopSpannable.ShopSpannableModelFactory;
+import com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable.ShopSpannableModelFactory;
 import com.example.shoplocator.util.fragment.FragmentTag;
 import com.example.shoplocator.util.ui.progress.ProgressDialog;
 import com.squareup.picasso.Picasso;

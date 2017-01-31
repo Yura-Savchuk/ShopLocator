@@ -22,7 +22,7 @@ import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 import com.example.shoplocator.ui.users.detail.presenter.IUserDetailPresenter;
-import com.example.shoplocator.ui.users.detail.shopsListAdapter.ShopsRecyclerViewAdapter;
+import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewAdapter;
 import com.example.shoplocator.util.fragment.FragmentTag;
 
 import java.util.List;

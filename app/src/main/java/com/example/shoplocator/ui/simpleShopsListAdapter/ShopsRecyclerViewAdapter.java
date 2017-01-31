@@ -1,4 +1,4 @@
-package com.example.shoplocator.ui.users.detail.shopsListAdapter;
+package com.example.shoplocator.ui.simpleShopsListAdapter;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -8,9 +8,8 @@ import android.view.ViewGroup;
 
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
-import com.example.shoplocator.ui.shops.model.SelectableShopModel;
-import com.example.shoplocator.ui.users.detail.shopsListAdapter.shopSpannable.ShopSpannableModel;
-import com.example.shoplocator.ui.users.detail.shopsListAdapter.shopSpannable.ShopSpannableModelsPool;
+import com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable.ShopSpannableModel;
+import com.example.shoplocator.ui.simpleShopsListAdapter.shopSpannable.ShopSpannableModelsPool;
 import com.example.shoplocator.util.picasso.CircleTransform;
 import com.squareup.picasso.Picasso;
 

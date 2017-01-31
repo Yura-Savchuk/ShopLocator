@@ -6,7 +6,7 @@ import android.view.View;
  * Created by {@author yura.savchuk22@gmail.com} on 22.01.17.
  */
 
-public interface ShopsRecyclerViewDelegate {
+public interface CheckableShopsRecyclerViewDelegate {
 
     void onItemClick(int position, View itemView);
 

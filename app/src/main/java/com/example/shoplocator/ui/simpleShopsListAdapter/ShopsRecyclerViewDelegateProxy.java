@@ -1,6 +1,4 @@
-package com.example.shoplocator.ui.shops.list.listAdapter;
-
-import android.view.View;
+package com.example.shoplocator.ui.simpleShopsListAdapter;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 23.01.17.
@@ -15,7 +13,7 @@ public class ShopsRecyclerViewDelegateProxy implements ShopsRecyclerViewDelegate
     }
 
     @Override
-    public void onItemClick(int position, View itemView) {
-        if (recyclerViewDelegate != null) recyclerViewDelegate.onItemClick(position, itemView);
+    public void onItemClick(int position) {
+        if (recyclerViewDelegate != null) recyclerViewDelegate.onItemClick(position);
     }
 }
