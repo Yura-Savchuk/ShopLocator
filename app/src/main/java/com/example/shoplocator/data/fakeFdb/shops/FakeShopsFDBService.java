@@ -11,6 +11,7 @@ import com.example.shoplocator.data.model.ShopFormDbModel;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.Callable;
 
 import rx.Single;
 
@@ -92,8 +93,15 @@ public class FakeShopsFDBService implements IShopsFDBService {
 
     @Override
     public Single<Object> deleteShopsByIds(@NonNull Collection<String> ids) {
-        //TODO
-        return Single.just(null);
+        return Single.fromCallable(() -> {
+            for (int i=0; i<shops.size(); i++) {
+                ShopDbModel shop = shops.get(i);
+                if (ids.contains(shop.getId())) {
+                    shops.remove(i--);
+                }
+            }
+            return null;
+        });
     }
 
     @Override
