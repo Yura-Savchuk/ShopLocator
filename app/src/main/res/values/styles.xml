@@ -13,7 +13,7 @@
     </style>
 
     <style name="ShpashTheme" parent="Theme.AppCompat.NoActionBar">
-        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowBackground">@color/colorWindowBackground</item>
     </style>
 
     <style name="AppTheme.NoActionBar">

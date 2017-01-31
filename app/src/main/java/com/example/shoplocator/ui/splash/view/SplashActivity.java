@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.shoplocator.App;
+import com.example.shoplocator.R;
 import com.example.shoplocator.data.repsitory.settings.ISettingsRepository;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulersAbs;
@@ -27,6 +28,7 @@ public class SplashActivity extends AppCompatActivity implements ISplashView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         App.instance().applicationComponent().inject(this);
+        setContentView(R.layout.activity_splash);
         if (savedInstanceState == null) {
             startSplashTimer();
         }
