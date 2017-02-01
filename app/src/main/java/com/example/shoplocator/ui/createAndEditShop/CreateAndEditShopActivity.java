@@ -74,11 +74,4 @@ public class CreateAndEditShopActivity extends AppCompatActivity {
         hideIfShownKeyboard();
         super.finish();
     }
-
-    @OnClick(R.id.buttonSubmit) void onSubmitButtonClick(View view) {
-        Fragment fragment = fragmentRouteAbs.getCurrentFragment(this);
-        if (fragment instanceof ICreateAndEditShopView) {
-            ((ICreateAndEditShopView) fragment).onSubmitButtonClick();
-        }
-    }
 }

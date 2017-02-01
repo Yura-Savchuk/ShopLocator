@@ -18,21 +18,10 @@
         app:popupTheme="@style/AppTheme.PopupOverlay"
         />
 
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/buttonSubmit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/save"
-        android:textColor="@android:color/white"
-        android:layout_alignParentBottom="true"
-        app:backgroundTint="?attr/colorAccent"
-        />
-
     <FrameLayout
         android:id="@+id/frameLayoutFragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@id/buttonSubmit"
         android:layout_below="@id/toolbar"
         />
 

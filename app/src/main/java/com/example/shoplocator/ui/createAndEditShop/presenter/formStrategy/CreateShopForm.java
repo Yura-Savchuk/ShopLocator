@@ -52,7 +52,7 @@ public class CreateShopForm implements IShopFormStrategy {
 
     private void handleGetUsersError(Throwable throwable) {
         view.showProgress(false);
-        view.showErrorMessage();
+        view.showErrorView(true);
     }
 
     @Override

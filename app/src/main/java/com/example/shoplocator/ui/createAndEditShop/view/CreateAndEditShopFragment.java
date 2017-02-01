@@ -10,16 +10,14 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.coulcod.selectorview.Checkable;
-import com.coulcod.selectorview.OnValuesChangeListener;
 import com.coulcod.selectorview.SelectionViewDialog;
 import com.coulcod.selectorview.SelectorView;
 import com.coulcod.selectorview.SelectorViewAdapter;
@@ -31,6 +29,7 @@ import com.example.shoplocator.dagger.createAndEditShop.CreateAndEditShopModule;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 import com.example.shoplocator.ui.createAndEditShop.presenter.ICreateAndEditShopPresenter;
 import com.example.shoplocator.util.listenerAdapter.TextWatcherAdapter;
+import com.example.shoplocator.util.ui.keyboard.KeyboardUtil;
 import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
@@ -39,6 +38,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by seotm on 27.01.17.
@@ -63,6 +63,9 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
     @BindView(R.id.editTextPosX) TextInputEditText editTextPosX;
     @BindView(R.id.editTextPosY) TextInputEditText editTextPosY;
     @BindView(R.id.selectorViewUserName) SelectorView selectorViewUserName;
+    @BindView(R.id.errorView) View errorView;
+    @BindView(R.id.buttonSubmit) Button buttonSubmit;
+    @BindView(R.id.dummyFocusableView) View dummyFocusableView;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,8 +101,11 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
         super.onDestroyView();
     }
 
-    @Override
-    public void onSubmitButtonClick() {
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onTryAgainButtonClick();
+    }
+
+    @OnClick(R.id.buttonSubmit) void onSubmitButtonClick(View view) {
         presenter.submitForm();
     }
 
@@ -175,8 +181,10 @@ public class CreateAndEditShopFragment extends Fragment implements ICreateAndEdi
     };
 
     @Override
-    public void showErrorMessage() {
-        Toast.makeText(getContext(), R.string.no_internet_connection_message, Toast.LENGTH_SHORT).show();
+    public void showErrorView(boolean show) {
+        errorView.setVisibility(show ? View.VISIBLE : View.GONE);
+        buttonSubmit.setVisibility(show ? View.GONE : View.VISIBLE);
+        new KeyboardUtil(dummyFocusableView).hideKeyboardIfShown(getActivity());
     }
 
     @Override

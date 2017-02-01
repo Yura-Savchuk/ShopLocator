@@ -1,148 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     >
 
-    <android.support.constraint.ConstraintLayout
+    <android.support.v7.widget.AppCompatButton
+        android:id="@+id/buttonSubmit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="@string/save"
+        android:textColor="@android:color/white"
+        android:layout_alignParentBottom="true"
+        app:backgroundTint="?attr/colorAccent"
+        />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/buttonSubmit"
+        android:layout_alignParentTop="true"
         >
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutShopName"
-            android:layout_width="0dp"
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginRight="16dp">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/editTextCardName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/shop_name"
-                android:textColor="?android:textColorPrimary"
-                app:backgroundTint="?android:textColorSecondary"
-                android:inputType="text"
-                />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutImageUrl"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutShopName"
-            app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
-            app:layout_constraintRight_toRightOf="@+id/textInputLayoutShopName"
-            android:layout_marginTop="8dp"
             >
 
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/editTextImageUrl"
-                android:layout_width="match_parent"
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutShopName"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/iamge_url"
-                android:textColor="?android:textColorPrimary"
-                app:backgroundTint="?android:textColorSecondary"
-                android:inputType="textUri"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextCardName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/shop_name"
+                    android:textColor="?android:textColorPrimary"
+                    app:backgroundTint="?android:textColorSecondary"
+                    android:inputType="text"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutImageUrl"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutShopName"
+                app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
+                app:layout_constraintRight_toRightOf="@+id/textInputLayoutShopName"
+                android:layout_marginTop="8dp"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextImageUrl"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/iamge_url"
+                    android:textColor="?android:textColorPrimary"
+                    app:backgroundTint="?android:textColorSecondary"
+                    android:inputType="textUri"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <com.coulcod.selectorview.SelectorView
+                android:id="@+id/selectorViewUserName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/textInputLayoutImageUrl"
+                app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
+                app:layout_constraintRight_toRightOf="@+id/textInputLayoutShopName"
+                android:layout_marginTop="8dp"
+                app:svTitleTextSize="15sp"
+                app:svValuesTextSize="15sp"
+                app:svTitleTextColor="?android:textColorSecondary"
+                app:svValueTextColor="?android:textColorPrimary"
+                app:svShowDefaultArrow="true"
+                app:svSelectionMode="singleNoDeselect"
+                app:svSelectorViewMode="appearsTextField"
                 />
 
-        </android.support.design.widget.TextInputLayout>
-
-        <com.coulcod.selectorview.SelectorView
-            android:id="@+id/selectorViewUserName"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/textInputLayoutImageUrl"
-            app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
-            app:layout_constraintRight_toRightOf="@+id/textInputLayoutShopName"
-            android:layout_marginTop="8dp"
-            app:svTitleTextSize="15sp"
-            app:svValuesTextSize="15sp"
-            app:svTitleTextColor="?android:textColorSecondary"
-            app:svValueTextColor="?android:textColorPrimary"
-            app:svShowDefaultArrow="true"
-            app:svSelectionMode="singleNoDeselect"
-            app:svSelectorViewMode="appearsTextField"
-            />
-
-        <TextView
-            android:id="@+id/userNameError"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.Design.Error"
-            android:textColor="?attr/textColorError"
-            android:layout_marginLeft="5dp"
-            android:layout_marginStart="5dp"
-            app:layout_constraintTop_toBottomOf="@+id/selectorViewUserName"
-            app:layout_constraintLeft_toLeftOf="@+id/selectorViewUserName"
-            app:layout_constraintRight_toRightOf="@+id/selectorViewUserName"
-            />
-
-        <android.support.constraint.Guideline
-            android:id="@+id/guideline1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"
-            />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutPosX"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/userNameError"
-            app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
-            app:layout_constraintRight_toLeftOf="@+id/guideline1"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginEnd="8dp"
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/editTextPosX"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/userNameError"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="@string/pos_x"
-                android:textColor="?android:textColorPrimary"
-                app:backgroundTint="?android:textColorSecondary"
-                android:inputType="phone"
+                android:textAppearance="@style/TextAppearance.Design.Error"
+                android:textColor="?attr/textColorError"
+                android:layout_marginLeft="5dp"
+                android:layout_marginStart="5dp"
+                app:layout_constraintTop_toBottomOf="@+id/selectorViewUserName"
+                app:layout_constraintLeft_toLeftOf="@+id/selectorViewUserName"
+                app:layout_constraintRight_toRightOf="@+id/selectorViewUserName"
                 />
 
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/textInputLayoutPosY"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@+id/textInputLayoutPosX"
-            app:layout_constraintLeft_toRightOf="@+id/guideline1"
-            app:layout_constraintRight_toRightOf="@+id/selectorViewUserName"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            >
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/editTextPosY"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/pos_y"
-                android:textColor="?android:textColorPrimary"
-                app:backgroundTint="?android:textColorSecondary"
-                android:inputType="phone"
+            <android.support.constraint.Guideline
+                android:id="@+id/guideline1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"
                 />
 
-        </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutPosX"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@+id/userNameError"
+                app:layout_constraintLeft_toLeftOf="@+id/textInputLayoutShopName"
+                app:layout_constraintRight_toLeftOf="@+id/guideline1"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginEnd="8dp"
+                >
 
-    </android.support.constraint.ConstraintLayout>
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextPosX"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pos_x"
+                    android:textColor="?android:textColorPrimary"
+                    app:backgroundTint="?android:textColorSecondary"
+                    android:inputType="phone"
+                    />
 
-</ScrollView>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/textInputLayoutPosY"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="@+id/textInputLayoutPosX"
+                app:layout_constraintLeft_toRightOf="@+id/guideline1"
+                app:layout_constraintRight_toRightOf="@+id/selectorViewUserName"
+                android:layout_marginLeft="8dp"
+                android:layout_marginStart="8dp"
+                >
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/editTextPosY"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pos_y"
+                    android:textColor="?android:textColorPrimary"
+                    app:backgroundTint="?android:textColorSecondary"
+                    android:inputType="phone"
+                    />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+    </ScrollView>
+
+    <include
+        android:id="@+id/errorView"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        layout="@layout/fragment_error"/>
+
+
+
+    <View
+        android:id="@+id/dummyFocusableView"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:descendantFocusability="beforeDescendants"
+        android:tag="@string/empty_view_for_focus"
+        />
+
+</RelativeLayout>

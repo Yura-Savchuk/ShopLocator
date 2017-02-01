@@ -17,4 +17,6 @@ public interface ICreateAndEditShopPresenter {
     void prepareForm();
 
     void submitForm();
+
+    void onTryAgainButtonClick();
 }

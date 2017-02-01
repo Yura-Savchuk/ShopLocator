@@ -82,7 +82,7 @@ public class EditShopForm implements IShopFormStrategy {
 
     private void handlePrefillFormError(Throwable throwable) {
         view.showProgress(false);
-        view.showErrorMessage();
+        view.showErrorView(true);
     }
 
     @Override

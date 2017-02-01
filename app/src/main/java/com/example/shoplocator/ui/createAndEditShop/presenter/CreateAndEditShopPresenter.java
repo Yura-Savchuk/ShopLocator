@@ -111,4 +111,10 @@ public class CreateAndEditShopPresenter implements ICreateAndEditShopPresenter {
         }
     }
 
+    @Override
+    public void onTryAgainButtonClick() {
+        view.showErrorView(false);
+        prepareForm();
+    }
+
 }

@@ -13,8 +13,6 @@ import java.util.List;
  */
 public interface ICreateAndEditShopView {
 
-    void onSubmitButtonClick();
-
     void showProgress(boolean progress);
 
     void returnSuccessResult(@NonNull String shopId);
@@ -35,7 +33,7 @@ public interface ICreateAndEditShopView {
 
     void setupUserSelector(@NonNull List<CheckableUserModel> users);
 
-    void showErrorMessage();
+    void showErrorView(boolean show);
 
     void setInvalidErrors(@NonNull List<ShopFormInvalidField> fields);
     void showErrorMessage(@NonNull String message);
