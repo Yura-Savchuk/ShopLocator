@@ -26,4 +26,5 @@ public interface IUserDetailPresenter {
     void onShopHasBeenRemovedFromDetailView(@NonNull String shopId);
     void onShopHasBeenEditedFromDetailView(@NonNull String shopId);
 
+    void onRetryButtonClick();
 }

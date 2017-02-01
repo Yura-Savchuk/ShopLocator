@@ -88,7 +88,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
 
     private void handleGetShopsByUserIdError(Throwable throwable) {
         view.setProgress(false);
-        view.shopErrorMessage();
+        view.shopErrorView(true);
     }
 
     @Override
@@ -131,6 +131,12 @@ public class UserDetailPresenter implements IUserDetailPresenter {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onRetryButtonClick() {
+        view.shopErrorView(false);
+        setupUserShops();
     }
 
 }

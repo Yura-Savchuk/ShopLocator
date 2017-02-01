@@ -99,7 +99,8 @@ public class ShopsRepository implements IShopsRepository {
     @Override
     public Single<List<ShopDbModel>> getShopsByUserId(@NonNull String userId) {
         return getShopsFromFDB(userId)
-                .onErrorResumeNext(throwable -> shopsDBService.getShopsByUserId(userId));
+                .onErrorResumeNext(throwable -> shopsDBService.getShopsByUserId(userId)
+                    .compose(rxValidation.collectionNotEmpty(new RuntimeException("Shops list not exist in db."))));
     }
 
     private Single<List<ShopDbModel>> getShopsFromFDB(@NonNull String userId) {

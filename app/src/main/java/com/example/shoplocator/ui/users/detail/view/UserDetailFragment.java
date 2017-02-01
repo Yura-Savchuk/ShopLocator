@@ -35,6 +35,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.
@@ -48,7 +49,8 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     @Inject IUserDetailPresenter presenter;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
-    @BindView(R.id.progressBar) ProgressBar progressBar;
+    @BindView(R.id.errorView) View errorView;
+    @BindView(R.id.progressView) View progressView;
 
     private ShopsRecyclerViewAdapter shopsAdapter;
 
@@ -115,6 +117,10 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
         }
     }
 
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onRetryButtonClick();
+    }
+
     @Override
     public void setTitle(@NonNull String title) {
         FragmentActivity activity = getActivity();
@@ -128,7 +134,7 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
 
     @Override
     public void setProgress(boolean progress) {
-        progressBar.setVisibility(progress ? View.VISIBLE : View.GONE);
+        progressView.setVisibility(progress ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -139,8 +145,8 @@ public class UserDetailFragment extends Fragment implements IUserDetailView {
     }
 
     @Override
-    public void shopErrorMessage() {
-        Toast.makeText(getContext(), getString(R.string.no_internet_connection_message), Toast.LENGTH_SHORT).show();
+    public void shopErrorView(boolean show) {
+        errorView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

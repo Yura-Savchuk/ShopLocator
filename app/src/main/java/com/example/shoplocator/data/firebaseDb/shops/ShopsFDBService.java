@@ -150,7 +150,7 @@ public class ShopsFDBService implements IShopsFDBService {
 
     @Override
     public Single<List<ShopDbModel>> getShopsByUserId(String userId) {
-        return Single.create(subscriber -> {
+        Single<List<ShopDbModel>> single = Single.create(subscriber -> {
             shopsDataRefrence.orderByChild("owner_id").equalTo(userId).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -163,6 +163,8 @@ public class ShopsFDBService implements IShopsFDBService {
                 }
             });
         });
+        single = single.timeout(RealTimeDatabaseConfig.SECONDS_TIME_OUT, TimeUnit.SECONDS);
+        return single;
     }
 
     @Override
