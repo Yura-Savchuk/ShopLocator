@@ -17,7 +17,7 @@ public interface IUsersListView {
 
     void setProgress(boolean progress);
 
-    void showErrorView();
+    void showErrorView(boolean show);
 
     void showUserDetailView(@NonNull String userId, @NonNull String userName);
 }

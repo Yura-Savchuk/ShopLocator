@@ -26,6 +26,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.
@@ -36,6 +37,8 @@ public class UsersListFragment extends Fragment implements IUsersListView {
     @Inject IUsersListPresenter presenter;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.errorView) View errorView;
+    @BindView(R.id.progressView) View progressView;
 
     private UsersRecyclerViewAdapter usersAdapter;
 
@@ -66,6 +69,10 @@ public class UsersListFragment extends Fragment implements IUsersListView {
         super.onDestroyView();
     }
 
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onRetryButtonClick();
+    }
+
     @Override
     public void setupUsersList(List<UserModel> users) {
         usersAdapter = new UsersRecyclerViewAdapter(users, getContext());
@@ -75,19 +82,12 @@ public class UsersListFragment extends Fragment implements IUsersListView {
 
     @Override
     public void setProgress(boolean progress) {
-        if (progress) {
-            ProgressDialog.showIfHidden(getActivity());
-        } else {
-            ProgressDialog.hideIfShown();
-        }
+        progressView.setVisibility(progress ? View.VISIBLE : View.GONE);
     }
 
     @Override
-    public void showErrorView() {
-        Activity activity = getActivity();
-        if (activity instanceof ShowErrorFragmentDelegate) {
-            ((ShowErrorFragmentDelegate) activity).showNoInternetConnectionError();
-        }
+    public void showErrorView(boolean show) {
+        errorView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

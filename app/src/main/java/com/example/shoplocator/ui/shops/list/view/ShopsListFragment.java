@@ -92,6 +92,10 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
         presenter.addShopById(shopId);
     }
 
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onRetryButtonClick();
+    }
+
     @Override
     public void setupShopsList(@NonNull List<SelectableShopModel> shops) {
         recyclerViewAdapter = new CheckableShopsRecyclerViewAdapter(shops, getContext());
@@ -174,10 +178,6 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     @Override
     public void showErrorView(boolean show) {
         errorView.setVisibility(show ? View.VISIBLE : View.GONE);
-    }
-
-    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
-        presenter.onRetryButtonClick();
     }
 
 }

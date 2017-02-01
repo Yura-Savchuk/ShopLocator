@@ -76,7 +76,13 @@ public class UsersListPresenter implements IUsersListPresenter {
 
     private void handleGetSelectableUsersError(Throwable throwable) {
         view.setProgress(false);
-        view.showErrorView();
+        view.showErrorView(true);
+    }
+
+    @Override
+    public void onRetryButtonClick() {
+        view.showErrorView(false);
+        setupUsersFromInteractor();
     }
 
 }
