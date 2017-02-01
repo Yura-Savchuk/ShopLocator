@@ -1,7 +1,6 @@
 package com.example.shoplocator.ui.shopsMap.view;
 
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;

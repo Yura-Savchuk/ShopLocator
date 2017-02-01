@@ -10,7 +10,6 @@ import com.example.shoplocator.util.rx.validation.RxValidation;
 import java.util.List;
 
 import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 22.01.17.

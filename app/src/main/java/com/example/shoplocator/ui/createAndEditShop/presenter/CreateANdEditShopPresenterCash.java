@@ -1,7 +1,6 @@
 package com.example.shoplocator.ui.createAndEditShop.presenter;
 
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
-import com.example.shoplocator.ui.model.UserModel;
 
 import java.util.List;
 

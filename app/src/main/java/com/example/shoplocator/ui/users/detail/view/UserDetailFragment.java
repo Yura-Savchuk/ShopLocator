@@ -14,8 +14,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
@@ -23,7 +21,6 @@ import com.example.shoplocator.dagger.userDetail.UserDetailModule;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
-import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelegate;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 import com.example.shoplocator.ui.users.detail.presenter.IUserDetailPresenter;
 import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewAdapter;

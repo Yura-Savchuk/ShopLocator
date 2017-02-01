@@ -13,12 +13,10 @@ import android.view.ViewGroup;
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.usersList.UsersListModule;
-import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.model.UserModel;
 import com.example.shoplocator.ui.users.UserListDelegate;
 import com.example.shoplocator.ui.users.list.listAdapter.UsersRecyclerViewAdapter;
 import com.example.shoplocator.ui.users.list.presenter.IUsersListPresenter;
-import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
 

@@ -9,7 +9,6 @@ import com.example.shoplocator.data.db.users.model.UserRealmObject;
 import com.example.shoplocator.data.model.UserDbModel;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import io.realm.Realm;
 import io.realm.RealmResults;

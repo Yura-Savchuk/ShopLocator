@@ -5,7 +5,6 @@ import android.support.annotation.Nullable;
 
 import com.example.shoplocator.data.db.users.model.UserRealmObject;
 import com.example.shoplocator.data.model.UserDbModel;
-import com.example.shoplocator.util.mapper.Mapper;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
 import java.util.Collection;

@@ -2,11 +2,8 @@ package com.example.shoplocator.ui.shops.list.listAdapter;
 
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.simpleShopsListAdapter.ShopViewHolder;
@@ -14,7 +11,6 @@ import com.example.shoplocator.ui.simpleShopsListAdapter.ShopsRecyclerViewDelega
 import com.example.shoplocator.util.sugar.CompareUtil;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 22.01.17.

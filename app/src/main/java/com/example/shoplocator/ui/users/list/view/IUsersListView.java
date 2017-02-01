@@ -1,7 +1,6 @@
 package com.example.shoplocator.ui.users.list.view;
 
 import android.support.annotation.NonNull;
-import android.view.View;
 
 import com.example.shoplocator.ui.model.UserModel;
 

@@ -16,8 +16,6 @@ import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
 import com.example.shoplocator.ui.settings.preferences.SendDbPreference;
 import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
-import com.example.shoplocator.ui.shopsMap.ShopsMapActivity;
-import com.example.shoplocator.ui.splash.view.SplashActivity;
 import com.example.shoplocator.ui.splash.view.SplashFragment;
 import com.example.shoplocator.ui.users.UsersListActivity;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;

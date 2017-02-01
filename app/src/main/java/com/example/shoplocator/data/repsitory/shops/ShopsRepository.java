@@ -14,8 +14,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import rx.Single;
-import rx.functions.Action1;
-import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.

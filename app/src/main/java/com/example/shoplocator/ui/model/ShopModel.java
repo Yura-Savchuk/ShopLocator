@@ -1,9 +1,6 @@
 package com.example.shoplocator.ui.model;
 
 import android.support.annotation.NonNull;
-import android.text.Spannable;
-
-import java.util.List;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.

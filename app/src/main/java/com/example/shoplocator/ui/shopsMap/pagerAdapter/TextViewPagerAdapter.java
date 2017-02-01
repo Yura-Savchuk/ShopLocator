@@ -1,19 +1,14 @@
 package com.example.shoplocator.ui.shopsMap.pagerAdapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.model.ShopModel;
 
-import java.util.LinkedList;
 import java.util.List;
 
 /**

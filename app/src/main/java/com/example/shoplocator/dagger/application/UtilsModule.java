@@ -1,8 +1,5 @@
 package com.example.shoplocator.dagger.application;
 
-import com.example.shoplocator.ui.errorFragment.ErrorFragmentConfig;
-import com.example.shoplocator.ui.errorFragment.ErrorFragmentFactory;
-import com.example.shoplocator.ui.errorFragment.IErrorFragmentFactory;
 import com.example.shoplocator.util.fragment.FragmentRoute;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;
 import com.example.shoplocator.util.rx.schedulers.RxSchedulers;
@@ -20,12 +17,6 @@ import dagger.Provides;
 @Module
 public class UtilsModule {
 
-//    @Provides
-//    @Singleton
-//    RateUtilAbs provideRateUtilAbs() {
-//        return new RateUtil();
-//    }
-
     @Provides
     @Singleton
     FragmentRouteAbs fragmentRoute() {
@@ -38,22 +29,10 @@ public class UtilsModule {
         return new RxSchedulers();
     }
 
-//    @Provides
-//    @Singleton
-//    NetworkUtil provideNetworkUtil() {
-//        return new NetworkUtil();
-//    }
-
     @Provides
     @Singleton
     RxValidation provideInternetConnectionUtil() {
         return new RxValidation();
-    }
-
-    @Provides
-    @Singleton
-    IErrorFragmentFactory provideErrorFragmentFactory() {
-        return new ErrorFragmentFactory(new ErrorFragmentConfig());
     }
 
 }

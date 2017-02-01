@@ -7,7 +7,6 @@ import com.example.shoplocator.ui.model.ShopModel;
 import java.util.List;
 
 import rx.Single;
-import rx.Subscription;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.

@@ -114,9 +114,7 @@ public class UserDetailPresenter implements IUserDetailPresenter {
         view.setProgress(true);
         Subscription subscription = interactor.getShopById(shopId, cash.getUserId(), cash.getUserName())
                 .compose(rxSchedulers.getIOToMainTransformerSingle())
-                .subscribe(this::handleUpdateShopByIdSuccess, throwable -> {
-                    view.setProgress(false);
-                });
+                .subscribe(this::handleUpdateShopByIdSuccess, throwable -> view.setProgress(false));
         compositeSubscription.add(subscription);
     }
 

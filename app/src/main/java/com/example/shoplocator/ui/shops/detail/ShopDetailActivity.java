@@ -8,15 +8,12 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.Toolbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
-import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
-import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.view.IShopDetailView;
 import com.example.shoplocator.ui.shops.detail.view.ShopDetailFragment;
 import com.example.shoplocator.util.fragment.FragmentRouteAbs;

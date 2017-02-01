@@ -3,7 +3,6 @@ package com.example.shoplocator.data.repsitory.users;
 import android.support.annotation.NonNull;
 
 import com.example.shoplocator.data.model.UserDbModel;
-import com.example.shoplocator.ui.model.ShopModel;
 
 import java.util.List;
 

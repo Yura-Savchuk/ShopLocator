@@ -8,10 +8,8 @@ import com.example.shoplocator.data.model.UserDbModel;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.model.UserModel;
-import com.example.shoplocator.util.mapper.Mapper;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 

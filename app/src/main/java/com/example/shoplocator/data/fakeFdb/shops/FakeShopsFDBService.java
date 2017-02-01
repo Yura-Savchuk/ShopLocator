@@ -11,7 +11,6 @@ import com.example.shoplocator.data.model.ShopFormDbModel;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.Callable;
 
 import rx.Single;
 

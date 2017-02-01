@@ -4,7 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.example.shoplocator.data.model.ShopDbModel;
 import com.example.shoplocator.data.model.ShopFormDbModel;
-import com.example.shoplocator.ui.model.ShopModel;
 
 import java.util.Collection;
 import java.util.List;

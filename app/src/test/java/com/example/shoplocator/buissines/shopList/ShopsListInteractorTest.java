@@ -28,9 +28,7 @@ import rx.Single;
 import rx.observers.TestSubscriber;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.notNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -129,9 +127,7 @@ public class ShopsListInteractorTest {
         assertThat(shops.size()).isEqualTo(3);
         final int [] removedItemsCount = new int[1];
         removedItemsCount[0] = 0;
-        removeShopsCommand.executeWithListener(position -> {
-            removedItemsCount[0]++;
-        });
+        removeShopsCommand.executeWithListener(position -> removedItemsCount[0]++);
         assertThat(removedItemsCount[0]).isEqualTo(2);
         assertThat(shops.size()).isEqualTo(1);
         assertThat(shops.contains(shop1)).isTrue();
@@ -197,9 +193,7 @@ public class ShopsListInteractorTest {
         assertThat(shops.size()).isEqualTo(3);
         final int [] changedItemsCount = new int[1];
         changedItemsCount[0] = 0;
-        addShopCommand.executeWithListener(position -> {
-            changedItemsCount[0]++;
-        });
+        addShopCommand.executeWithListener(position -> changedItemsCount[0]++);
         assertThat(changedItemsCount[0]).isEqualTo(1);
         assertThat(shops.size()).isEqualTo(4);
     }
@@ -230,9 +224,7 @@ public class ShopsListInteractorTest {
         assertThat(shops.size()).isEqualTo(3);
         final int [] changedItemsCount = new int[1];
         changedItemsCount[0] = 0;
-        addShopCommand.executeWithListener(position -> {
-            changedItemsCount[0]++;
-        });
+        addShopCommand.executeWithListener(position -> changedItemsCount[0]++);
         assertThat(changedItemsCount[0]).isEqualTo(1);
         assertThat(shops.size()).isEqualTo(3);
         assertThat(shops.get(0).getName()).isEqualTo("new shop1");

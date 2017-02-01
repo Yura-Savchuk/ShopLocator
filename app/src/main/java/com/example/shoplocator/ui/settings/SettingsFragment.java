@@ -2,7 +2,6 @@ package com.example.shoplocator.ui.settings;
 
 import android.os.Bundle;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 
 import com.example.shoplocator.BuildConfig;
 import com.example.shoplocator.R;

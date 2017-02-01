@@ -1,7 +1,5 @@
 package com.example.shoplocator.dagger.application;
 
-import android.content.Context;
-
 import com.example.shoplocator.data.db.client.DatabaseClient;
 import com.example.shoplocator.data.db.client.IDatabaseClient;
 import com.google.firebase.database.FirebaseDatabase;

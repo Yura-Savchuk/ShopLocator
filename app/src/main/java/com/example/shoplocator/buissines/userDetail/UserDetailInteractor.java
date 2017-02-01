@@ -7,13 +7,11 @@ import com.example.shoplocator.data.repsitory.shops.IShopsRepository;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.model.UserModel;
-import com.example.shoplocator.util.mapper.Mapper;
 import com.example.shoplocator.util.mapper.MapperUtil;
 
 import java.util.List;
 
 import rx.Single;
-import rx.functions.Func1;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 29.01.17.

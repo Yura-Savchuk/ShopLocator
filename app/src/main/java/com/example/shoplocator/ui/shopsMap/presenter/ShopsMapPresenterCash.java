@@ -1,12 +1,6 @@
 package com.example.shoplocator.ui.shopsMap.presenter;
 
-import android.os.Bundle;
-
-import com.example.shoplocator.buissines.shopsMap.filtration.IShopListFiler;
 import com.example.shoplocator.buissines.shopsMap.filtration.ShopListFilterModel;
-import com.example.shoplocator.ui.model.ShopModel;
-
-import java.util.List;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 25.01.17.

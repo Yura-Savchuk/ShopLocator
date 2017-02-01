@@ -2,7 +2,6 @@ package com.example.shoplocator.ui.createAndEditShop.view;
 
 import android.support.annotation.NonNull;
 
-import com.example.shoplocator.buissines.createAndEditShop.exception.ShopFormIsInvalid;
 import com.example.shoplocator.buissines.createAndEditShop.validation.field.ShopFormInvalidField;
 import com.example.shoplocator.ui.createAndEditShop.model.CheckableUserModel;
 
