@@ -10,18 +10,15 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsList.ShopsModule;
 import com.example.shoplocator.ui.createAndEditShop.CreateAndEditShopActivity;
-import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.shops.ShopListDelegate;
 import com.example.shoplocator.ui.shops.list.listAdapter.CheckableShopsRecyclerViewAdapter;
 import com.example.shoplocator.ui.shops.list.presenter.IShopsListPresenter;
 import com.example.shoplocator.ui.shops.model.SelectableShopModel;
-import com.example.shoplocator.util.ui.progress.ProgressDialog;
 
 import java.util.List;
 
@@ -43,6 +40,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
     @BindView(R.id.errorView) View errorView;
+    @BindView(R.id.progressView) View progress;
 
     private CheckableShopsRecyclerViewAdapter recyclerViewAdapter;
 
@@ -111,11 +109,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
 
     @Override
     public void showProgress(boolean show) {
-        if (show) {
-            ProgressDialog.showIfHidden(getActivity());
-        } else {
-            ProgressDialog.hideIfShown();
-        }
+        progress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     @Override

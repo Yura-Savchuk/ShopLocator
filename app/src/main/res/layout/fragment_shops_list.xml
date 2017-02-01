@@ -17,4 +17,12 @@
         android:visibility="gone"
         layout="@layout/fragment_error"/>
 
+    <include
+        android:id="@+id/progressView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        layout="@layout/progress_view"
+        />
+
 </FrameLayout>
