@@ -51,6 +51,11 @@ public class UsersRepository implements IUsersRepository {
                 .onErrorResumeNext(throwable -> getUserByIdsFromDb(userId));
     }
 
+    @Override
+    public Single<UserDbModel> getUserByIdFromDb(@NonNull String userId) {
+        return getUserByIdsFromDb(userId);
+    }
+
     @NonNull
     private Single<UserDbModel> getUserByIdsFromDb(@NonNull final String userId) {
         return usersDBService.getUserById(userId);

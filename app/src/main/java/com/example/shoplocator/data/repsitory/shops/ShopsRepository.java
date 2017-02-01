@@ -66,7 +66,7 @@ public class ShopsRepository implements IShopsRepository {
     }
 
     @NonNull
-    private Single<ShopDbModel> getShopByIdFromDb(@NonNull final String shopId) {
+    public Single<ShopDbModel> getShopByIdFromDb(@NonNull final String shopId) {
         return shopsDBService.getShopById(shopId);
     }
 
