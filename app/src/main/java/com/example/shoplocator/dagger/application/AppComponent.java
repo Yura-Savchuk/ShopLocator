@@ -18,6 +18,7 @@ import com.example.shoplocator.ui.shops.ShopsListActivity;
 import com.example.shoplocator.ui.shops.detail.ShopDetailActivity;
 import com.example.shoplocator.ui.shopsMap.ShopsMapActivity;
 import com.example.shoplocator.ui.splash.view.SplashActivity;
+import com.example.shoplocator.ui.splash.view.SplashFragment;
 import com.example.shoplocator.ui.users.UsersListActivity;
 import com.example.shoplocator.ui.users.detail.UserDetailActivity;
 
@@ -33,7 +34,6 @@ import dagger.Component;
 @Singleton
 public interface AppComponent {
 
-    void inject(SplashActivity activity);
     void inject(ShopsListActivity activity);
     void inject(ShopDetailActivity activity);
     void inject(CreateAndEditShopActivity activity);
@@ -41,6 +41,8 @@ public interface AppComponent {
     void inject(UserDetailActivity activity);
 
     void inject(SendDbPreference preference);
+
+    void inject(SplashFragment fragment);
 
     ShopsComponent plus(ShopsModule module);
     ShopDetailComponent plus(ShopDetailModule module);
