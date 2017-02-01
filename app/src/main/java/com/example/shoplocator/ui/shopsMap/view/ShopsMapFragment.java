@@ -48,6 +48,7 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
     @BindView(R.id.viewPager) ViewPager viewPager;
     @Inject IShopMapPresenter presenter;
 
+    @Nullable
     private GoogleMap mMap;
     private TextViewPagerAdapter pagerAdapter;
 
@@ -112,10 +113,12 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
 
     @Override
     public void setupShopMapkers(List<ShopModel> shops) {
-        for (ShopModel shop : shops) {
-            ShopCoordinate coordinate = shop.getCoordinate();
-            LatLng latLng = new LatLng(coordinate.getX(), coordinate.getY());
-            mMap.addMarker(new MarkerOptions().position(latLng).title(shop.getName()));
+        if (mMap != null) {
+            for (ShopModel shop : shops) {
+                ShopCoordinate coordinate = shop.getCoordinate();
+                LatLng latLng = new LatLng(coordinate.getX(), coordinate.getY());
+                mMap.addMarker(new MarkerOptions().position(latLng).title(shop.getName()));
+            }
         }
     }
 
@@ -129,8 +132,10 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
 
     @Override
     public void setMapCursorToCoordinate(ShopCoordinate coordinate) {
-        LatLng latLng = new LatLng(coordinate.getX(), coordinate.getY());
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM));
+        if (mMap != null) {
+            LatLng latLng = new LatLng(coordinate.getX(), coordinate.getY());
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, CAMERA_ZOOM));
+        }
     }
 
     @Override
