@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">ShopLocator</string>
-
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="title_shops_list">Shops List</string>
     <string name="title_shop_detail">Shop Detail</string>
     <string name="item_shop_owner_prefix">"Owner: "</string>
@@ -10,21 +7,21 @@
     <string name="item_shop_coordinate_y_prefix">" Y: "</string>
     <string name="content_shop_image">Shop image</string>
     <string name="transition_shop_image">transition_name_shop_image</string>
-    <string name="action_remove">Удалить</string>
-    <string name="action_cancel">Отменить</string>
-    <string name="action_confirm">Подтвердить</string>
+    <string name="action_remove">Delete</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Confirm</string>
     <string name="shops_list">Shops list</string>
     <string name="shops_map">Shops map</string>
     <string name="users_list">Users list</string>
     <string name="settings">Settings</string>
-    <string name="author_email">coulcod@gmail.com</string>
-    <string name="navigation_drawer_open">drawer_opwn</string>
-    <string name="navigation_drawer_close">drawer_close</string>
+    <string name="developer_email" translatable="false">coulcod@gmail.com</string>
+    <string name="navigation_drawer_open" translatable="false">drawer_opwn</string>
+    <string name="navigation_drawer_close" translatable="false">drawer_close</string>
     <string name="title_activity_shops_map">Shops Map</string>
     <string name="shop_name">Shop Name</string>
     <string name="save">Save</string>
-    <string name="empty_view_for_focus">empty_view_for_focus</string>
-    <string name="action_create">Создать</string>
+    <string name="empty_view_for_focus" translatable="false">empty_view_for_focus</string>
+    <string name="action_create">Create</string>
     <string name="iamge_url">Image Url</string>
     <string name="pos_x">Position X</string>
     <string name="pos_y">Position Y</string>
@@ -36,87 +33,12 @@
     <string name="coord_position_must_be_selected">Coord position_must be selected</string>
     <string name="coord_position_must_be_valid_float_number">Coord position must be valid float number</string>
     <string name="one_or_more_fields_are_invalid">One or more fields are invalid</string>
-    <string name="un_error_ocurred">Un error ocurred</string>
+    <string name="un_error_ocurred">Un error occurred</string>
     <string name="shop_icon">Shop icon</string>
-    <string name="button_edit_shop">Edit Shop</string>
     <string name="action_edit">Edit</string>
     <string name="title_users_list">Users List</string>
     <string name="title_activity_settings">Settings</string>
-
-    <!-- Strings related to Settings -->
-
-    <!-- Example General settings -->
-    <string name="pref_header_general">General</string>
-
-    <string name="pref_title_social_recommendations">Enable social recommendations</string>
-    <string name="pref_description_social_recommendations">Recommendations for people to contact
-        based on your message history
-    </string>
-
-    <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
-
-    <string name="pref_title_add_friends_to_messages">Add friends to messages</string>
-    <string-array name="pref_example_list_titles">
-        <item>Always</item>
-        <item>When possible</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_example_list_values">
-        <item>1</item>
-        <item>0</item>
-        <item>-1</item>
-    </string-array>
-
-    <!-- Example settings for Data & Sync -->
-    <string name="pref_header_data_sync">Data &amp; sync</string>
-
-    <string name="pref_title_sync_frequency">Sync frequency</string>
-    <string-array name="pref_sync_frequency_titles">
-        <item>15 minutes</item>
-        <item>30 minutes</item>
-        <item>1 hour</item>
-        <item>3 hours</item>
-        <item>6 hours</item>
-        <item>Never</item>
-    </string-array>
-    <string-array name="pref_sync_frequency_values">
-        <item>15</item>
-        <item>30</item>
-        <item>60</item>
-        <item>180</item>
-        <item>360</item>
-        <item>-1</item>
-    </string-array>
-
-    <string-array name="list_preference_entries">
-        <item>Entry 1</item>
-        <item>Entry 2</item>
-        <item>Entry 3</item>
-    </string-array>
-
-    <string-array name="list_preference_entry_values">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-    </string-array>
-
-    <string-array name="multi_select_list_preference_default_value" />
-
-    <string name="pref_title_system_sync_settings">System sync settings</string>
-
-    <!-- Example settings for Notifications -->
-    <string name="pref_header_notifications">Notifications</string>
-
-    <string name="pref_title_new_message_notifications">New message notifications</string>
-
-    <string name="pref_title_ringtone">Ringtone</string>
-    <string name="pref_ringtone_silent">Silent</string>
-
-    <string name="pref_title_vibrate">Vibrate</string>
-    <string name="spalsh_screen_delay">Splash Screeen Delay</string>
     <string name="send">Send</string>
-    <string name="e_mail">E-mail</string>
     <string name="shop_database_message_subject">Shop Locator Database</string>
     <string name="no_email_client_installed">There are no email clients installed.</string>
     <string name="send_mail_">Send mail…</string>
@@ -126,7 +48,6 @@
     <string name="try_again">Try Again</string>
     <string name="no_internet_connection_title">No internet connection</string>
     <string name="no_internet_connection_description">Oh no, internet connection is lost. Check your internet connection and try again.</string>
-    <string name="no_internet_connection_message">Internet connection error occured.</string>
     <string name="app_logo">App logo</string>
     <string name="developer_name">Developer: Yura Savchuk</string>
 </resources>
