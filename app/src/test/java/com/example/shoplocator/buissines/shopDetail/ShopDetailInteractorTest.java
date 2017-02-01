@@ -75,10 +75,10 @@ public class ShopDetailInteractorTest {
         }
         assertThat(targetUser).isNotNull();
         //mock shops
-        when(mockedShopsFDBService.getShopsById(targetShop.getId())).thenReturn(Single.just(targetShop));
+        when(mockedShopsDBService.getShopById(targetShop.getId())).thenReturn(Single.just(targetShop));
         when(mockedShopsDBService.addShops((Collection<ShopDbModel>)notNull())).thenReturn(Single.just(null));
         //mock users
-        when(mockedUsersFDBService.getUserById(targetUser.getId())).thenReturn(Single.just(targetUser));
+        when(mockedUsersDBService.getUserById(targetUser.getId())).thenReturn(Single.just(targetUser));
         when(mockedUsersDBService.addUser(targetUser)).thenReturn(Single.just(null));
         //create TestSubscriber
         TestSubscriber<ShopModel> testSubscriber = TestSubscriber.create();
