@@ -76,7 +76,7 @@ public class ShopsPresenter implements IShopsListPresenter {
 
     private void handleGetShopsError(Throwable throwable) {
         view.showProgress(false);
-        view.showErrorView();
+        view.showErrorView(true);
     }
 
     @Override
@@ -170,6 +170,12 @@ public class ShopsPresenter implements IShopsListPresenter {
                 break;
             }
         }
+    }
+
+    @Override
+    public void onRetryButtonClick() {
+        view.showErrorView(false);
+        setupShopsList();
     }
 
 }

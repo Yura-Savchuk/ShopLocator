@@ -31,5 +31,5 @@ public interface IShopsListView {
     void onEditShopResult(@NonNull String shopId);
     void onDeleteShopResult(@NonNull String shopId);
 
-    void showErrorView();
+    void showErrorView(boolean show);
 }

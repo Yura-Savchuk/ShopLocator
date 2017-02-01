@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
@@ -28,6 +29,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by {@author yura.savchuk22@gmail.com} on 21.01.17.
@@ -40,6 +42,7 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     @Inject IShopsListPresenter presenter;
 
     @BindView(R.id.recyclerView) RecyclerView recyclerView;
+    @BindView(R.id.errorView) View errorView;
 
     private CheckableShopsRecyclerViewAdapter recyclerViewAdapter;
 
@@ -175,11 +178,12 @@ public class ShopsListFragment extends Fragment implements IShopsListView {
     }
 
     @Override
-    public void showErrorView() {
-        Activity activity = getActivity();
-        if (activity instanceof ShowErrorFragmentDelegate) {
-            ((ShowErrorFragmentDelegate) activity).showNoInternetConnectionError();
-        }
+    public void showErrorView(boolean show) {
+        errorView.setVisibility(show ? View.VISIBLE : View.GONE);
+    }
+
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onRetryButtonClick();
     }
 
 }
