@@ -20,4 +20,6 @@ public interface IShopMapPresenter {
     void onShopPositionChanged(int position);
 
     void onQueryChanged(@NonNull String query);
+
+    void onTryAgainButtonClick();
 }

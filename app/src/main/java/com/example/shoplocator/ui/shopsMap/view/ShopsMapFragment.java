@@ -1,6 +1,5 @@
 package com.example.shoplocator.ui.shopsMap.view;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -9,19 +8,16 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.shoplocator.App;
 import com.example.shoplocator.R;
 import com.example.shoplocator.dagger.shopsMap.ShopsMapModule;
-import com.example.shoplocator.ui.errorFragment.ShowErrorFragmentDelegate;
 import com.example.shoplocator.ui.model.ShopCoordinate;
 import com.example.shoplocator.ui.model.ShopModel;
 import com.example.shoplocator.ui.shopsMap.pagerAdapter.TextViewPagerAdapter;
 import com.example.shoplocator.ui.shopsMap.presenter.IShopMapPresenter;
 import com.example.shoplocator.util.rx.lsitenerToObservable.ListenerToSingle;
 import com.example.shoplocator.util.ui.listenerAdapter.OnPagerChangeListenerAdapter;
-import com.example.shoplocator.util.ui.progress.ProgressDialog;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -35,6 +31,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import rx.Single;
 
 /**
@@ -46,6 +43,9 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
     private static final float CAMERA_ZOOM = 17.0f;
 
     @BindView(R.id.viewPager) ViewPager viewPager;
+    @BindView(R.id.errorView) View errorView;
+    @BindView(R.id.progressView) View progressView;
+
     @Inject IShopMapPresenter presenter;
 
     @Nullable
@@ -94,13 +94,13 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
         super.onDestroyView();
     }
 
+    @OnClick(R.id.buttonTryAgain) void onTryAgainButtonClick(View view) {
+        presenter.onTryAgainButtonClick();
+    }
+
     @Override
     public void shopProgress(boolean progress) {
-        if (progress) {
-            ProgressDialog.showIfHidden(getActivity());
-        } else {
-            ProgressDialog.hideIfShown();
-        }
+        progressView.setVisibility(progress ? View.VISIBLE : View.GONE);
     }
 
 
@@ -156,8 +156,8 @@ public class ShopsMapFragment extends Fragment implements IShopMapView {
     }
 
     @Override
-    public void showErrorMessage() {
-        Toast.makeText(getContext(), R.string.no_internet_connection_message, Toast.LENGTH_SHORT).show();
+    public void showErrorView(boolean show) {
+        errorView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
 }

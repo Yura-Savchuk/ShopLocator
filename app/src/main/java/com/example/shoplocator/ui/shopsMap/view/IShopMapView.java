@@ -27,5 +27,5 @@ public interface IShopMapView {
 
     void notifyShopsDataChanged();
 
-    void showErrorMessage();
+    void showErrorView(boolean show);
 }

@@ -64,7 +64,7 @@ public class ShopMapPresenter implements IShopMapPresenter {
 
     private void handleLoadShopsError(Throwable throwable) {
         view.shopProgress(false);
-        view.showErrorMessage();
+        view.showErrorView(true);
     }
 
     private void handleLoadShopsSuccess(ShopListFilterModel filterModel) {
@@ -124,4 +124,11 @@ public class ShopMapPresenter implements IShopMapPresenter {
             }
         }
     }
+
+    @Override
+    public void onTryAgainButtonClick() {
+        view.showErrorView(false);
+        loadShopsAndControlAccessablity(Single.just(null));
+    }
+
 }
