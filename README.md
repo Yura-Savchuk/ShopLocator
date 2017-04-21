@@ -1,4 +1,3 @@
-# ShopLocator
 ## Project corresponds to the next requirements:
   * Splash screen with 3 seconds delay. (Even when user rotate screen it must be shown  3 seconds)
   * Shops screen
@@ -23,5 +22,3 @@
   * Add ability to cache data from server (in case when user cant load data from server when network unavailable it must load them from cache)
   * Provide mechanism for debug build to load data from fake storage. For example when server is unavailable you should configure your build to display fake data
   * Create Unit tests for database CRUD operations
-
-
