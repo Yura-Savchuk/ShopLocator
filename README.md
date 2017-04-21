@@ -1,5 +1,5 @@
 # ShopLocator
-## This corresponds to the next requirements:
+## Project corresponds to the next requirements:
   * Splash screen with 3 seconds delay. (Even when user rotate screen it must be shown  3 seconds)
   * Shops screen
     * List of shops
